@@ -1,0 +1,855 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GUI functions and settings &mdash; visbrain 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="visbrain 0.1.0 documentation" href="index.html"/>
+        <link rel="up" title="vbrain" href="vbrain.html"/>
+        <link rel="next" title="Sleep" href="sleep.html"/>
+        <link rel="prev" title="vbrain" href="vbrain.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> visbrain
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="vbrain.html">vbrain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vbrain.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbrain.html#objects">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbrain.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbrain.html#color">Color</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vbrain.html#user-functions">User functions</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GUI functions and settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#show-graphical-interface">Show graphical interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quit-graphical-interface">Quit graphical interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rotation">Rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#background-color">Background color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#screenshot">Screenshot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#brain-functions">Brain functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control">Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#opacity">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#light-reflection">Light reflection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sources-functions">Sources functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#set-data">Set data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cortical-projection">Cortical projection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cortical-repartition">Cortical repartition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#colormap">Colormap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#connectivity-functions">Connectivity functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#area-functions">Area functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#plot-selection">Plot selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Light reflection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vbrain.html#shortcuts">Shortcuts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sleep.html">Sleep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ndviz.html">Ndviz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makefig.html">MakeFig</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">visbrain</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="vbrain.html">vbrain</a> &raquo;</li>
+      
+    <li>GUI functions and settings</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/vbfunctions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>The functions below are subdivided into several parts :</p>
+<ul class="simple">
+<li>GUI functions : control the graphical user interface (display, rotation, screenshot...)</li>
+<li>Brain functions: control the main brain object (color, transparency...)</li>
+<li>Sources functions: control sources object (color, transparency, data...)</li>
+<li>Connectivity functions: control connectivity object (color, transparency, data...)</li>
+<li>Area functions: control area object (selected areas, color, transparency...)</li>
+</ul>
+<div class="section" id="gui-functions-and-settings">
+<h1>GUI functions and settings<a class="headerlink" href="#gui-functions-and-settings" title="Permalink to this headline">¶</a></h1>
+<p>Set of functions for an iteractive control of the graphical user interface elements.</p>
+<div class="section" id="show-graphical-interface">
+<h2>Show graphical interface<a class="headerlink" href="#show-graphical-interface" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.vbrain.vbrain.show">
+<code class="descclassname">vbrain.</code><code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/vbrain.html#vbrain.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.vbrain.vbrain.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the graphical user interface.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="quit-graphical-interface">
+<h2>Quit graphical interface<a class="headerlink" href="#quit-graphical-interface" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.quit">
+<code class="descclassname">userfcn.</code><code class="descname">quit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.quit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.quit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quit the interface.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="rotation">
+<h2>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.rotate">
+<code class="descclassname">userfcn.</code><code class="descname">rotate</code><span class="sig-paren">(</span><em>fixed=None</em>, <em>custom=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate the scene elements using a predefined or a custom rotation.</p>
+<p>The rotation is applied on every objects on the scene.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>fixed: string, optional, (def: &#8216;axial&#8217;)</dt>
+<dd><p class="first">Predefined rotation. Use either &#8216;axial&#8217;, &#8216;coronal&#8217; or
+&#8216;sagittal&#8217;. As a complement, use the suffixe &#8216;_0&#8217; or
+&#8216;_1&#8217; to switch between possible views.</p>
+<ul class="last simple">
+<li>&#8216;axial_0/1&#8217;: switch between top/bottom view</li>
+<li>&#8216;coronal_0/1&#8217;: switch between front/back view</li>
+<li>&#8216;sagittal_0/1&#8217;: switch between left/right view</li>
+</ul>
+</dd>
+<dt>custom: tuple, optional, (def: None)</dt>
+<dd>Custom rotation. The custom parameter must be a
+tuple of two float respectively for azimuth and
+elevation.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Predefined rotation :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">fixed</span><span class="o">=</span><span class="s1">&#39;sagittal_1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Custom rotation :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">custom</span><span class="o">=</span><span class="p">(</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="background-color">
+<h2>Background color<a class="headerlink" href="#background-color" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.background_color">
+<code class="descclassname">userfcn.</code><code class="descname">background_color</code><span class="sig-paren">(</span><em>color=(0.1</em>, <em>0.1</em>, <em>0.1)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.background_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.background_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the background color of the main canvas and the colorbar.</p>
+<p>The main canvas is defined as the canvas where all objects are
+displayed. The colorbar has it own canvas and the background set will
+be the same as the one of the main canvas.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>color: tuple/string, optional, (def: (.1, .1, .1))</dt>
+<dd>The color to use for the background color of the main canvas.
+The color can either be a tuple of integers (R, G, B),
+a matplotlib color (string) or a hexadecimal color (string).</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the background color (using a RGB tuple) :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">background_color</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the background color (using matplotlib format) :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">background_color</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the background color (using hexadecimal format) :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">background_color</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ffffff&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="screenshot">
+<h2>Screenshot<a class="headerlink" href="#screenshot" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.screenshot">
+<code class="descclassname">userfcn.</code><code class="descname">screenshot</code><span class="sig-paren">(</span><em>name</em>, <em>region=None</em>, <em>colorbar=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.screenshot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.screenshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a screenshot of the current scene and save it as a picture.</p>
+<p>This method try to make a high-fidelity screenshot of your scene. There
+might be some strange behaviors (like with connectivity line width).
+One thing to keep in mind, is that printed picture using a transparent
+compatible extension (like .png files) produces transparent pictures.
+This might be quit disturbing especially using internal light
+reflection. To solve this in your pictures, I recommand putting your
+transparent brain picture onto a dark background (like black) and see
+the magic happend.
+This method requires imageio or PIL (pip install pillow).</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>name: str</dt>
+<dd>The name of the file to be saved. This file must contains one
+of the following extension: .png, .tiff</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>region: tuple, optional, (def: None)</dt>
+<dd>Crop the exported picture to a specified region. Must be a
+tuple of four integers where each one describe the region as
+(x_start, y_start, width, height) where x_start is where
+to start along the horizontal axis and y_start where to start
+along the vertical axis. By default, the entire canvas is
+rendered.</dd>
+<dt>colorbar: bool, optional, (def: False)</dt>
+<dd>Specify if the colorbar has to be exported too.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define the filename and the cropped region :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filename</span><span class="p">,</span> <span class="n">crop</span> <span class="o">=</span> <span class="s1">&#39;myfile.png&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">570</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Rotate the brain :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="s1">&#39;axial&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Take a screenshot and save it (tested on a 17&quot; laptop) and</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># export the colorbar :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">screenshot</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">crop</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>See also:</dt>
+<dd><div class="first last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">background_color, rotate</p>
+</div>
+</dd>
+<dt>Note:</dt>
+<dd><div class="first last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the region argument can be quit difficult to ajust. Be
+patient, it&#8217;s possible. Don&#8217;t forget that .png files contains
+transparency. For an optimal screenshot, I recommand doing a
+rotation before the screenshot, so that the canvas can be
+initialized.</p>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="brain-functions">
+<h1>Brain functions<a class="headerlink" href="#brain-functions" title="Permalink to this headline">¶</a></h1>
+<p>Set of functions for an iteractive control of the main brain object. Use the methods below to define which brain template or hemisphere to display, the transparency level...</p>
+<div class="figure align-center" id="id4">
+<img alt="_images/BrainObj.png" src="_images/BrainObj.png" />
+<p class="caption"><span class="caption-text">Several brain templates and control possiblities.</span></p>
+</div>
+<div class="section" id="control">
+<h2>Control<a class="headerlink" href="#control" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.brain_control">
+<code class="descclassname">userfcn.</code><code class="descname">brain_control</code><span class="sig-paren">(</span><em>template=None</em>, <em>show=True</em>, <em>hemisphere=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.brain_control"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.brain_control" title="Permalink to this definition">¶</a></dt>
+<dd><p>Control the type of brain to use.</p>
+<p>Use this method to switch between several brain templates. Then, you
+can to display selected hemisphere (left or right).</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>template: string, optional, (def: None)</dt>
+<dd>Template to use for the MNI brain. Use either &#8216;B1&#8217;, &#8216;B2&#8217; or
+&#8216;B3&#8217;.</dd>
+<dt>show: bool, optional, (def: True)</dt>
+<dd>Show (True) or hide (False) the MNI brain.</dd>
+<dt>hemisphere: string, optional, (def: None)</dt>
+<dd>Define if you want to see only &#8216;left&#8217; or &#8216;right&#8217;hemisphere.
+Otherwise use &#8216;both&#8217;.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display the right hemisphere of &#39;B3&#39; template :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">brain_control</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="n">hemisphere</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="opacity">
+<h2>Opacity<a class="headerlink" href="#opacity" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.brain_opacity">
+<code class="descclassname">userfcn.</code><code class="descname">brain_opacity</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.brain_opacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.brain_opacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the level of transparency of the brain.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>alpha: float, optional, (def: 0.1)</dt>
+<dd>Transparency level (usually between 0 and 1).</dd>
+<dt>show: bool, optional, (def: True)</dt>
+<dd>Specify if the brain has be shown.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set transparency :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">brain_opacity</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt>Note:</dt>
+<dd><div class="first last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The brain opacity is only avaible for internal projection</p>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="light-reflection">
+<h2>Light reflection<a class="headerlink" href="#light-reflection" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.light_reflection">
+<code class="descclassname">userfcn.</code><code class="descname">light_reflection</code><span class="sig-paren">(</span><em>reflect_on=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.light_reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.light_reflection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change how light is reflected onto the brain.</p>
+<p>This function can be used to see either the surface only (external) or
+deep voxels inside the brain (internal).</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>reflect_on: string, optional, (def: None)</dt>
+<dd>Choose either between &#8216;internal&#8217; or &#8216;external&#8217;. Inside the
+graphical interface, this can be done using the shortcut 3.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display the external surface :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">light_reflection</span><span class="p">(</span><span class="n">reflect_on</span><span class="o">=</span><span class="s1">&#39;external&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt>See also:</dt>
+<dd><div class="first last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">brain_control, brain_opacity</p>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="sources-functions">
+<h1>Sources functions<a class="headerlink" href="#sources-functions" title="Permalink to this headline">¶</a></h1>
+<p>Set of functions for an iteractive control of sources object. Use the methods below to pass some data to sources, to control the transparency level, to run the cortical projection / repartition...</p>
+<div class="figure align-center">
+<img alt="_images/SourcesObj.png" src="_images/SourcesObj.png" />
+</div>
+<div class="section" id="set-data">
+<h2>Set data<a class="headerlink" href="#set-data" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.sources_data">
+<code class="descclassname">userfcn.</code><code class="descname">sources_data</code><span class="sig-paren">(</span><em>data</em>, <em>color='#ab4652'</em>, <em>symbol='disc'</em>, <em>radiusmin=5.0</em>, <em>radiusmax=10.0</em>, <em>edgecolor=None</em>, <em>edgewidth=0.6</em>, <em>scaling=False</em>, <em>opacity=1.0</em>, <em>mask=None</em>, <em>maskcolor='gray'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.sources_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.sources_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set data to sources and control source&#8217;s properties.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd><dl class="first last docutils">
+<dt>data: array</dt>
+<dd>Vector of data for each source. Le length of this vector must
+be same as the number of sources.</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>color: string/list/ndarray, optional, (def: &#8216;#ab4652&#8217;)</dt>
+<dd>Color of each source sphere. If s_color is a single string,
+all sphere will have the same color. If it&#8217;s&#8216; a list of
+strings, the length must be N. Alternatively, s_color can be a
+(N, 3) RGB or (N, 4) RGBA colors.</dd>
+<dt>symbol: string, optional, (def: &#8216;disc&#8217;)</dt>
+<dd>Symbol to use for sources. Allowed style strings are: disc,
+arrow, ring, clobber, square, diamond, vbar, hbar, cross,
+tailed_arrow, x, triangle_up, triangle_down, and star.</dd>
+<dt>radiusmin/radiusmax: int/float, optional, (def: 5.0/10.0)</dt>
+<dd>Define the minimum and maximum source&#8217;s possible radius. By
+default if all sources have the same value, the radius will be
+radiusmin.</dd>
+<dt>edgecolor: string/list/ndarray, optional, (def: None)</dt>
+<dd>Add an edge to sources</dd>
+<dt>edgewidth: float, optional, (def: 0.4)</dt>
+<dd>Edge width of sources</dd>
+<dt>scaling: bool, optional, (def: True)</dt>
+<dd>If set to True, marker scales when rezooming.</dd>
+<dt>opacity: int/float, optional, (def: 1.0)</dt>
+<dd>Transparency of all sources. Must be between 0 and 1.</dd>
+<dt>mask: ndarray, optional, (def: None)</dt>
+<dd>Vector of boolean values, with the same length as the length of
+xyz. Use this parameter to mask some sources but keep it
+displayed.</dd>
+<dt>maskcolor: list/tuple, optional, (def: &#8216;gray&#8217;)</dt>
+<dd>Color of masked sources when projected on surface.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance with 10 random sources:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">(</span><span class="n">s_xyz</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define some random data :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define some color :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;white&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set data and properties :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">sources_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                <span class="n">radiusmin</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">radiusmax</span><span class="o">=</span><span class="mf">20.</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">edgewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h2>Opacity<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.sources_opacity">
+<code class="descclassname">userfcn.</code><code class="descname">sources_opacity</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.sources_opacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.sources_opacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the level of transparency of sources.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>alpha: float, optional, (def: 1.)</dt>
+<dd>Transparency level (usually between 0 and 1).</dd>
+<dt>show: bool, optional, (def: True)</dt>
+<dd>Specify if sources has be shown.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance with 10 random sources:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">(</span><span class="n">s_xyz</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set transparency :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">sources_opacity</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="figure align-center" id="id5">
+<img alt="_images/ProjObj.png" src="_images/ProjObj.png" />
+<p class="caption"><span class="caption-text">Example of cortical projection.</span></p>
+</div>
+</div>
+<div class="section" id="cortical-projection">
+<h2>Cortical projection<a class="headerlink" href="#cortical-projection" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.cortical_projection">
+<code class="descclassname">userfcn.</code><code class="descname">cortical_projection</code><span class="sig-paren">(</span><em>project_on='surface'</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.cortical_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.cortical_projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project sources activity.</p>
+<p>This method can be used to project the sources activity either onto the
+brain or on deep areas (like gyrus or brodmann areas).</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>project_on: string, optional, (def: &#8216;surface&#8217;)</dt>
+<dd>Define on which object to project the sources activity. Chose
+either &#8216;surface&#8217; for projecting the sources activity onto the
+brain or &#8216;deep&#8217; to project on deep areas (if defined).</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
+</pre></div>
+</div>
+</dd>
+<dt>See also:</dt>
+<dd>area_plot, sources_colormap</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="cortical-repartition">
+<h2>Cortical repartition<a class="headerlink" href="#cortical-repartition" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.cortical_repartition">
+<code class="descclassname">userfcn.</code><code class="descname">cortical_repartition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.cortical_repartition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.cortical_repartition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of contributing sources per vertex.</p>
+<p>Kargs:</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="colormap">
+<h2>Colormap<a class="headerlink" href="#colormap" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.sources_colormap">
+<code class="descclassname">userfcn.</code><code class="descname">sources_colormap</code><span class="sig-paren">(</span><em>cmap=None</em>, <em>clim=None</em>, <em>vmin=None</em>, <em>under=None</em>, <em>vmax=None</em>, <em>over=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.sources_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.sources_colormap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the colormap of cortical projection.</p>
+<p>This method can be used to update paramaters of the colormap. But it&#8217;s
+only going to work if the source&#8217;s activity has been projected (using
+the cortical projection or repartition).</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>cmap: string, optional, (def: inferno)</dt>
+<dd>Matplotlib colormap</dd>
+<dt>clim: tuple/list, optional, (def: None)</dt>
+<dd>Limit of the colormap. The clim parameter must be a tuple /
+list of two float number each one describing respectively the
+(min, max) of the colormap. Every values under clim[0] or over
+clim[1] will peaked.</dd>
+<dt>alpha: float, optional, (def: 1.0)</dt>
+<dd>The opacity to use. The alpha parameter must be between 0 and
+1.</dd>
+<dt>vmin: float, optional, (def: None)</dt>
+<dd>Threshold from which every color will have the color defined
+using the under parameter bellow.</dd>
+<dt>under: tuple/string, optional, (def: &#8216;dimgray&#8217;)</dt>
+<dd>Matplotlib color for values under vmin.</dd>
+<dt>vmax: float, optional, (def: None)</dt>
+<dd>Threshold from which every color will have the color defined
+using the over parameter bellow.</dd>
+<dt>over: tuple/string, optional, (def: &#8216;darkred&#8217;)</dt>
+<dd>Matplotlib color for values over vmax.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance with 10 random sources:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">(</span><span class="n">s_xyz</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define some random data :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set data and properties :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">sources_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Run the cortical projection :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">cortical_projection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set colormap proprties :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">sources_colormap</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                    <span class="n">under</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">80</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt>See also:</dt>
+<dd>cortical_projection, cortical_repartition</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="connectivity-functions">
+<h1>Connectivity functions<a class="headerlink" href="#connectivity-functions" title="Permalink to this headline">¶</a></h1>
+<p>Set of functions for an iteractive control of connectivity object. Use the methods below to pass some data to connectivity, to control the transparency level...</p>
+<div class="figure align-center" id="id6">
+<img alt="_images/ConnectObj.png" src="_images/ConnectObj.png" />
+<p class="caption"><span class="caption-text">Example of connectivity setup.</span></p>
+</div>
+</div>
+<div class="section" id="area-functions">
+<h1>Area functions<a class="headerlink" href="#area-functions" title="Permalink to this headline">¶</a></h1>
+<p>Set of functions for an iteractive control of areas object. Use the methods below to select the areas to display, to control the transparency level...</p>
+<div class="figure align-center" id="id7">
+<img alt="_images/AreaObj.png" src="_images/AreaObj.png" />
+<p class="caption"><span class="caption-text">Example of deep-structures (AAL / Brodmann area).</span></p>
+</div>
+<div class="section" id="plot-selection">
+<h2>Plot selection<a class="headerlink" href="#plot-selection" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.area_plot">
+<code class="descclassname">userfcn.</code><code class="descname">area_plot</code><span class="sig-paren">(</span><em>selection=[]</em>, <em>subdivision='brod'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.area_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.area_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select some area to plot.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>selection: list, optional, (def: [])</dt>
+<dd>List of integers where each one refer to a particular area. The
+corresponding list can be found in the graphical interface in
+the MNI -&gt; Strucures -&gt; Select structures tab.</dd>
+<dt>subdivision: str, optional, (def: &#8216;brod&#8217;)</dt>
+<dd>Select the sub-division method i.e &#8216;brod&#8217; (for brodmann areas)
+or &#8216;aal&#8217; (Anatomical Automatic Labeling)</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display brodmann area 4 and 6 :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">area_plot</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h2>Opacity<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.area_opacity">
+<code class="descclassname">userfcn.</code><code class="descname">area_opacity</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.area_opacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.area_opacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the level of transparency of the deep structures.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>alpha: float, optional, (def: 0.1)</dt>
+<dd>Transparency level (usually between 0 and 1).</dd>
+<dt>show: bool, optional, (def: True)</dt>
+<dd>Specify if area(s) has be shown.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set transparency :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">area_opacity</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="id3">
+<h2>Light reflection<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.area_light_reflection">
+<code class="descclassname">userfcn.</code><code class="descname">area_light_reflection</code><span class="sig-paren">(</span><em>reflect_on=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.area_light_reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.area_light_reflection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change how light is refleting onto sub-areas.</p>
+<p>This function can be used to see either the surface only (external) or
+deep voxels inside areas (internal).</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>reflect_on: string, optional, (def: None)</dt>
+<dd>Choose either to reflect on &#8216;internal&#8217; or &#8216;external&#8217;.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display brodmann area 4 and 6 :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">area_plot</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display the external surface :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">_area_light_reflection</span><span class="p">(</span><span class="n">reflect_on</span><span class="o">=</span><span class="s1">&#39;internal&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Hide the brain :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">brain_opacity</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sleep.html" class="btn btn-neutral float-right" title="Sleep" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vbrain.html" class="btn btn-neutral" title="vbrain" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Etienne Combrisson.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sleep &mdash; visbrain 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="visbrain 0.1.0 documentation" href="index.html"/>
+        <link rel="next" title="Ndviz" href="ndviz.html"/>
+        <link rel="prev" title="GUI functions and settings" href="vbfunctions.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> visbrain
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="vbrain.html">vbrain</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sleep</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-files-and-format">Supported files and format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-files">Data files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hypnogram">Hypnogram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#load-your-files">Load your files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#from-the-gui">From the GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-path">From path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raw-data">Raw data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hypnogram-scoring">Hypnogram scoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scoring-table">Scoring table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#live-editing">Live editing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#spindles-rem-peak-detection">Spindles / REM / Peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-inputs">Additional inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ndviz.html">Ndviz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makefig.html">MakeFig</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">visbrain</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Sleep</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/sleep.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sleep">
+<span id="id1"></span><h1>Sleep<a class="headerlink" href="#sleep" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id2">
+<img alt="_images/Sleep_full.png" src="_images/Sleep_full.png" />
+<p class="caption"><span class="caption-text">The Sleep module: individual control of each channel.</span></p>
+</div>
+<p>Sleep is a new graphical user interface dedicated to sleep data. Here&#8217;a some of the most relevant features :</p>
+<ul class="simple">
+<li>Display / hide data channel, spectrogram and hypnogram. All the channels can be visualized at the same time.</li>
+<li>Edit and save the hypnogram (either using the &#8220;Scoring&#8221; panel or directly from the hypnogram graph)</li>
+<li>Perform spindles / REM / Peak detection on multiple channels and report where each one of them on the hypnogram or inside a table. Each detection offer a few more control in order to improve the detection.</li>
+<li>Get relevant informations about data while editing (duration of each stage, latencies...)</li>
+<li>Futher signal processing tools (de-mean, de-trend, filtering...). Those tools are directly apply to each channel and to the spectrogram</li>
+<li>A lot a visual helper to quickly see where you are in the data and in which sleep stage.</li>
+</ul>
+<p>The Sleep module can be imported as follow :</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id3">
+<img alt="_images/Sleep_full2.png" src="_images/Sleep_full2.png" />
+<p class="caption"><span class="caption-text">Bandpass filtering example.</span></p>
+</div>
+</div>
+<div class="section" id="supported-files-and-format">
+<h2>Supported files and format<a class="headerlink" href="#supported-files-and-format" title="Permalink to this headline">¶</a></h2>
+<p>Sleep support by default several data and hypnogram files.</p>
+<div class="section" id="data-files">
+<h3>Data files<a class="headerlink" href="#data-files" title="Permalink to this headline">¶</a></h3>
+<p>Here&#8217;s the list of supported extensions for data files :</p>
+<ul class="simple">
+<li><strong>.eeg</strong> (Brainvision)</li>
+<li><strong>.eeg</strong> (ELAN)</li>
+<li><strong>.edf</strong></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The extensions above are files that are natively supported inside Sleep. But, tha data can be directly pass to the Sleep module if you load them before.</p>
+</div>
+</div>
+<div class="section" id="hypnogram">
+<h3>Hypnogram<a class="headerlink" href="#hypnogram" title="Permalink to this headline">¶</a></h3>
+<p>Here&#8217;s the list of supported extensions for hypnogram files :</p>
+<ul class="simple">
+<li><strong>.hyp</strong></li>
+<li><strong>.txt</strong></li>
+<li><strong>.csv</strong></li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>In order to be recognized, the hypnogram has to be formated in the propper way (see <em>Iber et al. 2007</em>). Each sleep stage must be a integer refering to :</p>
+<ul class="last simple">
+<li><strong>Wake</strong>:   0</li>
+<li><strong>N1</strong>:     1</li>
+<li><strong>N2</strong>:     2</li>
+<li><strong>N3</strong>:     3</li>
+<li><strong>REM</strong>:    4</li>
+<li><strong>Art</strong>:    -1  (<em>optional</em>)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="load-your-files">
+<h2>Load your files<a class="headerlink" href="#load-your-files" title="Permalink to this headline">¶</a></h2>
+<p>There is three way for loading your files :</p>
+<ul class="simple">
+<li><strong>Load from the GUI</strong>:</li>
+<li><strong>Load from path</strong>:</li>
+<li><strong>Load raw data</strong>:</li>
+</ul>
+<div class="section" id="from-the-gui">
+<h3>From the GUI<a class="headerlink" href="#from-the-gui" title="Permalink to this headline">¶</a></h3>
+<p>Don&#8217;t send anything, just open the interface and you will have a popup window asking for the filename of your data and hypnogram</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
+<span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
+<span class="c1"># Run the interface :</span>
+<span class="n">Sleep</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id4">
+<img alt="_images/Sleep_open.png" src="_images/Sleep_open.png" />
+<p class="caption"><span class="caption-text">Popup window for loading your files.</span></p>
+</div>
+</div>
+<div class="section" id="from-path">
+<h3>From path<a class="headerlink" href="#from-path" title="Permalink to this headline">¶</a></h3>
+<p>Instead of leaving inputs arguments empty, send the path to the data :</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
+<span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
+<span class="c1"># Define where the data are located :</span>
+<span class="n">dfile</span> <span class="o">=</span> <span class="s1">&#39;/home/perso/myfile.eeg&#39;</span>
+<span class="c1"># File for the hypogram :</span>
+<span class="n">hfile</span> <span class="o">=</span> <span class="s1">&#39;/home/perso/hypno.hyp&#39;</span>
+<span class="c1"># You&#39;re not forced to give a hypnogram. If you prefer to start from a fresh empty one, use :</span>
+<span class="c1"># hfile = None or ignore passing this argument.</span>
+<span class="n">Sleep</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">dfile</span><span class="p">,</span> <span class="n">hypno_file</span><span class="o">=</span><span class="n">hfile</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="raw-data">
+<h3>Raw data<a class="headerlink" href="#raw-data" title="Permalink to this headline">¶</a></h3>
+<p>This third way is the manually one. You have to load your data before and sending it to the sleep module. This may seems to be more difficult but it allow advanced user to pass any kind of data :</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
+<span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
+<span class="c1"># Load your dataset :</span>
+<span class="n">mat</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;testing_database.mat&#39;</span><span class="p">)</span>
+<span class="c1"># Get the data, sampling frequency and channel names :</span>
+<span class="n">raw_data</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+<span class="n">raw_sf</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s1">&#39;sf&#39;</span><span class="p">]</span>
+<span class="n">raw_channels</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span>
+<span class="c1"># For the hypnogram :</span>
+<span class="n">raw_hypno</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s1">&#39;hypno&#39;</span><span class="p">]</span>
+<span class="c1"># As before, if you prefer to start from a fresh empty one, use :</span>
+<span class="c1"># raw_hypno = None or ignore passing this argument.</span>
+<span class="c1"># Now, pass all the arguments to the Sleep module :</span>
+<span class="n">Sleep</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">raw_sf</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="n">raw_channels</span><span class="p">,</span>
+      <span class="n">hypno</span><span class="o">=</span><span class="n">raw_hypno</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Data shapes</p>
+</div>
+</div>
+</div>
+<div class="section" id="hypnogram-scoring">
+<h2>Hypnogram scoring<a class="headerlink" href="#hypnogram-scoring" title="Permalink to this headline">¶</a></h2>
+<p>Sleep offer the possibility to score the hypnogram, either manually using the <a class="reference internal" href="#scoretab"><span class="std std-ref">Scoring table</span></a> or <a class="reference internal" href="#liveedit"><span class="std std-ref">Live editing</span></a>. Both methods are always kept synchronized.</p>
+<div class="figure align-center" id="id5">
+<img alt="_images/Sleep_edit.png" src="_images/Sleep_edit.png" />
+<p class="caption"><span class="caption-text">Hypnogram scoring.</span></p>
+</div>
+<div class="section" id="scoring-table">
+<span id="scoretab"></span><h3>Scoring table<a class="headerlink" href="#scoring-table" title="Permalink to this headline">¶</a></h3>
+<p>The Scoring panel can be used to manually edit the hypnogram values. It contains three columns :</p>
+<ul class="simple">
+<li><strong>From</strong> : specify where the stage start (<em>in minutes</em>)</li>
+<li><strong>To</strong> : specify where the stage finish (<em>in minutes</em>)</li>
+<li><strong>Stage</strong> : the stage type (use Art, Wake, N1, N2, N3 or REM. Can be lowercase)</li>
+</ul>
+<p>At the end of the hypnogram, you can <strong>Add line</strong> or <strong>Remove line</strong> when a line is selected. An other interesting option is that the table is sortable (by clicking on the arrow inside the column name).</p>
+<p>Then, you can export your hypnogram in <strong>.hyp</strong>, <strong>.txt</strong> or <strong>cvs</strong>.</p>
+<div class="figure align-center" id="id6">
+<img alt="_images/Scoring_table.png" src="_images/Scoring_table.png" />
+<p class="caption"><span class="caption-text">Hypnogram scoring using the Scoring table. Manually specify where each stage start / finish and precise the stage type.</span></p>
+</div>
+</div>
+<div class="section" id="live-editing">
+<span id="liveedit"></span><h3>Live editing<a class="headerlink" href="#live-editing" title="Permalink to this headline">¶</a></h3>
+<p>Live editing consist of editing your hypnogram directly from the axis by adding / selecting / dragging points. Unused points will be automatically destroyed.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Your cursor is red. Existing points are set in gray.</li>
+<li>Double click on the hypnogram to add points</li>
+<li>Hover an existing point in order to select it (the point turn green)</li>
+<li>Dragg the point (blue) on the diffrent hypnogram values</li>
+</ul>
+</div></blockquote>
+<div class="figure align-center" id="id7">
+<img alt="_images/Sleep_livedit.png" src="_images/Sleep_livedit.png" />
+<p class="caption"><span class="caption-text">Edit the hypnogram directly from the axes.</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="spindles-rem-peak-detection">
+<h2>Spindles / REM / Peak detection<a class="headerlink" href="#spindles-rem-peak-detection" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id8">
+<img alt="_images/Sleep_detect.png" src="_images/Sleep_detect.png" />
+<p class="caption"><span class="caption-text">REM / Spindle and peak detection.</span></p>
+</div>
+</div>
+<div class="section" id="additional-inputs">
+<h2>Additional inputs<a class="headerlink" href="#additional-inputs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="visbrain.sleep.sleep.Sleep">
+<em class="property">class </em><code class="descclassname">visbrain.sleep.sleep.</code><code class="descname">Sleep</code><span class="sig-paren">(</span><em>file=None</em>, <em>hypno_file=None</em>, <em>data=None</em>, <em>channels=None</em>, <em>sf=None</em>, <em>hypno=None</em>, <em>downsample=100.0</em>, <em>axis=False</em>, <em>line='gl'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/sleep/sleep.html#Sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.sleep.sleep.Sleep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize and edit sleep data.</p>
+<dl class="docutils">
+<dt>Use this module to :</dt>
+<dd><ul class="first last simple">
+<li>Load .eeg (Brainvision and ELAN), .edf or directly raw data.</li>
+<li>Visualize data channels, spectrogram and hypnogram</li>
+<li>Edit hypnogram from the interface</li>
+<li>Perform a spindle / REM / Peak detection</li>
+<li>Further signal processing tools (de-mean, de-trend and filtering)</li>
+</ul>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>file: string, optional, (def: None)</dt>
+<dd>Path to the data file (.eeg or .edf).</dd>
+<dt>hypno_file: string, optional, (def: None)</dt>
+<dd>Path to the hypnogram file (.hyp, .txt or .csv)</dd>
+<dt>data: np.ndarray, optional, (def: None)</dt>
+<dd>Array of data of shape (n_channels, n_pts)</dd>
+<dt>channels: list, optional, (def: None)</dt>
+<dd>List of channel names. The length of this list must be n_channels.</dd>
+<dt>sf: float, optional, (def: None)</dt>
+<dd>The sampling frequency of raw data.</dd>
+<dt>hypno: np.ndarray, optional, (def: None)</dt>
+<dd>Hypnogram data. Should be a raw vector of shape (n_pts,)</dd>
+<dt>downsample: float, optional, (def: 100.)</dt>
+<dd>The downsampling frequency for the data and hypnogram raw data.</dd>
+<dt>axis: bool, optional, (def: Fals)</dt>
+<dd>Specify if each axis have to contains its own axis. Be carefull
+with this option, the rendering can be much slower.</dd>
+<dt>line: string, optional, (def: &#8216;gl&#8217;)</dt>
+<dd>Specify the line rendering. Use &#8216;gl&#8217; for the default line (fast) or
+&#8216;agg&#8217; for smooth lines. This option might not works on some
+plateforms.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="shortcuts">
+<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Keys</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CTRL+d</td>
+<td>Display quick settings panel</td>
+</tr>
+<tr class="row-odd"><td>CTRL+n</td>
+<td>Screenshot window</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>Display / hide spectrogram</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Display / hide hypnogram</td>
+</tr>
+<tr class="row-even"><td>z</td>
+<td>Enable / disable zoom</td>
+</tr>
+<tr class="row-odd"><td>b</td>
+<td>Previous window</td>
+</tr>
+<tr class="row-even"><td>n</td>
+<td>Next window</td>
+</tr>
+<tr class="row-odd"><td>mouse wheel</td>
+<td>Move the current window</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ndviz.html" class="btn btn-neutral float-right" title="Ndviz" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vbfunctions.html" class="btn btn-neutral" title="GUI functions and settings" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Etienne Combrisson.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

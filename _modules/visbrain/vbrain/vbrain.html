@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>visbrain.vbrain.vbrain &mdash; visbrain 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="visbrain 0.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> visbrain
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../vbrain.html">vbrain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sleep.html">Sleep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ndviz.html">Ndviz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../makefig.html">MakeFig</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">visbrain</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>visbrain.vbrain.vbrain</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for visbrain.vbrain.vbrain</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Top level vbrain class.</span>
+
+<span class="sd">uiInit: initialize the graphical interface</span>
+<span class="sd">uiElements: interactions between graphical elements and deep functions</span>
+<span class="sd">base: initialize all vbrain objects (MNI, sources, connectivity...)</span>
+<span class="sd">and associated transformations</span>
+<span class="sd">userfcn: initialize functions for user interaction.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">PyQt4</span> <span class="k">import</span> <span class="n">QtGui</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">vispy.app</span> <span class="k">as</span> <span class="nn">visapp</span>
+<span class="kn">import</span> <span class="nn">vispy.scene.cameras</span> <span class="k">as</span> <span class="nn">viscam</span>
+
+<span class="kn">from</span> <span class="nn">.interface</span> <span class="k">import</span> <span class="n">uiInit</span><span class="p">,</span> <span class="n">uiElements</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">.user</span> <span class="k">import</span> <span class="n">userfcn</span>
+
+
+<div class="viewcode-block" id="vbrain"><a class="viewcode-back" href="../../../vbrain.html#visbrain.vbrain.vbrain.vbrain">[docs]</a><span class="k">class</span> <span class="nc">vbrain</span><span class="p">(</span><span class="n">uiInit</span><span class="p">,</span> <span class="n">uiElements</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">userfcn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Visualization of neuroscientic data on a standard MNI brain.</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        a_color: tuple, (def: (1,1,1))</span>
+<span class="sd">            RGB colors of the MNI brain.</span>
+
+<span class="sd">        a_opacity: int/float, (def: 1.)</span>
+<span class="sd">            Transparency of the MNI brain. Must be between 0 and 1.</span>
+
+<span class="sd">        a_proj: string, (def: &#39;internal&#39;)</span>
+<span class="sd">            Turn a_proj to &#39;internal&#39; for internal projection or &#39;external&#39; for</span>
+<span class="sd">            cortical rendering.</span>
+
+<span class="sd">        a_template: string, (def: &#39;B1&#39;)</span>
+<span class="sd">            The MNI brain template to use. Switch between &#39;B1&#39;, &#39;B2&#39; or &#39;B3&#39;</span>
+
+<span class="sd">        a_vertices/a_faces: ndarray, (def: None)</span>
+<span class="sd">            Specify an alternativ surface to use. Both parameters must be a 2D</span>
+<span class="sd">            array, respectively of shapes (N_vertices, 3) and (N_faces, 3)</span>
+
+<span class="sd">        a_shading: string, (def: &#39;smooth&#39;)</span>
+<span class="sd">            Shading method to use for the brain. Switch between &#39;smooth&#39;,</span>
+<span class="sd">            &#39;flat&#39; or None.</span>
+
+<span class="sd">        s_xyz: ndarray, (def: None)</span>
+<span class="sd">            Array of talairach or MNI coordinates to display sources</span>
+<span class="sd">            into the brain. The shape of the array must be (N, 3) where</span>
+<span class="sd">            &#39;3&#39; is for (x, y, z) coordinates and N, the number of sources.</span>
+
+<span class="sd">        s_data: ndarray, (def, None)</span>
+<span class="sd">            Add some data to sources. As a consequence, the radius of each</span>
+<span class="sd">            source will be a function of s_data. must be an array of shape</span>
+<span class="sd">            (N,). If s_data is None, all sources will have the same value.</span>
+<span class="sd">            The parameter s_data can be masked using numpy.ma module.</span>
+
+<span class="sd">        s_color: string/list/ndarray, (def: &#39;red&#39;)</span>
+<span class="sd">            Color of each source sphere. If s_color is a single string,</span>
+<span class="sd">            all sphere will have the same color. If it&#39;s&#39; a list of strings,</span>
+<span class="sd">            the length must be N. Alternatively, s_color can be a (N, 3) RGB</span>
+<span class="sd">            or (N, 4) RGBA colors.</span>
+
+<span class="sd">        s_alpha: int/float, (def: 1.0)</span>
+<span class="sd">            Transparency of all sources. Must be between 0 and 1.</span>
+
+<span class="sd">        s_radiusmin/s_radiusmax: int/float, (def: 5.0/10.0)</span>
+<span class="sd">            Define the minimum and maximum source&#39;s possible radius. By default</span>
+<span class="sd">            if all sources have the same value, the radius will be s_radiusmin.</span>
+
+<span class="sd">        s_edgecolor: string/list/ndarray, (def: None)</span>
+<span class="sd">            Add an edge to sources</span>
+
+<span class="sd">        s_edgewidth: float, (def: 0.4)</span>
+<span class="sd">            Edge width of sources</span>
+
+<span class="sd">        s_scaling: bool, (def: True)</span>
+<span class="sd">            If set to True, marker scales when rezooming.</span>
+
+<span class="sd">        s_symbol: string, (def: &#39;disc&#39;)</span>
+<span class="sd">            Symbol to use for sources. Allowed style strings are: disc, arrow,</span>
+<span class="sd">            ring, clobber, square, diamond, vbar, hbar, cross, tailed_arrow, x,</span>
+<span class="sd">            triangle_up, triangle_down, and star.</span>
+
+<span class="sd">        s_text: list/tuple, (def: None)</span>
+<span class="sd">            Set text to each electrode. s_text should be an iterable object,</span>
+<span class="sd">            composed of strings, with the same length as the number of sources.</span>
+
+<span class="sd">        s_textcolor: string/list/ndarray, (def: &#39;k&#39;)</span>
+<span class="sd">            A single color element for all the text</span>
+
+<span class="sd">        s_textsize: int, (def: 3)</span>
+<span class="sd">            Fontsize of text elements</span>
+
+<span class="sd">        s_textshift: list/tuple, (def: (0,1,0))</span>
+<span class="sd">            Translate the text along (x, y, z) coordinates to improve text</span>
+<span class="sd">            visibility</span>
+
+<span class="sd">        s_projecton: string, optional, (def: &#39;surface&#39;)</span>
+<span class="sd">            Project sources activity either on surface or, if displayed,</span>
+<span class="sd">            on deep structures.</span>
+
+<span class="sd">        s_mask: ndarray, optional, (def: None)</span>
+<span class="sd">            Vector of boolean values, with the same length as the length of</span>
+<span class="sd">            s_xyz. Use this parameter to mask some sources but keep it</span>
+<span class="sd">            displayed.</span>
+
+<span class="sd">        s_maskcolor: list/tuple, optional, (def: &#39;gray&#39;)</span>
+<span class="sd">            Color of masked sources when projected on surface.</span>
+
+<span class="sd">        c_connect: ndarray, (def: None)</span>
+<span class="sd">            Connections between sources. Define N sources location using s_xyz</span>
+<span class="sd">            of shape (N, 3). Then, c_connect must be a (N, N) array defining</span>
+<span class="sd">            each value of connection between all sources. The diagonal is going</span>
+<span class="sd">            to be systematically ignored.</span>
+
+<span class="sd">        c_select: ndarray, (def: None)</span>
+<span class="sd">            Select relevant connections do display. This array should be</span>
+<span class="sd">            composed of 0 and 1 and must have the same shape as c_connect.</span>
+<span class="sd">            Alternatively, set a mask to c_connect to have the same effect</span>
+<span class="sd">            without using this parameter.</span>
+
+<span class="sd">        c_dynamic: tuple, optional, (def: None)</span>
+<span class="sd">            Control the dynamic opacity. For example, if c_dynamic=(0, 1),</span>
+<span class="sd">            strong connections will be more opaque than weak connections.</span>
+
+<span class="sd">        c_linewidth: float, optional, (def: 4.0)</span>
+<span class="sd">            Linewidth of connectivity lines.</span>
+
+<span class="sd">        cmap: string, (def: &#39;inferno&#39;)</span>
+<span class="sd">            Matplotlib colormap name.</span>
+
+<span class="sd">        cmap_lim: tuple/list, (def: None)</span>
+<span class="sd">            Define the limit of the colorbar. This parameter must be a list or</span>
+<span class="sd">            tuple containing two float (like (3, 5)...). If cmap_lim stay to</span>
+<span class="sd">            None, the minimum and maximum of projected values are going to be</span>
+<span class="sd">            used. Alternatively, you can use (3, None) or (None, 5) to ignore</span>
+<span class="sd">            one value and force it to be assigned to the minimum or maximum.</span>
+
+<span class="sd">        cmap_vmin/cmap_vmax: int/float, (def: None/None)</span>
+<span class="sd">            Define a threshold to change colors that are under cmap_vmin or</span>
+<span class="sd">            over cmap_vmax. See cmap_under/cmap_over to change those colors.</span>
+
+<span class="sd">        cmap_under/cmap_over: string/tuple, (def: None/None)</span>
+<span class="sd">            The color to use for values under cmap_vmin and values over</span>
+<span class="sd">            cmap_vmax.</span>
+
+<span class="sd">        t_radius: int/float, (def: 10)</span>
+<span class="sd">            The projection radius to use (depending on coordinates type)</span>
+
+<span class="sd">        ui_bgcolor: string/tuple, (def: (0.09, 0.09, 0.09))</span>
+<span class="sd">            Backgroud color of the ui</span>
+
+<span class="sd">        ui_savename: string, optional, (def: None)</span>
+<span class="sd">            The save name when exporting</span>
+
+<span class="sd">        ui_extension: string, optional, (def: &#39;.png&#39;)</span>
+<span class="sd">            The picture extension when exporting. Choose between &#39;png&#39;</span>
+<span class="sd">            and &#39;tiff&#39;</span>
+
+<span class="sd">        ui_region: tuple, optional, (def: None)</span>
+<span class="sd">            Crop the exportation to the region define by (x, y, width, height)</span>
+
+<span class="sd">        cb_export: bool, optional, (def: True)</span>
+<span class="sd">            Control if the colorbor must be exported when doing a screenshot</span>
+
+<span class="sd">        cb_fontsize: int, optional, (def: 15)</span>
+<span class="sd">            Font-size of colorbar text (min / max / title)</span>
+
+<span class="sd">        cb_fontcolor: string, optional, (def: &#39;w&#39;)</span>
+<span class="sd">            Font-color of colorbar text (min / max / title)</span>
+
+<span class="sd">        l_position: tuple, optional, (def: (100., 100., 100.))</span>
+<span class="sd">            Position of the light</span>
+
+<span class="sd">        l_intensity: tuple, optional, (def: (1., 1., 1.))</span>
+<span class="sd">            Intensity of the light</span>
+
+<span class="sd">        l_color: tuple, optional, (def: (1., 1., 1., 1.))</span>
+<span class="sd">            Color of the light</span>
+
+<span class="sd">        l_coefAmbient: float, optional, (def: 0.05)</span>
+<span class="sd">            Coefficient for the ambient light</span>
+
+<span class="sd">        l_coefSpecular: float, optional, (def: 0.5)</span>
+<span class="sd">            Coefficient for the specular light</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Load librairies :</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; from visbrain import vbrain</span>
+<span class="sd">        &gt;&gt;&gt; # Define some coordinates and colors for three deep sources :</span>
+<span class="sd">        &gt;&gt;&gt; s_xyz = np.array([[-12, -13, 58], [40, 7, 57], [10, 5, 36]])</span>
+<span class="sd">        &gt;&gt;&gt; s_color = [&quot;#3498db&quot;, &quot;#e74c3c&quot;, &quot;#2ecc71&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; # Add data to sources :</span>
+<span class="sd">        &gt;&gt;&gt; s_data = [100, 0.2, 27]</span>
+<span class="sd">        &gt;&gt;&gt; # Define a visbrain instance with previous parameters :</span>
+<span class="sd">        &gt;&gt;&gt; vb = vbrain(s_xyz=s_xyz, s_data=s_data, s_color=s_color)</span>
+<span class="sd">        &gt;&gt;&gt; # Finally, display the interface :</span>
+<span class="sd">        &gt;&gt;&gt; vb.show()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Init.&quot;&quot;&quot;</span>
+        <span class="c1"># ====================== ui Arguments ======================</span>
+        <span class="c1"># Background color (for the main and the colorbar canvas) :</span>
+        <span class="n">bgcolor</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_bgcolor&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.098</span><span class="p">,</span> <span class="mf">0.098</span><span class="p">,</span> <span class="mf">0.098</span><span class="p">))</span>
+        <span class="c1"># Savename, extension and croping region (usefull for the screenshot) :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_savename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_savename&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extension</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_extension&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_crop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_region&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;tiff&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_extension</span> <span class="o">=</span> <span class="s1">&#39;png&#39;</span>
+
+        <span class="c1"># ====================== App creation ======================</span>
+        <span class="c1"># Create the app and initialize all graphical elements :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+        <span class="n">uiInit</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bgcolor</span><span class="p">)</span>
+
+        <span class="c1"># Set icon :</span>
+        <span class="n">pathfile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">__name__</span><span class="p">]</span><span class="o">.</span><span class="n">__file__</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;vbrain&#39;</span><span class="p">,</span> <span class="s1">&#39;interface&#39;</span><span class="p">,</span> <span class="s1">&#39;gui&#39;</span><span class="p">,</span> <span class="s1">&#39;vbicon.png&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pathfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                                                        <span class="s1">&#39;/vbrain&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="p">)))</span>
+
+        <span class="c1"># ====================== Objects creation ======================</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">viscam</span><span class="o">.</span><span class="n">TurntableCamera</span><span class="p">(</span><span class="n">azimuth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">progressBar</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># ====================== UI to visbrain ======================</span>
+        <span class="c1"># Link UI and visbrain function :</span>
+        <span class="n">uiElements</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># # ====================== Cameras ======================</span>
+        <span class="c1"># # Main camera :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">camera</span> <span class="o">=</span> <span class="n">camera</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atlas</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">set_camera</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">camera</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vbNode</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">scene</span>
+
+        <span class="c1"># Fixed colorbar camera :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbwc</span><span class="o">.</span><span class="n">camera</span> <span class="o">=</span> <span class="n">viscam</span><span class="o">.</span><span class="n">TurntableCamera</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                       <span class="n">azimuth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">elevation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbwc</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">margin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># print(self.view.wc.scene.describe_tree(with_transform=True))</span>
+
+<div class="viewcode-block" id="vbrain.show"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.vbrain.vbrain.show">[docs]</a>    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Display the graphical user interface.&quot;&quot;&quot;</span>
+        <span class="c1"># This function has to be placed here (and not in the user.py script)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rotate</span><span class="p">()</span>
+        <span class="n">visapp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Etienne Combrisson.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
