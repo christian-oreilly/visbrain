@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.vbrain.vbrain &mdash; visbrain 0.1.0 documentation</title>
+  <title>visbrain.vbrain.vbrain &mdash; visbrain 0.1.1 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.1.1 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.1.1
               </div>
             
           
@@ -302,7 +302,7 @@
 <span class="sd">        cb_fontsize: int, optional, (def: 15)</span>
 <span class="sd">            Font-size of colorbar text (min / max / title)</span>
 
-<span class="sd">        cb_fontcolor: string, optional, (def: &#39;w&#39;)</span>
+<span class="sd">        cb_fontcolor: string, optional, (def: &#39;white&#39;)</span>
 <span class="sd">            Font-color of colorbar text (min / max / title)</span>
 
 <span class="sd">        l_position: tuple, optional, (def: (100., 100., 100.))</span>
@@ -359,7 +359,8 @@
                                                         <span class="s1">&#39;/vbrain&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="p">)))</span>
 
         <span class="c1"># ====================== Objects creation ======================</span>
-        <span class="n">camera</span> <span class="o">=</span> <span class="n">viscam</span><span class="o">.</span><span class="n">TurntableCamera</span><span class="p">(</span><span class="n">azimuth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">viscam</span><span class="o">.</span><span class="n">TurntableCamera</span><span class="p">(</span><span class="n">azimuth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;turntable&#39;</span><span class="p">)</span>
         <span class="n">base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">progressBar</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># ====================== UI to visbrain ======================</span>
@@ -419,7 +420,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.0',
+            VERSION:'0.1.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

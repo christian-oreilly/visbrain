@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>GUI functions and settings &mdash; visbrain 0.1.0 documentation</title>
+  <title>GUI functions and settings &mdash; visbrain 0.1.1 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.0 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.1.1 documentation" href="index.html"/>
         <link rel="up" title="vbrain" href="vbrain.html"/>
         <link rel="next" title="Sleep" href="sleep.html"/>
         <link rel="prev" title="vbrain" href="vbrain.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.1.1
               </div>
             
           
@@ -115,7 +115,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#connectivity-functions">Connectivity functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#area-functions">Area functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#roi-functions">ROI functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#list-of-suported-roi">List of suported ROI</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#plot-selection">Plot selection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2">Opacity</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Light reflection</a></li>
@@ -181,7 +182,7 @@
 <li>Brain functions: control the main brain object (color, transparency...)</li>
 <li>Sources functions: control sources object (color, transparency, data...)</li>
 <li>Connectivity functions: control connectivity object (color, transparency, data...)</li>
-<li>Area functions: control area object (selected areas, color, transparency...)</li>
+<li>ROI functions: control area object (selected areas, color, transparency...)</li>
 </ul>
 <div class="section" id="gui-functions-and-settings">
 <h1>GUI functions and settings<a class="headerlink" href="#gui-functions-and-settings" title="Permalink to this headline">¶</a></h1>
@@ -574,17 +575,17 @@ displayed.</dd>
 <h2>Cortical projection<a class="headerlink" href="#cortical-projection" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="visbrain.vbrain.user.userfcn.cortical_projection">
-<code class="descclassname">userfcn.</code><code class="descname">cortical_projection</code><span class="sig-paren">(</span><em>project_on='surface'</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.cortical_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.cortical_projection" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">userfcn.</code><code class="descname">cortical_projection</code><span class="sig-paren">(</span><em>project_on='brain'</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.cortical_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.cortical_projection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project sources activity.</p>
 <p>This method can be used to project the sources activity either onto the
 brain or on deep areas (like gyrus or brodmann areas).</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
-<dt>project_on: string, optional, (def: &#8216;surface&#8217;)</dt>
+<dt>project_on: string, optional, (def: &#8216;brain&#8217;)</dt>
 <dd>Define on which object to project the sources activity. Chose
-either &#8216;surface&#8217; for projecting the sources activity onto the
-brain or &#8216;deep&#8217; to project on deep areas (if defined).</dd>
+either &#8216;brain&#8217; for projecting the sources activity onto the
+brain or &#8216;roi&#8217; to project on region of interest (if defined).</dd>
 </dl>
 </dd>
 <dt>Example:</dt>
@@ -681,38 +682,40 @@ using the over parameter bellow.</dd>
 <p class="caption"><span class="caption-text">Example of connectivity setup.</span></p>
 </div>
 </div>
-<div class="section" id="area-functions">
-<h1>Area functions<a class="headerlink" href="#area-functions" title="Permalink to this headline">¶</a></h1>
-<p>Set of functions for an iteractive control of areas object. Use the methods below to select the areas to display, to control the transparency level...</p>
+<div class="section" id="roi-functions">
+<h1>ROI functions<a class="headerlink" href="#roi-functions" title="Permalink to this headline">¶</a></h1>
+<p>Set of functions for an iteractive control of ROI (Region of interest) objects. Use methods below to select the ROI to display, to control the transparency level...</p>
 <div class="figure align-center" id="id7">
 <img alt="_images/AreaObj.png" src="_images/AreaObj.png" />
 <p class="caption"><span class="caption-text">Example of deep-structures (AAL / Brodmann area).</span></p>
 </div>
-<div class="section" id="plot-selection">
-<h2>Plot selection<a class="headerlink" href="#plot-selection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="list-of-suported-roi">
+<h2>List of suported ROI<a class="headerlink" href="#list-of-suported-roi" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
-<dt id="visbrain.vbrain.user.userfcn.area_plot">
-<code class="descclassname">userfcn.</code><code class="descname">area_plot</code><span class="sig-paren">(</span><em>selection=[]</em>, <em>subdivision='brod'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.area_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.area_plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Select some area to plot.</p>
+<dt id="visbrain.vbrain.user.userfcn.roi_list">
+<code class="descclassname">userfcn.</code><code class="descname">roi_list</code><span class="sig-paren">(</span><em>subdivision='brod'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.roi_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.roi_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the list of supported ROI.</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
-<dt>selection: list, optional, (def: [])</dt>
-<dd>List of integers where each one refer to a particular area. The
-corresponding list can be found in the graphical interface in
-the MNI -&gt; Strucures -&gt; Select structures tab.</dd>
 <dt>subdivision: str, optional, (def: &#8216;brod&#8217;)</dt>
 <dd>Select the sub-division method i.e &#8216;brod&#8217; (for brodmann areas)
 or &#8216;aal&#8217; (Anatomical Automatic Labeling)</dd>
 </dl>
 </dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>labels: str</dt>
+<dd>The currently supported ROI&#8217;s labels.</dd>
+</dl>
+</dd>
 <dt>Example:</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display brodmann area 4 and 6 :</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">area_plot</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get list of ROI for AAL :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="n">vb</span><span class="o">.</span><span class="n">roi_list</span><span class="p">(</span><span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;aal&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print this list :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -720,11 +723,47 @@ or &#8216;aal&#8217; (Anatomical Automatic Labeling)</dd>
 </dd></dl>
 
 </div>
+<div class="section" id="plot-selection">
+<h2>Plot selection<a class="headerlink" href="#plot-selection" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.vbrain.user.userfcn.roi_plot">
+<code class="descclassname">userfcn.</code><code class="descname">roi_plot</code><span class="sig-paren">(</span><em>selection=[]</em>, <em>subdivision='brod'</em>, <em>smooth=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.roi_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.roi_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select some roi to plot.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>selection: list, optional, (def: [])</dt>
+<dd>List of integers where each one refer to a particular roi. The
+corresponding list can be found in the graphical interface in
+the ROI tab or using the function roi_list.</dd>
+<dt>subdivision: str, optional, (def: &#8216;brod&#8217;)</dt>
+<dd>Select the sub-division method i.e &#8216;brod&#8217; (for brodmann areas)
+or &#8216;aal&#8217; (Anatomical Automatic Labeling)</dd>
+<dt>smoth: int, optional, (def: 3)</dt>
+<dd>Define smooth proportion.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display brodmann area 4 and 6 :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">roi_plot</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt>See also:</dt>
+<dd>roi_list</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="id2">
 <h2>Opacity<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
-<dt id="visbrain.vbrain.user.userfcn.area_opacity">
-<code class="descclassname">userfcn.</code><code class="descname">area_opacity</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.area_opacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.area_opacity" title="Permalink to this definition">¶</a></dt>
+<dt id="visbrain.vbrain.user.userfcn.roi_opacity">
+<code class="descclassname">userfcn.</code><code class="descname">roi_opacity</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.roi_opacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.roi_opacity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the level of transparency of the deep structures.</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
@@ -732,14 +771,14 @@ or &#8216;aal&#8217; (Anatomical Automatic Labeling)</dd>
 <dt>alpha: float, optional, (def: 0.1)</dt>
 <dd>Transparency level (usually between 0 and 1).</dd>
 <dt>show: bool, optional, (def: True)</dt>
-<dd>Specify if area(s) has be shown.</dd>
+<dd>Specify if roi(s) has be shown.</dd>
 </dl>
 </dd>
 <dt>Example:</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set transparency :</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">area_opacity</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">roi_opacity</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -752,11 +791,11 @@ or &#8216;aal&#8217; (Anatomical Automatic Labeling)</dd>
 <div class="section" id="id3">
 <h2>Light reflection<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
-<dt id="visbrain.vbrain.user.userfcn.area_light_reflection">
-<code class="descclassname">userfcn.</code><code class="descname">area_light_reflection</code><span class="sig-paren">(</span><em>reflect_on=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.area_light_reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.area_light_reflection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change how light is refleting onto sub-areas.</p>
+<dt id="visbrain.vbrain.user.userfcn.roi_light_reflection">
+<code class="descclassname">userfcn.</code><code class="descname">roi_light_reflection</code><span class="sig-paren">(</span><em>reflect_on=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/vbrain/user.html#userfcn.roi_light_reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.vbrain.user.userfcn.roi_light_reflection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change how light is reflecting onto roi.</p>
 <p>This function can be used to see either the surface only (external) or
-deep voxels inside areas (internal).</p>
+deep voxels inside roi (internal).</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
@@ -768,9 +807,9 @@ deep voxels inside areas (internal).</p>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a vbrain instance :</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">vbrain</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display brodmann area 4 and 6 :</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">area_plot</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">roi_plot</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display the external surface :</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">_area_light_reflection</span><span class="p">(</span><span class="n">reflect_on</span><span class="o">=</span><span class="s1">&#39;internal&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">roi_light_reflection</span><span class="p">(</span><span class="n">reflect_on</span><span class="o">=</span><span class="s1">&#39;internal&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Hide the brain :</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">brain_opacity</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
@@ -825,7 +864,7 @@ deep voxels inside areas (internal).</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.0',
+            VERSION:'0.1.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
