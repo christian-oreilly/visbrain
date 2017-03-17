@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.vbrain.user &mdash; visbrain 0.1.2 documentation</title>
+  <title>visbrain.brain.user &mdash; visbrain 0.1.2 documentation</title>
   
 
   
@@ -120,7 +120,7 @@
       
           <li><a href="../../index.html">Module code</a> &raquo;</li>
       
-    <li>visbrain.vbrain.user</li>
+    <li>visbrain.brain.user</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -132,13 +132,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for visbrain.vbrain.user</h1><div class="highlight"><pre>
+  <h1>Source code for visbrain.brain.user</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This file contains user dedicated functions for a direct interaction.</span>
 
 <span class="sd">Those functions are a the top level of a visbrain instance and are defined in</span>
 <span class="sd">order to run commands without the necessity of opening the interface. This is</span>
 <span class="sd">really convenient for generating a large number of pictures by looping over a</span>
-<span class="sd">vbrain instance.</span>
+<span class="sd">Brain instance.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -165,7 +165,7 @@
     <span class="c1">#                             SETTINGS</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
-<div class="viewcode-block" id="userfcn.rotate"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.rotate">[docs]</a>    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fixed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">custom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.rotate"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.rotate">[docs]</a>    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fixed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">custom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Rotate the scene elements using a predefined or a custom rotation.</span>
 
 <span class="sd">        The rotation is applied on every objects on the scene.</span>
@@ -186,8 +186,8 @@
 <span class="sd">                elevation.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Predefined rotation :</span>
 <span class="sd">            &gt;&gt;&gt; vb.rotate(fixed=&#39;sagittal_1&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; # Custom rotation :</span>
@@ -197,7 +197,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rotate</span><span class="p">(</span><span class="n">fixed</span><span class="o">=</span><span class="n">fixed</span><span class="p">,</span> <span class="n">custom</span><span class="o">=</span><span class="n">custom</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="userfcn.background_color"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.background_color">[docs]</a>    <span class="k">def</span> <span class="nf">background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)):</span>
+<div class="viewcode-block" id="userfcn.background_color"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.background_color">[docs]</a>    <span class="k">def</span> <span class="nf">background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;Set the background color of the main canvas and the colorbar.</span>
 
 <span class="sd">        The main canvas is defined as the canvas where all objects are</span>
@@ -211,8 +211,8 @@
 <span class="sd">                a matplotlib color (string) or a hexadecimal color (string).</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Set the background color (using a RGB tuple) :</span>
 <span class="sd">            &gt;&gt;&gt; vb.background_color(color=(1., 1., 1.))</span>
 <span class="sd">            &gt;&gt;&gt; # Set the background color (using matplotlib format) :</span>
@@ -226,7 +226,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">bgcolor</span> <span class="o">=</span> <span class="n">bckcolor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbcanvas</span><span class="o">.</span><span class="n">bgcolor</span> <span class="o">=</span> <span class="n">bckcolor</span></div>
 
-<div class="viewcode-block" id="userfcn.screenshot"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.screenshot">[docs]</a>    <span class="k">def</span> <span class="nf">screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.screenshot"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.screenshot">[docs]</a>    <span class="k">def</span> <span class="nf">screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">cbregion</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cbzoom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">resolution</span><span class="o">=</span><span class="mf">3000.</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Take a screenshot of the current scene and save it as a picture.</span>
 
 <span class="sd">        This method try to make a high-fidelity screenshot of your scene. There</span>
@@ -241,8 +243,8 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: str</span>
-<span class="sd">                The name of the file to be saved. This file must contains one</span>
-<span class="sd">                of the following extension: .png, .tiff</span>
+<span class="sd">                The name of the file to be saved. This file must contains a</span>
+<span class="sd">                extension like .png, .tiff, .jpg...</span>
 
 <span class="sd">        Kargs:</span>
 <span class="sd">            region: tuple, optional, (def: None)</span>
@@ -253,12 +255,29 @@
 <span class="sd">                along the vertical axis. By default, the entire canvas is</span>
 <span class="sd">                rendered.</span>
 
+<span class="sd">            zoom: float, optional, (def: None)</span>
+<span class="sd">                Define the zoom level over the main canvas.</span>
+
 <span class="sd">            colorbar: bool, optional, (def: False)</span>
 <span class="sd">                Specify if the colorbar has to be exported too.</span>
 
+<span class="sd">            cbregion: tuple, optional, (def: None)</span>
+<span class="sd">                Same parameter as the region but applied on the colorbar canvas</span>
+
+<span class="sd">            cbzoom: float, optional, (def: None)</span>
+<span class="sd">                Define the zoom level over the colorbar canvas.</span>
+
+<span class="sd">            transparent: bool, optional, (def: False)</span>
+<span class="sd">                Specify if the exported figure have to contains a transparent</span>
+<span class="sd">                background.</span>
+
+<span class="sd">            resolution: float, optional, (def: 3000)</span>
+<span class="sd">                Define the screenshot resolution by indicating the number of</span>
+<span class="sd">                times the definition of your screen must be multiplied.</span>
+
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Define the filename and the cropped region :</span>
 <span class="sd">            &gt;&gt;&gt; filename, crop = &#39;myfile.png&#39;, (1000, 300, 570, 550)</span>
 <span class="sd">            &gt;&gt;&gt; # Rotate the brain :</span>
@@ -275,12 +294,13 @@
 <span class="sd">                patient, it&#39;s possible. Don&#39;t forget that .png files contains</span>
 <span class="sd">                transparency. For an optimal screenshot, I recommand doing a</span>
 <span class="sd">                rotation before the screenshot, so that the canvas can be</span>
-<span class="sd">                initialized.</span>
+<span class="sd">                initialized. See the</span>
+<span class="sd">                `tutorial &lt;https://etiennecmb.github.io/visbrain/vbexport.html&gt;`_</span>
+<span class="sd">                for futher explanations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Define the filename :</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_savename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_extension</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extension</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_savename</span> <span class="o">=</span> <span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The name must be a string and must contains the&quot;</span>
                              <span class="s2">&quot; extension (ex: name=&#39;myfile.png&#39;)&quot;</span><span class="p">)</span>
@@ -293,6 +313,17 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The region parameter must be a tuple of four&quot;</span>
                                  <span class="s2">&quot; integers describing (x_start, y_start, &quot;</span>
                                  <span class="s2">&quot;width, height)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cbregion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cbcrop</span> <span class="o">=</span> <span class="n">cbregion</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The cbregion parameter must be a tuple of&quot;</span>
+                                 <span class="s2">&quot;four integers describing (x_start, y_start, &quot;</span>
+                                 <span class="s2">&quot;width, height)&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Define screenshot resolution :</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_uirez</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
 
         <span class="c1"># Define if the colorbar has to be exported :</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colorbar</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -301,9 +332,20 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The colorbar parameter must be a bool describing&quot;</span>
                              <span class="s2">&quot; if the colorbar have to exported too.&quot;</span><span class="p">)</span>
 
+        <span class="c1"># Force transparent background :</span>
+        <span class="k">if</span> <span class="n">transparent</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">bgcolor</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbcanvas</span><span class="o">.</span><span class="n">bgcolor</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+
+        <span class="c1"># Zoom :</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">zoom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">zoom</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">scale_factor</span> <span class="o">=</span> <span class="n">zoom</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cbzoom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cbzoom</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbwc</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">scale_factor</span> <span class="o">=</span> <span class="n">cbzoom</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_screenshot</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="userfcn.quit"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.quit">[docs]</a>    <span class="k">def</span> <span class="nf">quit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.quit"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.quit">[docs]</a>    <span class="k">def</span> <span class="nf">quit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Quit the interface.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_app</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span></div>
 
@@ -312,7 +354,7 @@
     <span class="c1">#                           BRAIN CONTROL</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
-<div class="viewcode-block" id="userfcn.brain_control"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.brain_control">[docs]</a>    <span class="k">def</span> <span class="nf">brain_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">hemisphere</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.brain_control"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.brain_control">[docs]</a>    <span class="k">def</span> <span class="nf">brain_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">hemisphere</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Control the type of brain to use.</span>
 
 <span class="sd">        Use this method to switch between several brain templates. Then, you</span>
@@ -331,8 +373,8 @@
 <span class="sd">                Otherwise use &#39;both&#39;.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Display the right hemisphere of &#39;B3&#39; template :</span>
 <span class="sd">            &gt;&gt;&gt; vb.brain_control(template=&#39;B3&#39;, hemisphere=&#39;right&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
@@ -341,7 +383,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_brain_control</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="n">show</span><span class="p">,</span>
                             <span class="n">hemisphere</span><span class="o">=</span><span class="n">hemisphere</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="userfcn.brain_opacity"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.brain_opacity">[docs]</a>    <span class="k">def</span> <span class="nf">brain_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.brain_opacity"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.brain_opacity">[docs]</a>    <span class="k">def</span> <span class="nf">brain_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the level of transparency of the brain.</span>
 
 <span class="sd">        Kargs:</span>
@@ -352,8 +394,8 @@
 <span class="sd">                Specify if the brain has be shown.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Set transparency :</span>
 <span class="sd">            &gt;&gt;&gt; vb.brain_opacity(alpha=0.1, show=True)</span>
 <span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
@@ -368,7 +410,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">show_MNI</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">show</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atlas</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="userfcn.light_reflection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.light_reflection">[docs]</a>    <span class="k">def</span> <span class="nf">light_reflection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reflect_on</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.light_reflection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.light_reflection">[docs]</a>    <span class="k">def</span> <span class="nf">light_reflection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reflect_on</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change how light is reflected onto the brain.</span>
 
 <span class="sd">        This function can be used to see either the surface only (external) or</span>
@@ -380,8 +422,8 @@
 <span class="sd">                graphical interface, this can be done using the shortcut 3.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Display the external surface :</span>
 <span class="sd">            &gt;&gt;&gt; vb.light_reflection(reflect_on=&#39;external&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
@@ -403,7 +445,7 @@
     <span class="c1">#                              SOURCES</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
-<div class="viewcode-block" id="userfcn.sources_data"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.sources_data">[docs]</a>    <span class="k">def</span> <span class="nf">sources_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ab4652&#39;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;disc&#39;</span><span class="p">,</span> <span class="n">radiusmin</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span>
+<div class="viewcode-block" id="userfcn.sources_data"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_data">[docs]</a>    <span class="k">def</span> <span class="nf">sources_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ab4652&#39;</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;disc&#39;</span><span class="p">,</span> <span class="n">radiusmin</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span>
                      <span class="n">radiusmax</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">edgewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
                      <span class="n">scaling</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maskcolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set data to sources and control source&#39;s properties.</span>
@@ -451,8 +493,8 @@
 <span class="sd">                Color of masked sources when projected on surface.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance with 10 random sources:</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
 <span class="sd">            &gt;&gt;&gt; # Define some random data :</span>
 <span class="sd">            &gt;&gt;&gt; data = 100 * np.random.rand(10)</span>
 <span class="sd">            &gt;&gt;&gt; # Define some color :</span>
@@ -486,7 +528,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No sources detected. Please, add some sources &quot;</span>
                              <span class="s2">&quot;before trying to update data&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="userfcn.sources_opacity"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.sources_opacity">[docs]</a>    <span class="k">def</span> <span class="nf">sources_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.sources_opacity"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_opacity">[docs]</a>    <span class="k">def</span> <span class="nf">sources_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the level of transparency of sources.</span>
 
 <span class="sd">        Kargs:</span>
@@ -497,8 +539,8 @@
 <span class="sd">                Specify if sources has be shown.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance with 10 random sources:</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
 <span class="sd">            &gt;&gt;&gt; # Set transparency :</span>
 <span class="sd">            &gt;&gt;&gt; vb.sources_opacity(alpha=0.1, show=True)</span>
 <span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
@@ -513,24 +555,42 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">show</span></div>
 
-<div class="viewcode-block" id="userfcn.cortical_projection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.cortical_projection">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.cortical_projection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_projection">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Project sources activity.</span>
 
 <span class="sd">        This method can be used to project the sources activity either onto the</span>
 <span class="sd">        brain or on deep areas (like gyrus or brodmann areas).</span>
 
 <span class="sd">        Kargs:</span>
+<span class="sd">            radius: float, optional, (def: 10.)</span>
+<span class="sd">                Projection radius.</span>
+
 <span class="sd">            project_on: string, optional, (def: &#39;brain&#39;)</span>
 <span class="sd">                Define on which object to project the sources activity. Chose</span>
 <span class="sd">                either &#39;brain&#39; for projecting the sources activity onto the</span>
 <span class="sd">                brain or &#39;roi&#39; to project on region of interest (if defined).</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; ...</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
+<span class="sd">            &gt;&gt;&gt; # Set transparency :</span>
+<span class="sd">            &gt;&gt;&gt; vb.sources_opacity(alpha=0.1, show=True)</span>
+<span class="sd">            &gt;&gt;&gt; # Run the cortical projection :</span>
+<span class="sd">            &gt;&gt;&gt; vb.cortical_projection()</span>
+<span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
+<span class="sd">            &gt;&gt;&gt; vb.show()</span>
 
 <span class="sd">        See also:</span>
 <span class="sd">            area_plot, sources_colormap</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check projection radius :</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The radius parameter must be a integer or a &quot;</span>
+                             <span class="s2">&quot;float number.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check project_on parameter :</span>
         <span class="k">if</span> <span class="n">project_on</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="s1">&#39;roi&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
         <span class="k">else</span><span class="p">:</span>
@@ -540,17 +600,46 @@
         <span class="c1"># Run the corticale projection :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cortical_projection</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="userfcn.cortical_repartition"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.cortical_repartition">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_repartition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.cortical_repartition"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_repartition">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_repartition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the number of contributing sources per vertex.</span>
 
 <span class="sd">        Kargs:</span>
+<span class="sd">            radius: float, optional, (def: 10.)</span>
+<span class="sd">                Projection radius.</span>
+
+<span class="sd">            project_on: string, optional, (def: &#39;brain&#39;)</span>
+<span class="sd">                Define on which object to project the sources repartition.</span>
+<span class="sd">                Chose either &#39;brain&#39; for projecting onto the brain or &#39;roi&#39;</span>
+<span class="sd">                to project on region of interest (if defined).</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
+<span class="sd">            &gt;&gt;&gt; # Set transparency :</span>
+<span class="sd">            &gt;&gt;&gt; vb.sources_opacity(alpha=0.1, show=True)</span>
+<span class="sd">            &gt;&gt;&gt; # Run the cortical projection :</span>
+<span class="sd">            &gt;&gt;&gt; vb.cortical_repartition()</span>
+<span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
+<span class="sd">            &gt;&gt;&gt; vb.show()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check projection radius :</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The radius parameter must be a integer or a &quot;</span>
+                             <span class="s2">&quot;float number.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check project_on parameter :</span>
+        <span class="k">if</span> <span class="n">project_on</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="s1">&#39;roi&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The project_on parameter must be either &quot;</span>
+                             <span class="s2">&quot;&#39;brain&#39; or &#39;roi&#39;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Run the cortical repartition :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cortical_repartition</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="userfcn.sources_colormap"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.sources_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">sources_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="userfcn.sources_colormap"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">sources_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change the colormap of cortical projection.</span>
 
@@ -587,8 +676,8 @@
 <span class="sd">                Matplotlib color for values over vmax.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance with 10 random sources:</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
 <span class="sd">            &gt;&gt;&gt; # Define some random data :</span>
 <span class="sd">            &gt;&gt;&gt; data = 100 * np.random.rand(10)</span>
 <span class="sd">            &gt;&gt;&gt; # Set data and properties :</span>
@@ -604,7 +693,10 @@
 <span class="sd">        See also:</span>
 <span class="sd">            cortical_projection, cortical_repartition</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;cmap&#39;</span><span class="p">,</span> <span class="s1">&#39;clim&#39;</span><span class="p">,</span> <span class="s1">&#39;vmin&#39;</span><span class="p">,</span> <span class="s1">&#39;vmax&#39;</span><span class="p">,</span> <span class="s1">&#39;under&#39;</span><span class="p">,</span> <span class="s1">&#39;over&#39;</span><span class="p">],</span>
+                        <span class="p">[</span><span class="n">cmap</span><span class="p">,</span> <span class="n">clim</span><span class="p">,</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">under</span><span class="p">,</span> <span class="n">over</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">_cb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span></div>
 
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
@@ -617,7 +709,7 @@
     <span class="c1">#                                 ROI</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
-<div class="viewcode-block" id="userfcn.roi_plot"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.roi_plot">[docs]</a>    <span class="k">def</span> <span class="nf">roi_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">[],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.roi_plot"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.roi_plot">[docs]</a>    <span class="k">def</span> <span class="nf">roi_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">[],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Select some roi to plot.</span>
 
 <span class="sd">        Kargs:</span>
@@ -634,8 +726,8 @@
 <span class="sd">                Define smooth proportion.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Display brodmann area 4 and 6 :</span>
 <span class="sd">            &gt;&gt;&gt; vb.roi_plot(selection=[4, 6], subdivision=&#39;brod&#39;, smooth=5)</span>
 <span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
@@ -665,14 +757,17 @@
             <span class="c1"># Set check the corresponding subdivision :</span>
             <span class="k">if</span> <span class="n">subdivision</span> <span class="o">==</span> <span class="s1">&#39;brod&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">Sub_brod</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">_uidx</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">]</span>
             <span class="k">elif</span> <span class="n">subdivision</span> <span class="o">==</span> <span class="s1">&#39;aal&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">Sub_aal</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="c1"># Add selected items to the GUI :</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">struct2add</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">_label</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">struct2add</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">_label</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">struct2select</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">struct2select</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">_label</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="userfcn.roi_light_reflection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.roi_light_reflection">[docs]</a>    <span class="k">def</span> <span class="nf">roi_light_reflection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reflect_on</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.roi_light_reflection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.roi_light_reflection">[docs]</a>    <span class="k">def</span> <span class="nf">roi_light_reflection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reflect_on</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change how light is reflecting onto roi.</span>
 
 <span class="sd">        This function can be used to see either the surface only (external) or</span>
@@ -683,8 +778,8 @@
 <span class="sd">                Choose either to reflect on &#39;internal&#39; or &#39;external&#39;.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Display brodmann area 4 and 6 :</span>
 <span class="sd">            &gt;&gt;&gt; vb.roi_plot(selection=[4, 6], subdivision=&#39;brod&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; # Display the external surface :</span>
@@ -704,7 +799,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_area_light_reflection</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="userfcn.roi_opacity"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.roi_opacity">[docs]</a>    <span class="k">def</span> <span class="nf">roi_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.roi_opacity"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.roi_opacity">[docs]</a>    <span class="k">def</span> <span class="nf">roi_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the level of transparency of the deep structures.</span>
 
 <span class="sd">        Kargs:</span>
@@ -715,8 +810,8 @@
 <span class="sd">                Specify if roi(s) has be shown.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Set transparency :</span>
 <span class="sd">            &gt;&gt;&gt; vb.roi_opacity(alpha=0.1, show=True)</span>
 <span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
@@ -728,7 +823,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">strcutShow</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">show</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="userfcn.roi_list"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.vbrain.user.userfcn.roi_list">[docs]</a>    <span class="k">def</span> <span class="nf">roi_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.roi_list"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.roi_list">[docs]</a>    <span class="k">def</span> <span class="nf">roi_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the list of supported ROI.</span>
 
 <span class="sd">        Kargs:</span>
@@ -741,8 +836,8 @@
 <span class="sd">                The currently supported ROI&#39;s labels.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; # Define a vbrain instance :</span>
-<span class="sd">            &gt;&gt;&gt; vb = vbrain()</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain()</span>
 <span class="sd">            &gt;&gt;&gt; # Get list of ROI for AAL :</span>
 <span class="sd">            &gt;&gt;&gt; lst = vb.roi_list(subdivision=&#39;aal&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; # Print this list :</span>

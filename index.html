@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visbrain documentation &mdash; visbrain 0.1.1 documentation</title>
+  <title>Visbrain documentation &mdash; visbrain 0.1.2 documentation</title>
   
 
   
@@ -33,8 +33,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.1 documentation" href="#"/>
-        <link rel="next" title="vbrain" href="vbrain.html"/> 
+    <link rel="top" title="visbrain 0.1.2 documentation" href="#"/>
+        <link rel="next" title="Brain" href="brain.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -84,7 +84,7 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="vbrain.html">vbrain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="brain.html">Brain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sleep.html">Sleep</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ndviz.html">Ndviz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="makefig.html">MakeFig</a></li>
@@ -136,28 +136,35 @@
 <h1>Visbrain documentation<a class="headerlink" href="#visbrain-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Visbrain is a python package in development and it&#8217;s dedicated to neuroscience visualization tools. Here is the list of the current modules :</p>
 <ul class="simple">
-<li><a class="reference internal" href="vbrain.html#vbrain"><span class="std std-ref">vbrain</span></a> : plot your data onto a 3D MNI brain control it via the graphical interface</li>
+<li><a class="reference internal" href="brain.html#brain"><span class="std std-ref">Brain</span></a> : plot your data onto a 3D MNI brain control it via the graphical interface</li>
 <li><a class="reference internal" href="sleep.html#sleep"><span class="std std-ref">Sleep</span></a> : display sleep data, perform spindles / REM / peaks detection and live hypnogram edition</li>
 <li><a class="reference internal" href="ndviz.html#ndviz"><span class="std std-ref">Ndviz</span></a> : inspect data your n-dimentional data.</li>
 <li><a class="reference internal" href="makefig.html#makefig"><span class="std std-ref">MakeFig</span></a> : concatenate several pictures</li>
 </ul>
 <div class="section" id="installation">
 <h2>Installation:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>First, the vbrain module use PyQt4 which means that you need to use a python version under 3.5.2. The same for the matplotlib version (&lt;= 1.5.1). Then you need to install VisPy, which is a Python library for interactive scientific visualization. In order to install this package&#8217;s dependencies (OpenGL), checkout this <a class="reference external" href="http://vispy.org/installation.html">installation guide</a>. You&#8217;ll need to install the developper version of VisPy. Run the following code in a terminal :</p>
+<p>First, visbrain use PyQt4 which means that you need to use a python version under 3.5.2. The same for the matplotlib version (&lt;= 1.5.1). Then you need to install VisPy, which is a Python library for interactive scientific visualization. In order to install this package&#8217;s dependencies (OpenGL), checkout this <a class="reference external" href="http://vispy.org/installation.html">installation guide</a>. You&#8217;ll need to install the developper version of VisPy. Run the following code in a terminal :</p>
 <p>Clone visbrain repository :</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/EtienneCmb/visbrain.git
 </pre></div>
 </div>
 <p>Finally, install visbrain :</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python setup.py install
 </pre></div>
 </div>
 </div>
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>New in version v0.1.2:
+* vbrain has been renamed to Brain()
+* exportation improvements
+* New screenshot tutorial</li>
+<li>New in version v0.1.1:
+* vbrain GUI improvements (design, source&#8217;s panel and ROI)
+* better control of ROI</li>
 <li><dl class="first docutils">
-<dt>New in version v0.1.0:</dt>
+<dt>New in version v0.1.1:</dt>
 <dd><ul class="first last">
 <li>vbrain GUI improvements (design, source&#8217;s panel and ROI)</li>
 <li>better control of ROI</li>
@@ -187,12 +194,12 @@
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="vbrain.html">vbrain</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vbrain.html#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vbrain.html#objects">Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vbrain.html#inputs">Inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vbrain.html#color">Color</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vbrain.html#user-functions">User functions</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="brain.html">Brain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="brain.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brain.html#objects">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brain.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brain.html#color">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brain.html#user-functions">User functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="vbfunctions.html">GUI functions and settings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="vbfunctions.html#brain-functions">Brain functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="vbfunctions.html#sources-functions">Sources functions</a></li>
@@ -200,7 +207,13 @@
 <li class="toctree-l3"><a class="reference internal" href="vbfunctions.html#roi-functions">ROI functions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="vbrain.html#shortcuts">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brain.html#screenshot-tutorial">Screenshot tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vbexport.html">Exporting your figures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbexport.html#screenshot-function">Screenshot function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbexport.html#transparency">Transparency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brain.html#shortcuts">Shortcuts</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sleep.html">Sleep</a><ul>
@@ -253,7 +266,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="vbrain.html" class="btn btn-neutral float-right" title="vbrain" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="brain.html" class="btn btn-neutral float-right" title="Brain" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -285,7 +298,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.1',
+            VERSION:'0.1.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

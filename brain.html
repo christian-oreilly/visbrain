@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Brain &mdash; visbrain 0.1.2 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="visbrain 0.1.2 documentation" href="index.html"/>
+        <link rel="next" title="GUI functions and settings" href="vbfunctions.html"/>
+        <link rel="prev" title="Visbrain documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> visbrain
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Brain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objects">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#color">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-functions">User functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vbfunctions.html">GUI functions and settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbfunctions.html#brain-functions">Brain functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbfunctions.html#sources-functions">Sources functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbfunctions.html#connectivity-functions">Connectivity functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbfunctions.html#roi-functions">ROI functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#screenshot-tutorial">Screenshot tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vbexport.html">Exporting your figures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbexport.html#screenshot-function">Screenshot function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vbexport.html#transparency">Transparency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sleep.html">Sleep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ndviz.html">Ndviz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makefig.html">MakeFig</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">visbrain</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Brain</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/brain.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="brain">
+<span id="id1"></span><h1>Brain<a class="headerlink" href="#brain" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="_images/example.png" src="_images/example.png" />
+</div>
+<p>Brain is a flexible graphical user interface for 3D visualizations on an MNI brain. It can be use to display deep sources, brodmann areas, materialize connectivity... This module use <a class="reference external" href="http://vispy.org/">vispy</a> and can be imported as follow :</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Brain</span>
+</pre></div>
+</div>
+<p>Visit this page for a set of <a class="reference external" href="https://github.com/EtienneCmb/visbrain/tree/master/examples/vbrain">examples</a>.</p>
+</div>
+<div class="section" id="objects">
+<h2>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h2>
+<p>There&#8217;s four fundamental objects in Brain :</p>
+<ul class="simple">
+<li>The main brain, which can be generated using one of the three possible template or simply pass vertices / faces of your own template.</li>
+<li>Sources, which can represent deep electrodes, EEG / MEG captors or source localization...</li>
+<li>Connectivity, in order to materialize a connexion strength between those sources (like coherence, amplitude-amplitude coupling...)</li>
+<li>Areas, which are brain sub-structures (brodmann areas or AAL)</li>
+</ul>
+<div class="figure align-center">
+<img alt="_images/objects.png" src="_images/objects.png" />
+</div>
+</div>
+<div class="section" id="inputs">
+<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
+<p>Each one of the above objects can be controled using input parameters for the Brain class. All possible inputs use a prefixe, refering to the object itself :</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;a(_)&#8217;: atlas properties</li>
+<li>&#8216;s(_)&#8217;: sources properties</li>
+<li>&#8216;c(_)&#8217;: connectivity properties</li>
+<li>&#8216;cmap(_)&#8217;: colormap properties</li>
+<li>&#8216;t(_)&#8217;: transformations properties</li>
+<li>&#8216;ui(_)&#8217;: graphical interface properties</li>
+<li>&#8216;cb(_)&#8217;: colorbar properties</li>
+<li>&#8216;l(_)&#8217;: light properties</li>
+</ul>
+</div></blockquote>
+<p>Here&#8217;s the list of all possible inputs :</p>
+<dl class="class">
+<dt id="visbrain.brain.brain.Brain">
+<em class="property">class </em><code class="descclassname">visbrain.brain.brain.</code><code class="descname">Brain</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/brain.html#Brain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.brain.Brain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualization of neuroscientic data on a standard MNI brain.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>a_color: tuple, (def: (1,1,1))</dt>
+<dd>RGB colors of the MNI brain.</dd>
+<dt>a_opacity: int/float, (def: 1.)</dt>
+<dd>Transparency of the MNI brain. Must be between 0 and 1.</dd>
+<dt>a_proj: string, (def: &#8216;internal&#8217;)</dt>
+<dd>Turn a_proj to &#8216;internal&#8217; for internal projection or &#8216;external&#8217; for
+cortical rendering.</dd>
+<dt>a_template: string, (def: &#8216;B1&#8217;)</dt>
+<dd>The MNI brain template to use. Switch between &#8216;B1&#8217;, &#8216;B2&#8217; or &#8216;B3&#8217;</dd>
+<dt>a_vertices/a_faces: ndarray, (def: None)</dt>
+<dd>Specify an alternativ surface to use. Both parameters must be a 2D
+array, respectively of shapes (N_vertices, 3) and (N_faces, 3)</dd>
+<dt>a_shading: string, (def: &#8216;smooth&#8217;)</dt>
+<dd>Shading method to use for the brain. Switch between &#8216;smooth&#8217;,
+&#8216;flat&#8217; or None.</dd>
+<dt>s_xyz: ndarray, (def: None)</dt>
+<dd>Array of talairach or MNI coordinates to display sources
+into the brain. The shape of the array must be (N, 3) where
+&#8216;3&#8217; is for (x, y, z) coordinates and N, the number of sources.</dd>
+<dt>s_data: ndarray, (def, None)</dt>
+<dd>Add some data to sources. As a consequence, the radius of each
+source will be a function of s_data. must be an array of shape
+(N,). If s_data is None, all sources will have the same value.
+The parameter s_data can be masked using numpy.ma module.</dd>
+<dt>s_color: string/list/ndarray, (def: &#8216;red&#8217;)</dt>
+<dd>Color of each source sphere. If s_color is a single string,
+all sphere will have the same color. If it&#8217;s&#8216; a list of strings,
+the length must be N. Alternatively, s_color can be a (N, 3) RGB
+or (N, 4) RGBA colors.</dd>
+<dt>s_alpha: int/float, (def: 1.0)</dt>
+<dd>Transparency of all sources. Must be between 0 and 1.</dd>
+<dt>s_radiusmin/s_radiusmax: int/float, (def: 5.0/10.0)</dt>
+<dd>Define the minimum and maximum source&#8217;s possible radius. By default
+if all sources have the same value, the radius will be s_radiusmin.</dd>
+<dt>s_edgecolor: string/list/ndarray, (def: None)</dt>
+<dd>Add an edge to sources</dd>
+<dt>s_edgewidth: float, (def: 0.4)</dt>
+<dd>Edge width of sources</dd>
+<dt>s_scaling: bool, (def: True)</dt>
+<dd>If set to True, marker scales when rezooming.</dd>
+<dt>s_symbol: string, (def: &#8216;disc&#8217;)</dt>
+<dd>Symbol to use for sources. Allowed style strings are: disc, arrow,
+ring, clobber, square, diamond, vbar, hbar, cross, tailed_arrow, x,
+triangle_up, triangle_down, and star.</dd>
+<dt>s_text: list/tuple, (def: None)</dt>
+<dd>Set text to each electrode. s_text should be an iterable object,
+composed of strings, with the same length as the number of sources.</dd>
+<dt>s_textcolor: string/list/ndarray, (def: &#8216;k&#8217;)</dt>
+<dd>A single color element for all the text</dd>
+<dt>s_textsize: int, (def: 3)</dt>
+<dd>Fontsize of text elements</dd>
+<dt>s_textshift: list/tuple, (def: (0,1,0))</dt>
+<dd>Translate the text along (x, y, z) coordinates to improve text
+visibility</dd>
+<dt>s_projecton: string, optional, (def: &#8216;surface&#8217;)</dt>
+<dd>Project sources activity either on surface or, if displayed,
+on deep structures.</dd>
+<dt>s_mask: ndarray, optional, (def: None)</dt>
+<dd>Vector of boolean values, with the same length as the length of
+s_xyz. Use this parameter to mask some sources but keep it
+displayed.</dd>
+<dt>s_maskcolor: list/tuple, optional, (def: &#8216;gray&#8217;)</dt>
+<dd>Color of masked sources when projected on surface.</dd>
+<dt>c_connect: ndarray, (def: None)</dt>
+<dd>Connections between sources. Define N sources location using s_xyz
+of shape (N, 3). Then, c_connect must be a (N, N) array defining
+each value of connection between all sources. The diagonal is going
+to be systematically ignored.</dd>
+<dt>c_select: ndarray, (def: None)</dt>
+<dd>Select relevant connections do display. This array should be
+composed of 0 and 1 and must have the same shape as c_connect.
+Alternatively, set a mask to c_connect to have the same effect
+without using this parameter.</dd>
+<dt>c_dynamic: tuple, optional, (def: None)</dt>
+<dd>Control the dynamic opacity. For example, if c_dynamic=(0, 1),
+strong connections will be more opaque than weak connections.</dd>
+<dt>c_linewidth: float, optional, (def: 4.0)</dt>
+<dd>Linewidth of connectivity lines.</dd>
+<dt>cmap: string, (def: &#8216;inferno&#8217;)</dt>
+<dd>Matplotlib colormap name.</dd>
+<dt>cmap_lim: tuple/list, (def: None)</dt>
+<dd>Define the limit of the colorbar. This parameter must be a list or
+tuple containing two float (like (3, 5)...). If cmap_lim stay to
+None, the minimum and maximum of projected values are going to be
+used. Alternatively, you can use (3, None) or (None, 5) to ignore
+one value and force it to be assigned to the minimum or maximum.</dd>
+<dt>cmap_vmin/cmap_vmax: int/float, (def: None/None)</dt>
+<dd>Define a threshold to change colors that are under cmap_vmin or
+over cmap_vmax. See cmap_under/cmap_over to change those colors.</dd>
+<dt>cmap_under/cmap_over: string/tuple, (def: None/None)</dt>
+<dd>The color to use for values under cmap_vmin and values over
+cmap_vmax.</dd>
+<dt>t_radius: int/float, (def: 10)</dt>
+<dd>The projection radius to use (depending on coordinates type)</dd>
+<dt>ui_bgcolor: string/tuple, (def: (0.09, 0.09, 0.09))</dt>
+<dd>Backgroud color of the ui</dd>
+<dt>ui_savename: string, optional, (def: None)</dt>
+<dd>The save name when exporting</dd>
+<dt>ui_region: tuple, optional, (def: None)</dt>
+<dd>Crop the exportation of the main canvas to the region define by
+(x, y, width, height).</dd>
+<dt>ui_cbregion: tuple, optional, (def: None)</dt>
+<dd>Crop the exportation of the colorbar canvas to the region define by
+(x, y, width, height).</dd>
+<dt>ui_resolution: float, optional, (def: 3000)</dt>
+<dd>Define the screenshot resolution by indicating the number of times
+the definition of your screen must be multiplied.</dd>
+<dt>cb_export: bool, optional, (def: True)</dt>
+<dd>Control if the colorbor must be exported when doing a screenshot</dd>
+<dt>cb_fontsize: int, optional, (def: 15)</dt>
+<dd>Font-size of colorbar text (min / max / title)</dd>
+<dt>cb_fontcolor: string, optional, (def: &#8216;white&#8217;)</dt>
+<dd>Font-color of colorbar text (min / max / title)</dd>
+<dt>l_position: tuple, optional, (def: (100., 100., 100.))</dt>
+<dd>Position of the light</dd>
+<dt>l_intensity: tuple, optional, (def: (1., 1., 1.))</dt>
+<dd>Intensity of the light</dd>
+<dt>l_color: tuple, optional, (def: (1., 1., 1., 1.))</dt>
+<dd>Color of the light</dd>
+<dt>l_coefAmbient: float, optional, (def: 0.05)</dt>
+<dd>Coefficient for the ambient light</dd>
+<dt>l_coefSpecular: float, optional, (def: 0.5)</dt>
+<dd>Coefficient for the specular light</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load librairies :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">visbrain</span> <span class="k">import</span> <span class="n">Brain</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define some coordinates and colors for three deep sources :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="o">-</span><span class="mi">13</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">57</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">36</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_color</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#3498db&quot;</span><span class="p">,</span> <span class="s2">&quot;#e74c3c&quot;</span><span class="p">,</span> <span class="s2">&quot;#2ecc71&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Add data to sources :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">27</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a visbrain instance with previous parameters :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">s_xyz</span><span class="o">=</span><span class="n">s_xyz</span><span class="p">,</span> <span class="n">s_data</span><span class="o">=</span><span class="n">s_data</span><span class="p">,</span> <span class="n">s_color</span><span class="o">=</span><span class="n">s_color</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Finally, display the interface :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="color">
+<h2>Color<a class="headerlink" href="#color" title="Permalink to this headline">¶</a></h2>
+<p>Brain can manage several types of color inputs. All possible colors can be a matplotlib color name (&#8216;olive&#8217;, &#8216;slateblue&#8217;...), an hexadecimal type (&#8216;#9b59b6&#8217;, &#8216;#3498db&#8217;, &#8216;#95a5a6&#8217;...*) or an array of RGB or RGBA colors ((1., 0., 0.), (.1, .1, .1)...).</p>
+<p>The colormap can be personalized using five variables :</p>
+<ul class="simple">
+<li>clim : define the colorbar limits (like (-10, 10) or (-245, 7)...). The clim parameter must be a tuple/list of two floats. Every values over or under the colorbar limits will clip.</li>
+<li>vmin / under : vmin is a float and under is a color. The vmin parameter can be defined in order to control the color of data that is under vmin.</li>
+<li>vmax / over : vmax is a float and over is a color. The over parameter can be defined in order to control the color of data that is over vmax.</li>
+</ul>
+<div class="figure align-center">
+<img alt="_images/colormap.png" src="_images/colormap.png" />
+</div>
+</div>
+<div class="section" id="user-functions">
+<h2>User functions<a class="headerlink" href="#user-functions" title="Permalink to this headline">¶</a></h2>
+<p>The user functions correspond to a bundle of functions that the user can use to control Brain operations without opening the graphical interface. This can be convenient to generate a large amount of pictures.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vbfunctions.html">GUI functions and settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#show-graphical-interface">Show graphical interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#quit-graphical-interface">Quit graphical interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#rotation">Rotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#background-color">Background color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#screenshot">Screenshot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#brain-functions">Brain functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#control">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#opacity">Opacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#light-reflection">Light reflection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#sources-functions">Sources functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#set-data">Set data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#id1">Opacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#cortical-projection">Cortical projection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#cortical-repartition">Cortical repartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#colormap">Colormap</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#connectivity-functions">Connectivity functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#roi-functions">ROI functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#list-of-suported-roi">List of suported ROI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#plot-selection">Plot selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#id2">Opacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#id3">Light reflection</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="screenshot-tutorial">
+<h2>Screenshot tutorial<a class="headerlink" href="#screenshot-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>See this tutorial to export your figures in a proper way in order to use them in your research / paper...</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vbexport.html">Exporting your figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vbexport.html#screenshot-function">Screenshot function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbexport.html#name-of-your-figure">Name of your figure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbexport.html#cropping-region">Cropping region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbexport.html#zoom">Zoom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbexport.html#colorbar">Colorbar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vbexport.html#transparency">Transparency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbexport.html#png-files">PNG files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbexport.html#combine-transparent-figures">Combine transparent figures</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="shortcuts">
+<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Keys</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CTRL+d</td>
+<td>Display quick settings panel</td>
+</tr>
+<tr class="row-odd"><td>CTRL+n</td>
+<td>Screenshot window</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>Toggle axial view</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Toggle coronal view</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Toggle sagittal view</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Toggle light reflection on the brain</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Display / hide the brain</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Display / hide the sources (if defined)</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Display / hide the connectivity lines (if defined)</td>
+</tr>
+<tr class="row-odd"><td>&#8220;+&#8221;</td>
+<td>Increase brain opacity</td>
+</tr>
+<tr class="row-even"><td>&#8220;-&#8220;</td>
+<td>Decrease brain opacity</td>
+</tr>
+<tr class="row-odd"><td>CTRL+p</td>
+<td>Run the cortical projection</td>
+</tr>
+<tr class="row-even"><td>CTRL+r</td>
+<td>Run the cortical repartition</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vbfunctions.html" class="btn btn-neutral float-right" title="GUI functions and settings" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Visbrain documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Etienne Combrisson.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
