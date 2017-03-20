@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Exporting your figures &mdash; visbrain 0.1.2 documentation</title>
+  <title>Exporting your figures &mdash; visbrain 0.1.4 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.2 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.1.4 documentation" href="index.html"/>
         <link rel="up" title="Brain" href="brain.html"/>
         <link rel="next" title="Sleep" href="sleep.html"/>
         <link rel="prev" title="GUI functions and settings" href="vbfunctions.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.4
               </div>
             
           
@@ -185,15 +185,17 @@
 <div class="section" id="cropping-region">
 <h2>Cropping region<a class="headerlink" href="#cropping-region" title="Permalink to this headline">¶</a></h2>
 <p>Specify the region of your screen to capture. This is usefull to have a fitted figure around your brain (see Figure 1)</p>
-<div class="figure align-center">
-<img alt="Figure 1 : Explanation of the region argument." src="_images/brain_region.png" />
+<div class="figure align-center" id="id2">
+<img alt="_images/brain_region.png" src="_images/brain_region.png" />
+<p class="caption"><span class="caption-text">Figure 1 : Explanation of the region argument.</span></p>
 </div>
 </div>
 <div class="section" id="zoom">
 <h2>Zoom<a class="headerlink" href="#zoom" title="Permalink to this headline">¶</a></h2>
 <p>Specify the zoom level over the canvas.</p>
-<div class="figure align-center">
-<img alt="Figure 2 : Explanation of the zoom argument." src="_images/brain_zoom.png" />
+<div class="figure align-center" id="id3">
+<img alt="_images/brain_zoom.png" src="_images/brain_zoom.png" />
+<p class="caption"><span class="caption-text">Figure 2 : Explanation of the zoom argument.</span></p>
 </div>
 <p>If you don&#8217;t want to ajust manually the zoom, you can <a class="reference external" href="https://etiennecmb.github.io/visbrain/vbfunctions.html#rotation">rotate</a> the brain before, this will force the zoom level to be perfectly ajusted. For example, if you want to take an axial view of the brain, run before the screenshot :</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">vb</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">()</span>
@@ -212,15 +214,17 @@
 <div class="section" id="png-files">
 <h2>PNG files<a class="headerlink" href="#png-files" title="Permalink to this headline">¶</a></h2>
 <p>If you export your figures as a <em>png</em> file, and if the brain is transparent, don&#8217;t forget that the exported figure will be <strong>transparent too !</strong></p>
-<div class="figure align-center">
-<img alt="Figure 3 : transparent brain and *png* files." src="_images/brain_png.png" />
+<div class="figure align-center" id="id4">
+<img alt="_images/brain_png.png" src="_images/brain_png.png" />
+<p class="caption"><span class="caption-text">Figure 3 : transparent brain and <em>png</em> files.</span></p>
 </div>
 </div>
 <div class="section" id="combine-transparent-figures">
 <h2>Combine transparent figures<a class="headerlink" href="#combine-transparent-figures" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://etiennecmb.github.io/visbrain/vbfunctions.html#screenshot">Screenshot</a> method has a <em>transparent</em> argument, which allow the user to force the background to be transparent. Using this, you can then combine several <em>png</em> transparent files to generate more complex figures (see Figure 4). For example, you can export sources with transparent background and the main bran with non-transparent background and finally superimpose figures.</p>
-<div class="figure align-center">
-<img alt="Figure 4 : combine png files to create complex scene." src="_images/brain_complex.png" />
+<div class="figure align-center" id="id5">
+<img alt="_images/brain_complex.png" src="_images/brain_complex.png" />
+<p class="caption"><span class="caption-text">Figure 4 : combine png files to create complex scene.</span></p>
 </div>
 </div>
 </div>
@@ -266,7 +270,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.2',
+            VERSION:'0.1.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.sleep.sleep &mdash; visbrain 0.1.2 documentation</title>
+  <title>visbrain.sleep.sleep &mdash; visbrain 0.1.4 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.2 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.1.4 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.4
               </div>
             
           
@@ -231,26 +231,27 @@
                 <span class="c1"># Load hypnogram :</span>
                 <span class="n">hypno</span> <span class="o">=</span> <span class="n">load_hypno</span><span class="p">(</span><span class="n">hypno_file</span><span class="p">,</span> <span class="n">sf</span><span class="p">)</span>
 
-        <span class="c1"># Empty hypnogram :</span>
-        <span class="k">if</span> <span class="n">hypno</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_HypW</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_PanHypViz</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-        <span class="c1"># print(&#39;ON load : &#39;, id(data), id(hypno))</span>
         <span class="c1"># ====================== VARIABLES ======================</span>
         <span class="c1"># Check all data :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">file</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hypno</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">(</span>
             <span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">hypno</span><span class="p">,</span> <span class="n">downsample</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_lw</span> <span class="o">=</span> <span class="mf">1.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_lwhyp</span> <span class="o">=</span> <span class="mf">2.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ax</span> <span class="o">=</span> <span class="n">axis</span>
+        <span class="c1"># ---------- Default line width ----------</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lw</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lwhyp</span> <span class="o">=</span> <span class="mf">2.5</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_defwin</span> <span class="o">=</span> <span class="mf">30.</span>
-        <span class="c1"># Color :</span>
+        <span class="c1"># ---------- Default colors ----------</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_chancolor</span> <span class="o">=</span> <span class="s1">&#39;#292824&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_hypcolor</span> <span class="o">=</span> <span class="s1">&#39;#292824&#39;</span>
+        <span class="c1"># self._hypcolor = &#39;#292824&#39;</span>
+        <span class="c1"># Hypnogram color :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hypcolor</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;#8bbf56&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;#56bf8b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;#568bbf&#39;</span><span class="p">,</span>
+                          <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;#8b56bf&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;#bf568b&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;#bf5656&#39;</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_indicol</span> <span class="o">=</span> <span class="s1">&#39;#e74c3c&#39;</span>
+        <span class="c1"># Default spectrogram colormap :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_defcmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span>
+        <span class="c1"># Spindles / REM / Peaks colors :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_defspin</span> <span class="o">=</span> <span class="n">color2vb</span><span class="p">(</span><span class="s1">&#39;#d73737&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_defrem</span> <span class="o">=</span> <span class="n">color2vb</span><span class="p">(</span><span class="s1">&#39;#6684e1&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_defpeaks</span> <span class="o">=</span> <span class="s1">&#39;#b854d4&#39;</span>
@@ -391,7 +392,7 @@
         <span class="c1"># ========================== DOWN-SAMPLING ==========================</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">downsample</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="c1"># Find frequency ratio :</span>
-            <span class="n">fratio</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">sf</span> <span class="o">/</span> <span class="n">downsample</span><span class="p">)</span>
+            <span class="n">fratio</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">sf</span> <span class="o">/</span> <span class="n">downsample</span><span class="p">))</span>
             <span class="c1"># Select time, data and hypno points :</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">::</span><span class="n">fratio</span><span class="p">]</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[::</span><span class="n">fratio</span><span class="p">]</span>
@@ -456,7 +457,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.2',
+            VERSION:'0.1.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

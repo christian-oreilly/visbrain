@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visbrain documentation &mdash; visbrain 0.1.2 documentation</title>
+  <title>Visbrain documentation &mdash; visbrain 0.1.4 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.2 documentation" href="#"/>
+    <link rel="top" title="visbrain 0.1.4 documentation" href="#"/>
         <link rel="next" title="Brain" href="brain.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.4
               </div>
             
           
@@ -156,6 +156,9 @@
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>New in version v0.1.4:
+* Python 2 compatibility
+* Sleep module and doc improvements</li>
 <li>New in version v0.1.2:
 * vbrain has been renamed to Brain()
 * exportation improvements
@@ -218,9 +221,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sleep.html">Sleep</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="sleep.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sleep.html#import-and-use-sleep">Import and use sleep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sleep.html#supported-files-and-format">Supported files and format</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="sleep.html#data-files">Data files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sleep.html#hypnogram">Hypnogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html#save-hypnogram">Save hypnogram</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="sleep.html#load-your-files">Load your files</a><ul>
@@ -229,13 +234,14 @@
 <li class="toctree-l3"><a class="reference internal" href="sleep.html#raw-data">Raw data</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="sleep.html#hypnogram-scoring">Hypnogram scoring</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="sleep.html#scoring-table">Scoring table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sleep.html#live-editing">Live editing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sleep.html#tabs-descripion">Tabs descripion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html#panels">Panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html#tools">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html#info">Info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html#scoring">Scoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html#detection">Detection</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="sleep.html#spindles-rem-peak-detection">Spindles / REM / Peak detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sleep.html#additional-inputs">Additional inputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sleep.html#shortcuts">Shortcuts</a></li>
 </ul>
 </li>
@@ -298,7 +304,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.2',
+            VERSION:'0.1.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
