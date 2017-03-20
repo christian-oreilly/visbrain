@@ -179,7 +179,7 @@
 <span id="id1"></span><h1>Sleep<a class="headerlink" href="#sleep" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center" id="id3">
+<div class="figure align-center" id="id4">
 <img alt="_images/Sleep_main.png" src="_images/Sleep_main.png" />
 <p class="caption"><span class="caption-text">The Sleep module: individual control of each channel.</span></p>
 </div>
@@ -188,7 +188,7 @@
 <li>Dynamic display of polysomnographic data, spectrogram and hypnogram, with individual real-time adjustment of channel amplitude and visibility.</li>
 <li>Spectrogram display with several controllable parameters (e.g. frequency, channel, colormap)</li>
 <li>Hypnogram editing and saving functions, as well as real-time computation of the main sleep parameters (see Hypnogram section).</li>
-<li>Implementation of several semi-automatic detection method such as sleep spindles, rapid eye movements or peak detection. These can be performed either on single or multiple channels and report where each one of them on the hypnogram or inside a table. Each detection comes with several parameters that the user * can adjust to find the optimal detection.</li>
+<li>Implementation of several semi-automatic detection method such as sleep spindles, rapid eye movements or peak detection. These can be performed either on single or multiple channels and report where each one of them on the hypnogram or inside a table. Each detection comes with several parameters that the user can adjust to find the optimal detection.</li>
 <li>Several others signal processing tools such as de-mean, de-trend and filtering. Those tools are directly applied to each channel and to the spectrogram</li>
 <li>Nice and intuitive interface to help you scroll and explore your data.</li>
 </ul>
@@ -208,7 +208,7 @@
 <p>Here’s the list of currently supported extensions for data files:</p>
 <ul class="simple">
 <li>BrainVision (<strong>.eeg</strong>)</li>
-<li>ELAN – (lien: <a class="reference external" href="http://elan.lyon.inserm.fr">http://elan.lyon.inserm.fr</a>) (<strong>.eeg</strong>)</li>
+<li><a class="reference external" href="http://elan.lyon.inserm.fr">ELAN</a> (<strong>.eeg</strong>)</li>
 <li>European Data Format (<strong>.edf</strong>)</li>
 </ul>
 <div class="admonition note">
@@ -224,7 +224,7 @@
 <h3>Hypnogram<a class="headerlink" href="#hypnogram" title="Permalink to this headline">¶</a></h3>
 <p>Here&#8217;s the list of supported extensions for hypnogram files :</p>
 <ul class="simple">
-<li><strong>.hyp</strong> (ELAN)</li>
+<li><strong>.hyp</strong> (<a class="reference external" href="http://elan.lyon.inserm.fr">ELAN</a>)</li>
 <li><strong>.txt</strong></li>
 <li><strong>.csv</strong></li>
 </ul>
@@ -264,12 +264,12 @@
 <h2>Load your files<a class="headerlink" href="#load-your-files" title="Permalink to this headline">¶</a></h2>
 <p>There is three way for loading your files :</p>
 <ul class="simple">
-<li><strong>Load from the GUI</strong>:</li>
-<li><strong>Load from path</strong>:</li>
-<li><strong>Load raw data</strong>:</li>
+<li><a class="reference internal" href="#loadfromgui"><span class="std std-ref">From the GUI</span></a></li>
+<li><a class="reference internal" href="#loadfrompath"><span class="std std-ref">From path</span></a></li>
+<li><a class="reference internal" href="#loadfromraw"><span class="std std-ref">Raw data</span></a></li>
 </ul>
 <div class="section" id="from-the-gui">
-<h3>From the GUI<a class="headerlink" href="#from-the-gui" title="Permalink to this headline">¶</a></h3>
+<span id="loadfromgui"></span><h3>From the GUI<a class="headerlink" href="#from-the-gui" title="Permalink to this headline">¶</a></h3>
 <p>Don&#8217;t send anything, just open the interface and you will have a popup window asking for the filename of your data and hypnogram</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
 <span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
@@ -277,13 +277,13 @@
 <span class="n">Sleep</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="figure align-center" id="id4">
+<div class="figure align-center" id="id5">
 <img alt="_images/Sleep_open.png" src="_images/Sleep_open.png" />
 <p class="caption"><span class="caption-text">Popup window for loading your files.</span></p>
 </div>
 </div>
 <div class="section" id="from-path">
-<h3>From path<a class="headerlink" href="#from-path" title="Permalink to this headline">¶</a></h3>
+<span id="loadfrompath"></span><h3>From path<a class="headerlink" href="#from-path" title="Permalink to this headline">¶</a></h3>
 <p>Instead of leaving inputs arguments empty, send the path to the data :</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
 <span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
@@ -298,7 +298,7 @@
 </div>
 </div>
 <div class="section" id="raw-data">
-<h3>Raw data<a class="headerlink" href="#raw-data" title="Permalink to this headline">¶</a></h3>
+<span id="loadfromraw"></span><h3>Raw data<a class="headerlink" href="#raw-data" title="Permalink to this headline">¶</a></h3>
 <p>This third way is the manually one. You have to load your data before and sending it to the sleep module. This may seems to be more difficult but it allow advanced user to pass any kind of data :</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
 <span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
@@ -343,7 +343,7 @@
 <div class="section" id="filtering">
 <h4>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h4>
 <p>Apply either a lowpass, highpass or bandpass butterworth filter on the channel data and spectrogram.</p>
-<div class="figure align-center" id="id5">
+<div class="figure align-center" id="id6">
 <img alt="_images/Sleep_filtering.png" src="_images/Sleep_filtering.png" />
 <p class="caption"><span class="caption-text">Bandpass filter applied across all channels and spectrogram.</span></p>
 </div>
@@ -352,7 +352,7 @@
 <div class="section" id="info">
 <span id="infotab"></span><h3>Info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h3>
 <p>The Info panel displays recording information (name and Downsampling frequency) as well as the main sleep statistics computed with the hypnogram (see specs below). These values are adjusted in real-time if you modify the hypnogram using either live edition or the Scoring panel. Sleep statistics can be exported to <strong>.csv</strong> or <strong>.txt</strong> file.</p>
-<div class="figure align-center" id="id6">
+<div class="figure align-center" id="id7">
 <img alt="_images/Sleep_info.png" src="_images/Sleep_info.png" />
 <p class="caption"><span class="caption-text">Hypnogram&#8217;s informations.</span></p>
 </div>
@@ -371,12 +371,12 @@
 <div class="section" id="scoring">
 <span id="scoringtab"></span><h3>Scoring<a class="headerlink" href="#scoring" title="Permalink to this headline">¶</a></h3>
 <p>Sleep offer three possibilities to score the hypnogram, during the <a class="reference internal" href="#navigation"><span class="std std-ref">Navigation</span></a> using shortcuts, manually using the <a class="reference internal" href="#scoretable"><span class="std std-ref">Scoring table</span></a> or in <a class="reference internal" href="#liveedit"><span class="std std-ref">Live editing</span></a>.</p>
-<div class="figure align-center" id="id7">
+<div class="figure align-center" id="id8">
 <img alt="_images/Sleep_scoring.png" src="_images/Sleep_scoring.png" />
 <p class="caption"><span class="caption-text">Hypnogram scoring table.</span></p>
 </div>
 <div class="section" id="navigation">
-<span id="id2"></span><h4>Navigation<a class="headerlink" href="#navigation" title="Permalink to this headline">¶</a></h4>
+<span id="id3"></span><h4>Navigation<a class="headerlink" href="#navigation" title="Permalink to this headline">¶</a></h4>
 <p>This is probably the most usefull editing method. While you are navigating across time, simply press on your keyboard to insert a sleep stage. Use the key below :</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -392,7 +392,7 @@
 <tr class="row-even"><td>a</td>
 <td>Artefact</td>
 </tr>
-<tr class="row-odd"><td>0</td>
+<tr class="row-odd"><td>w</td>
 <td>Wake stage</td>
 </tr>
 <tr class="row-even"><td>1</td>
@@ -425,7 +425,7 @@
 </ul>
 <p>At the end of the hypnogram, you can <strong>Add line</strong> or <strong>Remove line</strong> when a line is selected. An other interesting option is that the table is sortable (by clicking on the arrow inside the column name).</p>
 <p>Then, you can export your hypnogram in <strong>.hyp</strong>, <strong>.txt</strong> or <strong>cvs</strong>.</p>
-<div class="figure align-center" id="id8">
+<div class="figure align-center" id="id9">
 <img alt="_images/Scoring_table.png" src="_images/Scoring_table.png" />
 <p class="caption"><span class="caption-text">Hypnogram scoring using the Scoring table. Manually specify where each stage start / finish and precise the stage type.</span></p>
 </div>
@@ -441,7 +441,7 @@
 <li>Dragg the point (blue) on the diffrent hypnogram values</li>
 </ul>
 </div></blockquote>
-<div class="figure align-center" id="id9">
+<div class="figure align-center" id="id10">
 <img alt="_images/Sleep_livedit.png" src="_images/Sleep_livedit.png" />
 <p class="caption"><span class="caption-text">Edit the hypnogram directly from the axes.</span></p>
 </div>
@@ -451,10 +451,12 @@
 <span id="detectiontab"></span><h3>Detection<a class="headerlink" href="#detection" title="Permalink to this headline">¶</a></h3>
 <p>The Detection panel offers several semi-automatic algorithms for the detection of sleep features such as sleep spindles, rapid eyes movements and peaks. All detection types shared the following parameters :</p>
 <ul class="simple">
-<li><em>Apply on</em> : choose on which channel to perform the detection
-* Selected : apply detection on selected channel
-* Visible : apply detection on all visible channels
-* All : apply detection on all channels (even those that are hidden)</li>
+<li><em>Apply on</em> : choose on which channel to perform the detection<ul>
+<li>Selected : apply detection on selected channel</li>
+<li>Visible : apply detection on all visible channels</li>
+<li>All : apply detection on all channels (even those that are hidden)</li>
+</ul>
+</li>
 <li><em>Report detection on hypnogram</em> : display markers on the hypnogram where your spindles / REM / peaks are located.</li>
 </ul>
 <div class="admonition note">
@@ -464,7 +466,7 @@
 <div class="section" id="spindles-detection">
 <h4>Spindles detection<a class="headerlink" href="#spindles-detection" title="Permalink to this headline">¶</a></h4>
 <p>This algorithm perform a semi-automatic detection of sleep spindles which are an essential feature of N2 sleep. Sleep spindles are defined as bursts of 12-14 Hz waves that occur for at least 0.5 seconds. They are maximally visible on central electrodes.</p>
-<div class="figure align-center" id="id10">
+<div class="figure align-center" id="id11">
 <img alt="_images/Sleep_spindles.png" src="_images/Sleep_spindles.png" />
 <p class="caption"><span class="caption-text">Spindles detection on channel Cz and report on the hypnogram.</span></p>
 </div>
@@ -482,7 +484,7 @@
 <div class="section" id="rapid-eye-movements-detection">
 <h4>Rapid Eye Movements detection<a class="headerlink" href="#rapid-eye-movements-detection" title="Permalink to this headline">¶</a></h4>
 <p>This algorithm perform a semi-automatic detection of rapid eye movements (REMs, or saccades) which occur during REM sleep (hence the name). Briefly, the method identify consecutive supra-threshold samples of the first derivative of the signal (after filtering).</p>
-<div class="figure align-center" id="id11">
+<div class="figure align-center" id="id12">
 <img alt="_images/Sleep_rem.png" src="_images/Sleep_rem.png" />
 <p class="caption"><span class="caption-text">Rapid Eye Movements (REM) detection on channel EOG1 and report on the hypnogram.</span></p>
 </div>
@@ -495,7 +497,7 @@
 <div class="section" id="peaks-detection">
 <h4>Peaks detection<a class="headerlink" href="#peaks-detection" title="Permalink to this headline">¶</a></h4>
 <p>Perform a peak detection.</p>
-<div class="figure align-center" id="id12">
+<div class="figure align-center" id="id13">
 <img alt="_images/Sleep_peak.png" src="_images/Sleep_peak.png" />
 <p class="caption"><span class="caption-text">Peaks detection on ECG channel and report on the hypnogram.</span></p>
 </div>
@@ -548,7 +550,7 @@
 <tr class="row-even"><td>a</td>
 <td>Insert Artefact in the hypnogram</td>
 </tr>
-<tr class="row-odd"><td>0</td>
+<tr class="row-odd"><td>w</td>
 <td>Insert Wake stage in the hypnogram</td>
 </tr>
 <tr class="row-even"><td>1</td>
