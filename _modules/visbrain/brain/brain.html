@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.brain &mdash; visbrain 0.1.4 documentation</title>
+  <title>visbrain.brain.brain &mdash; visbrain 0.1.6 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.4 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.1.6 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.4
+                0.1.6
               </div>
             
           
@@ -259,7 +259,19 @@
 <span class="sd">            Control the dynamic opacity. For example, if c_dynamic=(0, 1),</span>
 <span class="sd">            strong connections will be more opaque than weak connections.</span>
 
-<span class="sd">        c_linewidth: float, optional, (def: 4.0)</span>
+<span class="sd">        c_colorby: string, optional, (def: &#39;strength&#39;)</span>
+<span class="sd">            Define how to color connexions. Use &#39;strength&#39; if the color has to</span>
+<span class="sd">            be modulate by the connectivity strength or use &#39;count&#39; if the</span>
+<span class="sd">            color depends on the number of connexions per node.</span>
+
+<span class="sd">        c_colval: dict, optional, (def: None)</span>
+<span class="sd">            Define colors for a specifics values. For example, c_colval=</span>
+<span class="sd">            {1.5: &#39;red&#39;, 2.1: &#39;blue&#39;} every connexions equal to 1.5 are going</span>
+<span class="sd">            to be red and blue for 2.1. Use np.nan: &#39;gray&#39; in order to define</span>
+<span class="sd">            the color of all connexions that are not in the dictionary</span>
+<span class="sd">            otherwise they are going to be ignored.</span>
+
+<span class="sd">        c_linewidth: float, optional, (def: 3.0)</span>
 <span class="sd">            Linewidth of connectivity lines.</span>
 
 <span class="sd">        cmap: string, (def: &#39;inferno&#39;)</span>
@@ -362,6 +374,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_cbfontsize</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cb_fontsize&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cbfontcolor</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cb_fontcolor&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cblabel</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cb_label&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="c1"># ====================== App creation ======================</span>
         <span class="c1"># Create the app and initialize all graphical elements :</span>
@@ -438,7 +451,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.4',
+            VERSION:'0.1.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

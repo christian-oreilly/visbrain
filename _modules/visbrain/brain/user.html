@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.user &mdash; visbrain 0.1.4 documentation</title>
+  <title>visbrain.brain.user &mdash; visbrain 0.1.6 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.4 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.1.6 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.4
+                0.1.6
               </div>
             
           
@@ -144,6 +144,8 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 
+<span class="kn">from</span> <span class="nn">.base.SourcesBase</span> <span class="k">import</span> <span class="n">SourcesBase</span>
+<span class="kn">from</span> <span class="nn">.base.ConnectBase</span> <span class="k">import</span> <span class="n">ConnectBase</span>
 <span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">color2vb</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;userfcn&#39;</span><span class="p">]</span>
@@ -698,11 +700,46 @@
             <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">_cb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span></div>
 
+<div class="viewcode-block" id="userfcn.add_sources"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.add_sources">[docs]</a>    <span class="k">def</span> <span class="nf">add_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a supplementar source&#39;s object.</span>
+
+<span class="sd">        Warning : sources that are adding usnig this methos cannot be controled</span>
+<span class="sd">        using the GUI.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: string</span>
+<span class="sd">                Your source&#39;s object name.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            kwargs: dict</span>
+<span class="sd">                Pass every further arguments starting with &quot;s&quot; (like s_xyz,</span>
+<span class="sd">                s_data, s_cmap, s_symbol...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">SourcesBase</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vbNode</span></div>
+
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1">#                            CONNECTIVITY</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
+<div class="viewcode-block" id="userfcn.add_connect"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.add_connect">[docs]</a>    <span class="k">def</span> <span class="nf">add_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a supplementar connectivity object.</span>
+
+<span class="sd">        Warning : connectivity lines that are adding usnig this methos cannot</span>
+<span class="sd">        be controled using the GUI.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: string</span>
+<span class="sd">                Your connectivity lines object name.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            kwargs: dict</span>
+<span class="sd">                Pass every further arguments starting with &quot;c&quot; (like c_xyz,</span>
+<span class="sd">                c_connect, c_select, c_colorby...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ConnectBase</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vbNode</span></div>
 
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
@@ -877,7 +914,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.4',
+            VERSION:'0.1.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

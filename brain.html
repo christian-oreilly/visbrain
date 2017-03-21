@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Brain &mdash; visbrain 0.1.4 documentation</title>
+  <title>Brain &mdash; visbrain 0.1.6 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.4 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.1.6 documentation" href="index.html"/>
         <link rel="next" title="GUI functions and settings" href="vbfunctions.html"/>
         <link rel="prev" title="Visbrain documentation" href="index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.4
+                0.1.6
               </div>
             
           
@@ -165,7 +165,7 @@
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Brain</span>
 </pre></div>
 </div>
-<p>Visit this page for a set of <a class="reference external" href="https://github.com/EtienneCmb/visbrain/tree/master/examples/vbrain">examples</a>.</p>
+<p>Visit this page for a set of <a class="reference external" href="https://github.com/EtienneCmb/visbrain/tree/master/examples/brain">examples</a>.</p>
 </div>
 <div class="section" id="objects">
 <h2>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h2>
@@ -279,7 +279,17 @@ without using this parameter.</dd>
 <dt>c_dynamic: tuple, optional, (def: None)</dt>
 <dd>Control the dynamic opacity. For example, if c_dynamic=(0, 1),
 strong connections will be more opaque than weak connections.</dd>
-<dt>c_linewidth: float, optional, (def: 4.0)</dt>
+<dt>c_colorby: string, optional, (def: &#8216;strength&#8217;)</dt>
+<dd>Define how to color connexions. Use &#8216;strength&#8217; if the color has to
+be modulate by the connectivity strength or use &#8216;count&#8217; if the
+color depends on the number of connexions per node.</dd>
+<dt>c_colval: dict, optional, (def: None)</dt>
+<dd>Define colors for a specifics values. For example, c_colval=
+{1.5: &#8216;red&#8217;, 2.1: &#8216;blue&#8217;} every connexions equal to 1.5 are going
+to be red and blue for 2.1. Use np.nan: &#8216;gray&#8217; in order to define
+the color of all connexions that are not in the dictionary
+otherwise they are going to be ignored.</dd>
+<dt>c_linewidth: float, optional, (def: 3.0)</dt>
 <dd>Linewidth of connectivity lines.</dd>
 <dt>cmap: string, (def: &#8216;inferno&#8217;)</dt>
 <dd>Matplotlib colormap name.</dd>
@@ -385,12 +395,16 @@ the definition of your screen must be multiplied.</dd>
 <li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#sources-functions">Sources functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#set-data">Set data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#id1">Opacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#add-source-object">Add source object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#cortical-projection">Cortical projection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#cortical-repartition">Cortical repartition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#colormap">Colormap</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#connectivity-functions">Connectivity functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#connectivity-functions">Connectivity functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#add-connectivity-object">Add connectivity object</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#roi-functions">ROI functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#list-of-suported-roi">List of suported ROI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#plot-selection">Plot selection</a></li>
@@ -520,7 +534,7 @@ the definition of your screen must be multiplied.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.4',
+            VERSION:'0.1.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
