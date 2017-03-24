@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Brain &mdash; visbrain 0.1.6 documentation</title>
+  <title>Brain &mdash; visbrain 0.1.8 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.6 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.1.8 documentation" href="index.html"/>
         <link rel="next" title="GUI functions and settings" href="vbfunctions.html"/>
         <link rel="prev" title="Visbrain documentation" href="index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.6
+                0.1.8
               </div>
             
           
@@ -281,8 +281,12 @@ without using this parameter.</dd>
 strong connections will be more opaque than weak connections.</dd>
 <dt>c_colorby: string, optional, (def: &#8216;strength&#8217;)</dt>
 <dd>Define how to color connexions. Use &#8216;strength&#8217; if the color has to
-be modulate by the connectivity strength or use &#8216;count&#8217; if the
-color depends on the number of connexions per node.</dd>
+be modulate by the connectivity strength. Use &#8216;count&#8217; if the
+color depends on the number of connexions per node. Use &#8216;density&#8217;
+to define colors according to the number of line in a sphere of
+radius c_dradius.</dd>
+<dt>c_dradius: float, optional, (def: 30.)</dt>
+<dd>Radius for the density color line method.</dd>
 <dt>c_colval: dict, optional, (def: None)</dt>
 <dd>Define colors for a specifics values. For example, c_colval=
 {1.5: &#8216;red&#8217;, 2.1: &#8216;blue&#8217;} every connexions equal to 1.5 are going
@@ -534,7 +538,7 @@ the definition of your screen must be multiplied.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.6',
+            VERSION:'0.1.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

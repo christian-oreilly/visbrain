@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sleep &mdash; visbrain 0.1.6 documentation</title>
+  <title>Sleep &mdash; visbrain 0.1.8 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.6 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.1.8 documentation" href="index.html"/>
         <link rel="next" title="Ndviz" href="ndviz.html"/>
         <link rel="prev" title="Exporting your figures" href="vbexport.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.6
+                0.1.8
               </div>
             
           
@@ -188,7 +188,7 @@
 <li>Dynamic display of polysomnographic data, spectrogram and hypnogram, with individual real-time adjustment of channel amplitude and visibility.</li>
 <li>Spectrogram display with several controllable parameters (e.g. frequency, channel, colormap)</li>
 <li>Hypnogram editing and saving functions, as well as real-time computation of the main sleep parameters (see Hypnogram section).</li>
-<li>Implementation of several semi-automatic detection method such as sleep spindles, rapid eye movements or peak detection. These can be performed either on single or multiple channels and report where each one of them on the hypnogram or inside a table. Each detection comes with several parameters that the user can adjust to find the optimal detection.</li>
+<li>Implementation of several semi-automatic detection method such as sleep spindles, rapid eye movements, slow waves, K-complex or peak detection. These can be performed either on single or multiple channels and report where each one of them on the hypnogram or inside a table. Each detection comes with several parameters that the user can adjust to find the optimal detection.</li>
 <li>Several others signal processing tools such as de-mean, de-trend and filtering. Those tools are directly applied to each channel and to the spectrogram</li>
 <li>Nice and intuitive interface to help you scroll and explore your data.</li>
 </ul>
@@ -213,7 +213,7 @@
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Extensions above are files that are natively supported inside Sleep. But, tha data can be directly pass to the Sleep module if you load them before.</p>
+<p class="last">Extensions above are the ones natively supported inside Sleep, but you can also directly pass numpy array or .mat file (loaded with scipy.loadmat)</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -270,7 +270,7 @@
 </ul>
 <div class="section" id="from-the-gui">
 <span id="loadfromgui"></span><h3>From the GUI<a class="headerlink" href="#from-the-gui" title="Permalink to this headline">¶</a></h3>
-<p>Don&#8217;t send anything, just open the interface and you will have a popup window asking for the filename of your data and hypnogram</p>
+<p>Don&#8217;t send anything, just open the interface and you will have a popup window asking for the filename of your data and hypnogram. If you do not have a hypnogram for your data and/or wish to display only the data, just press Cancel when the hypnogram popup opens.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
 <span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
 <span class="c1"># Run the interface :</span>
@@ -299,8 +299,9 @@
 </div>
 <div class="section" id="raw-data">
 <span id="loadfromraw"></span><h3>Raw data<a class="headerlink" href="#raw-data" title="Permalink to this headline">¶</a></h3>
-<p>This third way is the manually one. You have to load your data before and sending it to the sleep module. This may seems to be more difficult but it allow advanced user to pass any kind of data :</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Import the Sleep module from visbrain :</span>
+<p>This third way is the manually one. You have to load your data before and sending it to the sleep module. For example if you want to import Matlab .mat file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>    <span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">loadmat</span>
+<span class="c1"># Import the Sleep module from visbrain :</span>
 <span class="kn">from</span> <span class="nn">visbrain</span> <span class="kn">import</span> <span class="n">Sleep</span>
 <span class="c1"># Load your dataset :</span>
 <span class="n">mat</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;testing_database.mat&#39;</span><span class="p">)</span>
@@ -319,7 +320,7 @@
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The data must have the same number of points as the hypnogram and the same number of channels in the <em>channels</em> variable.</p>
+<p class="last">The data must have the same number of points as the hypnogram and the same number of channels as in the <em>channels</em> variable.</p>
 </div>
 </div>
 </div>
@@ -329,9 +330,9 @@
 <ul class="simple">
 <li><a class="reference internal" href="#paneltab"><span class="std std-ref">Panels</span></a> : manage object visibility, channel&#8217;s amplitudes, spectrogram properties...</li>
 <li><a class="reference internal" href="#toolstab"><span class="std std-ref">Tools</span></a> : a bundle of signal processing tools (like <em>filtering</em>)</li>
-<li><a class="reference internal" href="#infotab"><span class="std std-ref">Info</span></a> : some usefull informations about the hypnogram</li>
+<li><a class="reference internal" href="#infotab"><span class="std std-ref">Info</span></a> : Sleep statistics and record basic infos</li>
 <li><a class="reference internal" href="#scoringtab"><span class="std std-ref">Scoring</span></a> : a scoring table that can be used to edit the hypnogram</li>
-<li><a class="reference internal" href="#detectiontab"><span class="std std-ref">Detection</span></a> : run the spindles / REM / peak detection</li>
+<li><a class="reference internal" href="#detectiontab"><span class="std std-ref">Detection</span></a> : Automatic detection of sleep spindles, rapid eye movements (REMs) and peaks</li>
 </ul>
 <div class="section" id="panels">
 <span id="paneltab"></span><h3>Panels<a class="headerlink" href="#panels" title="Permalink to this headline">¶</a></h3>
@@ -351,7 +352,7 @@
 </div>
 <div class="section" id="info">
 <span id="infotab"></span><h3>Info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h3>
-<p>The Info panel displays recording information (name and Downsampling frequency) as well as the main sleep statistics computed with the hypnogram (see specs below). These values are adjusted in real-time if you modify the hypnogram using either live edition or the Scoring panel. Sleep statistics can be exported to <strong>.csv</strong> or <strong>.txt</strong> file.</p>
+<p>The Info panel displays recording information (name and downsampling frequency) as well as the main sleep statistics computed with the hypnogram (see specs below). These values are adjusted in real-time if you modify the hypnogram using either live edition or the Scoring panel. Sleep statistics can be exported to <strong>.csv</strong> or <strong>.txt</strong> file.</p>
 <div class="figure align-center" id="id7">
 <img alt="_images/Sleep_info.png" src="_images/Sleep_info.png" />
 <p class="caption"><span class="caption-text">Hypnogram&#8217;s informations.</span></p>
@@ -412,7 +413,7 @@
 <p>After pressing one of those keys, data coming from the next window will be prompted automatically so that you can continu scoring.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">If you feel that shortcuts doesn&#8217;t works, this is because no canvas are selected. Simply click on a canvas (on a channel / spectrogram / histogam)</p>
+<p class="last">If no canvas are selected the shortcuts might be not working. Simply click on a canvas (on a channel / spectrogram / histogam) before starting to score to avoid this issue.</p>
 </div>
 </div>
 <div class="section" id="scoring-table">
@@ -611,7 +612,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.6',
+            VERSION:'0.1.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

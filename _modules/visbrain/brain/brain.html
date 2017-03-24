@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.brain &mdash; visbrain 0.1.6 documentation</title>
+  <title>visbrain.brain.brain &mdash; visbrain 0.1.8 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.6 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.1.8 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.6
+                0.1.8
               </div>
             
           
@@ -152,6 +152,7 @@
 <span class="kn">from</span> <span class="nn">.interface</span> <span class="k">import</span> <span class="n">uiInit</span><span class="p">,</span> <span class="n">uiElements</span>
 <span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">base</span>
 <span class="kn">from</span> <span class="nn">.user</span> <span class="k">import</span> <span class="n">userfcn</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">GuideLines</span><span class="p">,</span> <span class="n">ShortcutPopup</span>
 
 
 <div class="viewcode-block" id="Brain"><a class="viewcode-back" href="../../../brain.html#visbrain.brain.brain.Brain">[docs]</a><span class="k">class</span> <span class="nc">Brain</span><span class="p">(</span><span class="n">uiInit</span><span class="p">,</span> <span class="n">uiElements</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">userfcn</span><span class="p">):</span>
@@ -261,8 +262,13 @@
 
 <span class="sd">        c_colorby: string, optional, (def: &#39;strength&#39;)</span>
 <span class="sd">            Define how to color connexions. Use &#39;strength&#39; if the color has to</span>
-<span class="sd">            be modulate by the connectivity strength or use &#39;count&#39; if the</span>
-<span class="sd">            color depends on the number of connexions per node.</span>
+<span class="sd">            be modulate by the connectivity strength. Use &#39;count&#39; if the</span>
+<span class="sd">            color depends on the number of connexions per node. Use &#39;density&#39;</span>
+<span class="sd">            to define colors according to the number of line in a sphere of</span>
+<span class="sd">            radius c_dradius.</span>
+
+<span class="sd">        c_dradius: float, optional, (def: 30.)</span>
+<span class="sd">            Radius for the density color line method.</span>
 
 <span class="sd">        c_colval: dict, optional, (def: None)</span>
 <span class="sd">            Define colors for a specifics values. For example, c_colval=</span>
@@ -370,7 +376,6 @@
                           <span class="s1">&#39;fly&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
                                   <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">)},</span>
                           <span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_xRange</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cbfontsize</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cb_fontsize&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cbfontcolor</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cb_fontcolor&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cblabel</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cb_label&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -380,6 +385,10 @@
         <span class="c1"># Create the app and initialize all graphical elements :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
         <span class="n">uiInit</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bgcolor</span><span class="p">)</span>
+
+        <span class="c1"># Shortcuts popup window :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shpopup</span> <span class="o">=</span> <span class="n">ShortcutPopup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shpopup</span><span class="o">.</span><span class="n">set_shortcuts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sh</span><span class="p">)</span>
 
         <span class="c1"># Set icon :</span>
         <span class="n">pathfile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">__name__</span><span class="p">]</span><span class="o">.</span><span class="n">__file__</span>
@@ -396,7 +405,7 @@
         <span class="c1"># Link UI and visbrain function :</span>
         <span class="n">uiElements</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-        <span class="c1"># # ====================== Cameras ======================</span>
+        <span class="c1"># ====================== Cameras ======================</span>
         <span class="c1"># # Main camera :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">camera</span> <span class="o">=</span> <span class="n">camera</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atlas</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">set_camera</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">camera</span><span class="p">)</span>
@@ -405,10 +414,15 @@
         <span class="c1"># Fixed colorbar camera :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbwc</span><span class="o">.</span><span class="n">camera</span> <span class="o">=</span> <span class="n">viscam</span><span class="o">.</span><span class="n">TurntableCamera</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                        <span class="n">azimuth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">elevation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbwc</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">margin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbwc</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="o">-.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">margin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># self.view.wc.scene.children[0].parent = None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cb</span><span class="o">.</span><span class="n">_cbNode</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">cbwc</span><span class="o">.</span><span class="n">scene</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rotate</span><span class="p">(</span><span class="n">fixed</span><span class="o">=</span><span class="s1">&#39;axial&#39;</span><span class="p">)</span>
 
+        <span class="c1"># ====================== Guidelines ======================</span>
+        <span class="c1"># Create guide lines for exportation :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">guide</span> <span class="o">=</span> <span class="n">GuideLines</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_vbNode</span><span class="p">,</span>
+                                <span class="n">camrange</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_xyzRange</span><span class="p">[</span><span class="s1">&#39;turntable&#39;</span><span class="p">])</span>
         <span class="c1"># print(self.view.wc.scene.describe_tree(with_transform=True))</span>
 
 <div class="viewcode-block" id="Brain.show"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.brain.Brain.show">[docs]</a>    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -451,7 +465,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.6',
+            VERSION:'0.1.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

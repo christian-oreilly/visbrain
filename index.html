@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visbrain documentation &mdash; visbrain 0.1.6 documentation</title>
+  <title>Visbrain documentation &mdash; visbrain 0.1.8 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.6 documentation" href="#"/>
+    <link rel="top" title="visbrain 0.1.8 documentation" href="#"/>
         <link rel="next" title="Brain" href="brain.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.6
+                0.1.8
               </div>
             
           
@@ -137,7 +137,7 @@
 <p>Visbrain is a python package in development and it&#8217;s dedicated to neuroscience visualization tools. Here is the list of the current modules :</p>
 <ul class="simple">
 <li><a class="reference internal" href="brain.html#brain"><span class="std std-ref">Brain</span></a> : plot your data onto a 3D MNI brain control it via the graphical interface</li>
-<li><a class="reference internal" href="sleep.html#sleep"><span class="std std-ref">Sleep</span></a> : display sleep data, perform spindles / REM / peaks detection and live hypnogram edition</li>
+<li><a class="reference internal" href="sleep.html#sleep"><span class="std std-ref">Sleep</span></a> : display sleep data, perform spindles / REM / peaks / slow waves / K-complex detection and live hypnogram edition</li>
 <li><a class="reference internal" href="ndviz.html#ndviz"><span class="std std-ref">Ndviz</span></a> : inspect data your n-dimentional data.</li>
 <li><a class="reference internal" href="makefig.html#makefig"><span class="std std-ref">MakeFig</span></a> : concatenate several pictures</li>
 </ul>
@@ -148,14 +148,24 @@
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/EtienneCmb/visbrain.git
 </pre></div>
 </div>
-<p>Finally, install visbrain :</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>python setup.py install
+<p>Go to the cloned folder and run :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install .
 </pre></div>
 </div>
 </div>
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>New in version v0.1.8<ul>
+<li>Brain : New density color and start bundling</li>
+<li>Brain : possibility to add multiple source / connectivity objects</li>
+<li>Brain : screenshot improvements and GUI integration</li>
+<li>Sleep : new slow wave / K-complex detection</li>
+<li>Sleep : REM / spindles detection improvements</li>
+<li>Sleep : everything can now be exported.</li>
+<li>Sleep : GUI re-organization and improvements</li>
+</ul>
+</li>
 <li>New in version v0.1.4<ul>
 <li>Python 2 compatibility</li>
 <li>Sleep module and doc improvements</li>
@@ -280,7 +290,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.6',
+            VERSION:'0.1.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
