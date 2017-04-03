@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visbrain documentation &mdash; visbrain 0.1.8 documentation</title>
+  <title>Visbrain documentation &mdash; visbrain 0.1.9 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.8 documentation" href="#"/>
+    <link rel="top" title="visbrain 0.1.9 documentation" href="#"/>
         <link rel="next" title="Brain" href="brain.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
             
           
@@ -87,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="brain.html">Brain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sleep.html">Sleep</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ndviz.html">Ndviz</a></li>
-<li class="toctree-l1"><a class="reference internal" href="makefig.html">MakeFig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figure.html">Figure</a></li>
 </ul>
 
             
@@ -139,7 +139,7 @@
 <li><a class="reference internal" href="brain.html#brain"><span class="std std-ref">Brain</span></a> : plot your data onto a 3D MNI brain control it via the graphical interface</li>
 <li><a class="reference internal" href="sleep.html#sleep"><span class="std std-ref">Sleep</span></a> : display sleep data, perform spindles / REM / peaks / slow waves / K-complex detection and live hypnogram edition</li>
 <li><a class="reference internal" href="ndviz.html#ndviz"><span class="std std-ref">Ndviz</span></a> : inspect data your n-dimentional data.</li>
-<li><a class="reference internal" href="makefig.html#makefig"><span class="std std-ref">MakeFig</span></a> : concatenate several pictures</li>
+<li><a class="reference internal" href="figure.html#figure"><span class="std std-ref">Figure</span></a> : arange exported pictures in a grid, add colorbar and save a paper ready figure.</li>
 </ul>
 <div class="section" id="installation">
 <h2>Installation:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -156,6 +156,16 @@
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>New in version v0.1.9<ul>
+<li><strong>New module</strong> <a class="reference internal" href="figure.html#figure"><span class="std std-ref">Figure</span></a></li>
+<li>Brain : fix color control (conflict between clim / (vmin, vmax))</li>
+<li>Brain : improve cortical projection and repartition. This new version use much more RAM but the final result is better</li>
+<li>Brain : user fonctions improved</li>
+<li>Sleep : detections and down-sampling improvements</li>
+<li>Sleep : new magnify to improve signal lisibility</li>
+<li>Sleep : topoplot and re-referencing integration</li>
+</ul>
+</li>
 <li>New in version v0.1.8<ul>
 <li>Brain : New density color and start bundling</li>
 <li>Brain : possibility to add multiple source / connectivity objects</li>
@@ -164,17 +174,6 @@
 <li>Sleep : REM / spindles detection improvements</li>
 <li>Sleep : everything can now be exported.</li>
 <li>Sleep : GUI re-organization and improvements</li>
-</ul>
-</li>
-<li>New in version v0.1.4<ul>
-<li>Python 2 compatibility</li>
-<li>Sleep module and doc improvements</li>
-</ul>
-</li>
-<li>New in version v0.1.2<ul>
-<li>vbrain has been renamed to Brain()</li>
-<li>exportation improvements</li>
-<li>New screenshot tutorial</li>
 </ul>
 </li>
 </ul>
@@ -229,6 +228,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="sleep.html#shortcuts">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sleep.html#collaborator">Collaborator</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ndviz.html">Ndviz</a><ul>
@@ -237,7 +237,19 @@
 <li class="toctree-l2"><a class="reference internal" href="ndviz.html#shortcuts">Shortcuts</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="makefig.html">MakeFig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figure.html">Figure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="figure.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figure.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figure.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figure.html#methods">Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="figure.html#show">show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="figure.html#save">save</a></li>
+<li class="toctree-l3"><a class="reference internal" href="figure.html#colorbar-to-axis">colorbar_to_axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="figure.html#shared-colorbar">shared_colorbar</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -290,7 +302,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.8',
+            VERSION:'0.1.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

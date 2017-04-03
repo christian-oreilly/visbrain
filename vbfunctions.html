@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>GUI functions and settings &mdash; visbrain 0.1.8 documentation</title>
+  <title>GUI functions and settings &mdash; visbrain 0.1.9 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.8 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.1.9 documentation" href="index.html"/>
         <link rel="up" title="Brain" href="brain.html"/>
         <link rel="next" title="Exporting your figures" href="vbexport.html"/>
         <link rel="prev" title="Brain" href="brain.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
             
           
@@ -109,6 +109,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#sources-functions">Sources functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#set-data">Set data</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-sources">Select sources</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#add-source-object">Add source object</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cortical-projection">Cortical projection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cortical-repartition">Cortical repartition</a></li>
@@ -134,7 +135,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sleep.html">Sleep</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ndviz.html">Ndviz</a></li>
-<li class="toctree-l1"><a class="reference internal" href="makefig.html">MakeFig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figure.html">Figure</a></li>
 </ul>
 
             
@@ -590,6 +591,36 @@ displayed.</dd>
 <p class="caption"><span class="caption-text">Example of cortical projection.</span></p>
 </div>
 </div>
+<div class="section" id="select-sources">
+<h2>Select sources<a class="headerlink" href="#select-sources" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="visbrain.brain.user.userfcn.sources_display">
+<code class="descclassname">userfcn.</code><code class="descname">sources_display</code><span class="sig-paren">(</span><em>select='all'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.sources_display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.sources_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select sources to display.</p>
+<p>The selected sources can be then used to project activity or
+repartition.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>select: string</dt>
+<dd>The select parameter can be &#8216;all&#8217;, &#8216;none&#8217;, &#8216;left&#8217;, &#8216;right&#8217;,
+&#8216;inside&#8217; or &#8216;outside&#8217;.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a Brain instance with 10 random sources:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">s_xyz</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set transparency :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">sources_display</span><span class="p">(</span><span class="n">select</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the GUI :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="add-source-object">
 <h2>Add source object<a class="headerlink" href="#add-source-object" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
@@ -620,7 +651,7 @@ s_data, s_cmap, s_symbol...)</dd>
 <h2>Cortical projection<a class="headerlink" href="#cortical-projection" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="visbrain.brain.user.userfcn.cortical_projection">
-<code class="descclassname">userfcn.</code><code class="descname">cortical_projection</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_projection" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">userfcn.</code><code class="descname">cortical_projection</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_projection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project sources activity.</p>
 <p>This method can be used to project the sources activity either onto the
 brain or on deep areas (like gyrus or brodmann areas).</p>
@@ -633,6 +664,10 @@ brain or on deep areas (like gyrus or brodmann areas).</p>
 <dd>Define on which object to project the sources activity. Chose
 either &#8216;brain&#8217; for projecting the sources activity onto the
 brain or &#8216;roi&#8217; to project on region of interest (if defined).</dd>
+<dt>kwargs: dict</dt>
+<dd>Further arguments are passed to the sources_colormap function.
+Those arguments can be used to control the colormap (clim,
+vmin, under, vmax, over and cmap).</dd>
 </dl>
 </dd>
 <dt>Example:</dt>
@@ -657,7 +692,7 @@ brain or &#8216;roi&#8217; to project on region of interest (if defined).</dd>
 <h2>Cortical repartition<a class="headerlink" href="#cortical-repartition" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="visbrain.brain.user.userfcn.cortical_repartition">
-<code class="descclassname">userfcn.</code><code class="descname">cortical_repartition</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_repartition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_repartition" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">userfcn.</code><code class="descname">cortical_repartition</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_repartition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_repartition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the number of contributing sources per vertex.</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
@@ -668,6 +703,10 @@ brain or &#8216;roi&#8217; to project on region of interest (if defined).</dd>
 <dd>Define on which object to project the sources repartition.
 Chose either &#8216;brain&#8217; for projecting onto the brain or &#8216;roi&#8217;
 to project on region of interest (if defined).</dd>
+<dt>kwargs: dict</dt>
+<dd>Further arguments are passed to the sources_colormap function.
+Those arguments can be used to control the colormap (clim,
+vmin, under, vmax, over and cmap).</dd>
 </dl>
 </dd>
 <dt>Example:</dt>
@@ -691,7 +730,7 @@ to project on region of interest (if defined).</dd>
 <dl class="method">
 <dt id="visbrain.brain.user.userfcn.sources_colormap">
 <code class="descclassname">userfcn.</code><code class="descname">sources_colormap</code><span class="sig-paren">(</span><em>cmap=None</em>, <em>clim=None</em>, <em>vmin=None</em>, <em>under=None</em>, <em>vmax=None</em>, <em>over=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.sources_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.sources_colormap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change the colormap of cortical projection.</p>
+<dd><p>Change the colormap of cortical projection / repartition.</p>
 <p>This method can be used to update paramaters of the colormap. But it&#8217;s
 only going to work if the source&#8217;s activity has been projected (using
 the cortical projection or repartition).</p>
@@ -960,7 +999,7 @@ deep voxels inside roi (internal).</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.8',
+            VERSION:'0.1.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

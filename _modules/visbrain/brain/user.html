@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.user &mdash; visbrain 0.1.8 documentation</title>
+  <title>visbrain.brain.user &mdash; visbrain 0.1.9 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.8 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.1.9 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
             
           
@@ -87,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../brain.html">Brain</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../sleep.html">Sleep</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ndviz.html">Ndviz</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../makefig.html">MakeFig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../figure.html">Figure</a></li>
 </ul>
 
             
@@ -142,7 +142,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">.base.SourcesBase</span> <span class="k">import</span> <span class="n">SourcesBase</span>
 <span class="kn">from</span> <span class="nn">.base.ConnectBase</span> <span class="k">import</span> <span class="n">ConnectBase</span>
@@ -557,7 +557,38 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">show</span></div>
 
-<div class="viewcode-block" id="userfcn.cortical_projection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_projection">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.sources_display"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_display">[docs]</a>    <span class="k">def</span> <span class="nf">sources_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Select sources to display.</span>
+
+<span class="sd">        The selected sources can be then used to project activity or</span>
+<span class="sd">        repartition.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            select: string</span>
+<span class="sd">                The select parameter can be &#39;all&#39;, &#39;none&#39;, &#39;left&#39;, &#39;right&#39;,</span>
+<span class="sd">                &#39;inside&#39; or &#39;outside&#39;.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
+<span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
+<span class="sd">            &gt;&gt;&gt; # Set transparency :</span>
+<span class="sd">            &gt;&gt;&gt; vb.sources_display(select=&#39;right&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
+<span class="sd">            &gt;&gt;&gt; vb.show()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Display either All / None :</span>
+        <span class="k">if</span> <span class="n">select</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
+
+        <span class="c1"># Display sources that are either in the inside / outside the brain :</span>
+        <span class="k">elif</span> <span class="n">select</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;inside&#39;</span><span class="p">,</span> <span class="s1">&#39;outside&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">_isInside</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atlas</span><span class="o">.</span><span class="n">vert</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">progressbar</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The select parameter must either be &#39;all&#39;, &quot;</span>
+                             <span class="s2">&quot;&#39;none&#39;, &#39;left&#39;, &#39;right&#39;, &#39;inside&#39; or &#39;outside&#39;&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="userfcn.cortical_projection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_projection">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Project sources activity.</span>
 
 <span class="sd">        This method can be used to project the sources activity either onto the</span>
@@ -572,6 +603,11 @@
 <span class="sd">                either &#39;brain&#39; for projecting the sources activity onto the</span>
 <span class="sd">                brain or &#39;roi&#39; to project on region of interest (if defined).</span>
 
+<span class="sd">            kwargs: dict</span>
+<span class="sd">                Further arguments are passed to the sources_colormap function.</span>
+<span class="sd">                Those arguments can be used to control the colormap (clim,</span>
+<span class="sd">                vmin, under, vmax, over and cmap).</span>
+
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
 <span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
@@ -585,24 +621,16 @@
 <span class="sd">        See also:</span>
 <span class="sd">            area_plot, sources_colormap</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Check projection radius :</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The radius parameter must be a integer or a &quot;</span>
-                             <span class="s2">&quot;float number.&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Check project_on parameter :</span>
-        <span class="k">if</span> <span class="n">project_on</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="s1">&#39;roi&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The project_on parameter must be either &quot;</span>
-                             <span class="s2">&quot;&#39;brain&#39; or &#39;roi&#39;&quot;</span><span class="p">)</span>
-
+        <span class="c1"># Update variables :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tprojectas</span> <span class="o">=</span> <span class="s1">&#39;activity&#39;</span>
+        <span class="c1"># Colormap control :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources_colormap</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># Run the corticale projection :</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cortical_projection</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sourcesProjection</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="userfcn.cortical_repartition"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_repartition">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_repartition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.cortical_repartition"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_repartition">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_repartition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the number of contributing sources per vertex.</span>
 
 <span class="sd">        Kargs:</span>
@@ -614,6 +642,11 @@
 <span class="sd">                Chose either &#39;brain&#39; for projecting onto the brain or &#39;roi&#39;</span>
 <span class="sd">                to project on region of interest (if defined).</span>
 
+<span class="sd">            kwargs: dict</span>
+<span class="sd">                Further arguments are passed to the sources_colormap function.</span>
+<span class="sd">                Those arguments can be used to control the colormap (clim,</span>
+<span class="sd">                vmin, under, vmax, over and cmap).</span>
+
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; # Define a Brain instance with 10 random sources:</span>
 <span class="sd">            &gt;&gt;&gt; vb = Brain(s_xyz=np.random.randint(-20, 20, (10, 3)))</span>
@@ -624,26 +657,18 @@
 <span class="sd">            &gt;&gt;&gt; # Show the GUI :</span>
 <span class="sd">            &gt;&gt;&gt; vb.show()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Check projection radius :</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The radius parameter must be a integer or a &quot;</span>
-                             <span class="s2">&quot;float number.&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Check project_on parameter :</span>
-        <span class="k">if</span> <span class="n">project_on</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="s1">&#39;roi&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The project_on parameter must be either &quot;</span>
-                             <span class="s2">&quot;&#39;brain&#39; or &#39;roi&#39;&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Run the cortical repartition :</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cortical_repartition</span><span class="p">()</span></div>
+        <span class="c1"># Update variables :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tprojectas</span> <span class="o">=</span> <span class="s1">&#39;repartition&#39;</span>
+        <span class="c1"># Colormap control :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources_colormap</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Run the corticale reparition :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sourcesProjection</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="userfcn.sources_colormap"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">sources_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Change the colormap of cortical projection.</span>
+        <span class="sd">&quot;&quot;&quot;Change the colormap of cortical projection / repartition.</span>
 
 <span class="sd">        This method can be used to update paramaters of the colormap. But it&#39;s</span>
 <span class="sd">        only going to work if the source&#39;s activity has been projected (using</span>
@@ -914,7 +939,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.8',
+            VERSION:'0.1.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
