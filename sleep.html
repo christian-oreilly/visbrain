@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sleep &mdash; visbrain 0.1.9 documentation</title>
+  <title>Sleep &mdash; visbrain 0.2.0 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.9 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.2.0 documentation" href="index.html"/>
         <link rel="next" title="Ndviz" href="ndviz.html"/>
         <link rel="prev" title="Exporting your figures" href="vbexport.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.9
+                0.2.0
               </div>
             
           
@@ -106,7 +106,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tabs-descripion">Tabs descripion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#panels">Panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#panels">Panels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#channels">Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spectrogram-hypnogram-time-axis">Spectrogram // hypnogram // time axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topoplot">Topoplot</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#filtering">Filtering</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#referencing">Referencing</a></li>
@@ -244,14 +249,46 @@
 <div class="section" id="save-hypnogram">
 <h3>Save hypnogram<a class="headerlink" href="#save-hypnogram" title="Permalink to this headline">¶</a></h3>
 <p>By default, Sleep will save your hypnogram with a sampling rate of 1 value per second, and with the following values assigned to each sleep stages:</p>
-<ul class="simple">
-<li><strong>Wake</strong> :   0</li>
-<li><strong>N1</strong> :     1</li>
-<li><strong>N2</strong> :     2</li>
-<li><strong>N3</strong> :     3</li>
-<li><strong>REM</strong> :    4</li>
-<li><strong>Art</strong> :    -1  (<em>optional</em>)</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Stage</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Wake</strong></td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td><strong>N1</strong></td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td><strong>N2</strong></td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td><strong>N3</strong></td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td><strong>REM</strong></td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td><strong>Art</strong></td>
+<td><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-1</span></kbd></td>
+<td>(optional)</td></tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="section" id="elan-hyp-format">
 <h4>Elan .hyp format<a class="headerlink" href="#elan-hyp-format" title="Permalink to this headline">¶</a></h4>
 <p>Sleep will create a single .hyp file with 4 header rows and the values presented above for the sleep stages, with the exception that the value assigned to REM sleep will be 5 for compatibility with Elan hypnogram reader.</p>
@@ -336,9 +373,67 @@
 <li><a class="reference internal" href="#scoringtab"><span class="std std-ref">Scoring</span></a> : a scoring table that can be used to edit the hypnogram</li>
 <li><a class="reference internal" href="#detectiontab"><span class="std std-ref">Detection</span></a> : Automatic detection of sleep spindles, rapid eye movements (REMs), slow waves, K-complexes (KCs) and peaks</li>
 </ul>
+<p>In addition, there is a ruler (bottom of the page). From this ruler :</p>
+<ul class="simple">
+<li><em>Go to</em> : go to the time location of your choice</li>
+<li><em>Window</em> : length of the displayed time window</li>
+<li><em>Slider step</em> : step between each consecutive window</li>
+<li><em>Rule</em> : display unit in second, minute or hours</li>
+<li><em>Grid</em> : display the grid on the hypnogram and channel plot</li>
+<li><em>Magnify</em> : improve plot lisibility (better for small time events). Alternatively, click on the plot of your choice for increasing lisibility directly.</li>
+</ul>
 <div class="section" id="panels">
 <span id="paneltab"></span><h3>Panels<a class="headerlink" href="#panels" title="Permalink to this headline">¶</a></h3>
-<p>(TODO)</p>
+<p>From the <strong>Panels</strong> tab control displayed elements/</p>
+<div class="section" id="channels">
+<h4>Channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Show / hide channels :<ul>
+<li>Select channels of your choice by clicking on the corresponding checkbox</li>
+<li>Display / hide all channels</li>
+</ul>
+</li>
+<li>Control the amplitude :<ul>
+<li>Per channel</li>
+<li>By setting all amplitudes at once</li>
+<li>Use symetric amplitudes (-M, +M)</li>
+<li>Use automatic amplitude (each amplitude fit to the (minimum, maximum) of the current displayed window)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="spectrogram-hypnogram-time-axis">
+<h4>Spectrogram // hypnogram // time axis<a class="headerlink" href="#spectrogram-hypnogram-time-axis" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Control spectrogram looking and properties<ul>
+<li>the channel on whichs compute spectrogram</li>
+<li>tarting and ending frequencies</li>
+<li>time length window and overlap</li>
+<li>colormap</li>
+</ul>
+</li>
+<li>Show / hide spectrogram, hypnogram, time axis</li>
+<li>Display / hide visual indicators refering to the current time window</li>
+<li>Zoom : when zooming, the axis will fit to the time window according to the (window, step) parameters defined in the ruler</li>
+</ul>
+</div>
+<div class="section" id="topoplot">
+<h4>Topoplot<a class="headerlink" href="#topoplot" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Show / hide topoplot</li>
+<li>Display several information types :<ul>
+<li>The raw signal</li>
+<li>The filtered signal</li>
+<li>The amplitude</li>
+<li>The power</li>
+</ul>
+</li>
+</ul>
+<p>Filtered, amplitude and power are computed in a specific frequency band. The topoplot display the mean across the current time window according to the (window, step) parameters defined in the ruler.</p>
+<div class="figure align-center">
+<img alt="_images/Sleep_topo.png" src="_images/Sleep_topo.png" />
+</div>
+</div>
 </div>
 <div class="section" id="tools">
 <span id="toolstab"></span><h3>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h3>
@@ -517,7 +612,7 @@
 </div>
 <div class="section" id="shortcuts">
 <h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
-<p>Sleep comes with a bundle of shortcuts that can be used to speed up your productivity.</p>
+<p>Sleep comes with a bundle of shortcuts that can be used to speed up your productivity. If shortcuts don&#8217;t seems to be active, simply click on a canvas before.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -529,29 +624,11 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>CTRL+d</td>
-<td>Display quick settings panel</td>
-</tr>
-<tr class="row-odd"><td>CTRL+n</td>
-<td>Screenshot window</td>
-</tr>
-<tr class="row-even"><td>s</td>
-<td>Display / hide spectrogram</td>
-</tr>
-<tr class="row-odd"><td>h</td>
-<td>Display / hide hypnogram</td>
-</tr>
-<tr class="row-even"><td>z</td>
-<td>Enable / disable zoom</td>
-</tr>
-<tr class="row-odd"><td>b</td>
-<td>Previous window</td>
-</tr>
-<tr class="row-even"><td>n</td>
-<td>Next window</td>
-</tr>
-<tr class="row-odd"><td>mouse wheel</td>
+<tr class="row-even"><td>mouse wheel</td>
 <td>Move the current window</td>
+</tr>
+<tr class="row-odd"><td>mouse click</td>
+<td>On a channel canvas, magnify signal under mouse location</td>
 </tr>
 <tr class="row-even"><td>a</td>
 <td>Insert Artefact in the hypnogram</td>
@@ -570,6 +647,42 @@
 </tr>
 <tr class="row-odd"><td>r</td>
 <td>Insert REM stage in the hypnogram</td>
+</tr>
+<tr class="row-even"><td>b</td>
+<td>Previous window</td>
+</tr>
+<tr class="row-odd"><td>n</td>
+<td>Next window</td>
+</tr>
+<tr class="row-even"><td>s</td>
+<td>Display / hide spectrogram</td>
+</tr>
+<tr class="row-odd"><td>t</td>
+<td>Display / hide topoplot</td>
+</tr>
+<tr class="row-even"><td>h</td>
+<td>Display / hide hypnogram</td>
+</tr>
+<tr class="row-odd"><td>z</td>
+<td>Enable / disable zoom</td>
+</tr>
+<tr class="row-even"><td>CTRL + d</td>
+<td>Display quick settings panel</td>
+</tr>
+<tr class="row-odd"><td>CTRL + s</td>
+<td>Save hypnogram</td>
+</tr>
+<tr class="row-even"><td>CTRL + n</td>
+<td>Screenshot window</td>
+</tr>
+<tr class="row-odd"><td>CTRL + e</td>
+<td>Display documentation</td>
+</tr>
+<tr class="row-even"><td>CTRL + t</td>
+<td>Display shortcuts window</td>
+</tr>
+<tr class="row-odd"><td>CTRL + q</td>
+<td>Close the window</td>
 </tr>
 </tbody>
 </table>
@@ -621,7 +734,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.9',
+            VERSION:'0.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

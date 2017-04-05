@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.brain &mdash; visbrain 0.1.9 documentation</title>
+  <title>visbrain.brain.brain &mdash; visbrain 0.2.0 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.9 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.2.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.9
+                0.2.0
               </div>
             
           
@@ -311,6 +311,9 @@
 <span class="sd">            Crop the exportation of the main canvas to the region define by</span>
 <span class="sd">            (x, y, width, height).</span>
 
+<span class="sd">        ui_autocrop: bool, optional, (def: False)</span>
+<span class="sd">            Automaticaly crop figures when saving.</span>
+
 <span class="sd">        ui_cbregion: tuple, optional, (def: None)</span>
 <span class="sd">            Crop the exportation of the colorbar canvas to the region define by</span>
 <span class="sd">            (x, y, width, height).</span>
@@ -369,6 +372,7 @@
         <span class="c1"># Savename, extension and croping region (usefull for the screenshot) :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_savename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_savename&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_crop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_region&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_autocrop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_autocrop&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cbcrop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_cbregion&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_uirez</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_resolution&#39;</span><span class="p">,</span> <span class="mf">3000.</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyzRange</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;turntable&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">750</span><span class="p">,</span> <span class="mi">850</span><span class="p">),</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -465,7 +469,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.9',
+            VERSION:'0.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

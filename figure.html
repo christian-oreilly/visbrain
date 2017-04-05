@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Figure &mdash; visbrain 0.1.9 documentation</title>
+  <title>Figure &mdash; visbrain 0.2.0 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.1.9 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.2.0 documentation" href="index.html"/>
         <link rel="prev" title="Ndviz" href="ndviz.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.9
+                0.2.0
               </div>
             
           
@@ -175,7 +175,7 @@
 <span class="n">f</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="n">titles</span><span class="p">,</span> <span class="n">figtitle</span><span class="o">=</span><span class="s1">&#39;My figure&#39;</span><span class="p">,</span> <span class="n">xlabels</span><span class="o">=</span><span class="n">xlabels</span><span class="p">,</span>
            <span class="n">ylabels</span><span class="o">=</span><span class="n">ylabels</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ax_bgcolor</span><span class="o">=</span><span class="n">ax_bgcolor</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
            <span class="n">fig_bgcolor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.098</span><span class="p">,</span> <span class="mf">0.098</span><span class="p">,</span> <span class="mf">0.098</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
-           <span class="n">text_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+           <span class="n">text_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">auto_crop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Add a colorbar only to the second axis :</span>
 <span class="n">f</span><span class="o">.</span><span class="n">colorbar_to_axis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Repartition&#39;</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span>
@@ -221,7 +221,7 @@
 </ul>
 <dl class="class">
 <dt id="visbrain.figure.figure.Figure">
-<em class="property">class </em><code class="descclassname">visbrain.figure.figure.</code><code class="descname">Figure</code><span class="sig-paren">(</span><em>files</em>, <em>path=None</em>, <em>grid=None</em>, <em>figtitle=None</em>, <em>y=1.02</em>, <em>titles=None</em>, <em>xlabels=None</em>, <em>ylabels=None</em>, <em>figsize=None</em>, <em>subspace={'right': 1.0</em>, <em>'wspace': 0.0</em>, <em>'top': 0.9</em>, <em>'left': 0.05</em>, <em>'bottom': 0.1</em>, <em>'hspace': 0.3}</em>, <em>rmax=True</em>, <em>fig_bgcolor=None</em>, <em>ax_bgcolor=None</em>, <em>text_color='black'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/figure/figure.html#Figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.figure.figure.Figure" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">visbrain.figure.figure.</code><code class="descname">Figure</code><span class="sig-paren">(</span><em>files</em>, <em>path=None</em>, <em>grid=None</em>, <em>figtitle=None</em>, <em>y=1.02</em>, <em>titles=None</em>, <em>xlabels=None</em>, <em>ylabels=None</em>, <em>figsize=None</em>, <em>subspace={'right': 1.0</em>, <em>'bottom': 0.1</em>, <em>'hspace': 0.3</em>, <em>'left': 0.05</em>, <em>'top': 0.9</em>, <em>'wspace': 0.0}</em>, <em>rmax=True</em>, <em>fig_bgcolor=None</em>, <em>ax_bgcolor=None</em>, <em>text_color='black'</em>, <em>autocrop=False</em>, <em>autoresize=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/figure/figure.html#Figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.figure.figure.Figure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Automatically arange pictures in a grid and save a paper ready figure.</p>
 <p>This class can be used to generate figures to be then used in a paper. For
 example, if you export 10 pictures, you may want to concatenate them in a
@@ -269,6 +269,8 @@ no label will be added. If ylabels is a string, the same label will
 be applied to all figures. If ylabels is a list/tuple of strings,
 the strings inside will be used to set the label of each picture
 independantly (must have the same length as files.)</dd>
+<dt>figsize: tuple, optional, (def: None)</dt>
+<dd>The size of the figure. Should be a tuple of integers.</dd>
 <dt>subspace: dict, optional, (def: None)</dt>
 <dd><dl class="first last docutils">
 <dt>Control margins and the distance between subplots. Use:</dt>
@@ -289,6 +291,8 @@ width.</li>
 <dd>&#8216;wspace&#8217;: 0., &#8216;hspace&#8217;: 0.05}</dd>
 </dl>
 </dd>
+<dt>rmax: bool, optional, (def: True)</dt>
+<dd>Remove borders of each axis.</dd>
 <dt>fig_bgcolor: str/tuple/list, optional, (def: None)</dt>
 <dd>Background color of the figure. By default, no background is used.</dd>
 <dt>ax_bgcolor: str/tuple/list, optional, (def: None)</dt>
@@ -299,8 +303,15 @@ of each axis. This is a very important parameter for transparent
 pictures (like png or tiff files).</dd>
 <dt>text_color: str/tuple/list, optional, (def: &#8216;black&#8217;)</dt>
 <dd>Color of text elements (figure title, axes titles, x and y labels.)</dd>
-<dt>rmax: bool, optional, (def: True)</dt>
-<dd>Remove borders of each axis.</dd>
+<dt>autocrop: bool, optional, (def: False)</dt>
+<dd>Specify if each picture has to be automatically cropped.</dd>
+<dt>autoresize: bool, optional, (def: False)</dt>
+<dd>Specify if all pictures have to be resized. If True, all pictures
+will be resized according to the minimum size along row axis. For
+further controls, define autoresize as a dictionary. Use the
+key &#8216;axis&#8217; to specify if pictures have to share the same height (0)
+or width (1). Use &#8216;extend&#8217; if the smallest (False) or the largest
+have to be considered as the reference.</dd>
 </dl>
 </dd>
 <dt>Methods:</dt>
@@ -509,7 +520,7 @@ ticks directly.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.9',
+            VERSION:'0.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

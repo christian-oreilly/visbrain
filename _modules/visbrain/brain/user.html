@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.user &mdash; visbrain 0.1.9 documentation</title>
+  <title>visbrain.brain.user &mdash; visbrain 0.2.0 documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.1.9 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.2.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.9
+                0.2.0
               </div>
             
           
@@ -230,17 +230,17 @@
 
 <div class="viewcode-block" id="userfcn.screenshot"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.screenshot">[docs]</a>    <span class="k">def</span> <span class="nf">screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                    <span class="n">cbregion</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cbzoom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                   <span class="n">resolution</span><span class="o">=</span><span class="mf">3000.</span><span class="p">):</span>
+                   <span class="n">resolution</span><span class="o">=</span><span class="mf">3000.</span><span class="p">,</span> <span class="n">autocrop</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Take a screenshot of the current scene and save it as a picture.</span>
 
-<span class="sd">        This method try to make a high-fidelity screenshot of your scene. There</span>
-<span class="sd">        might be some strange behaviors (like with connectivity line width).</span>
+<span class="sd">        This method try to make a high-fidelity screenshot of your scene.</span>
 <span class="sd">        One thing to keep in mind, is that printed picture using a transparent</span>
 <span class="sd">        compatible extension (like .png files) produces transparent pictures.</span>
 <span class="sd">        This might be quit disturbing especially using internal light</span>
 <span class="sd">        reflection. To solve this in your pictures, I recommand putting your</span>
 <span class="sd">        transparent brain picture onto a dark background (like black) and see</span>
-<span class="sd">        the magic happend.</span>
+<span class="sd">        the magic happend. If you want perfectly fitting pictures, just turn</span>
+<span class="sd">        the autocrop parameter to True.</span>
 <span class="sd">        This method requires imageio or PIL (pip install pillow).</span>
 
 <span class="sd">        Args:</span>
@@ -256,6 +256,10 @@
 <span class="sd">                to start along the horizontal axis and y_start where to start</span>
 <span class="sd">                along the vertical axis. By default, the entire canvas is</span>
 <span class="sd">                rendered.</span>
+
+<span class="sd">            autocrop: bool, optional, (def: False)</span>
+<span class="sd">                Automaticaly crop the figure in order to have the smallest</span>
+<span class="sd">                space between the brain and the border of the picture.</span>
 
 <span class="sd">            zoom: float, optional, (def: None)</span>
 <span class="sd">                Define the zoom level over the main canvas.</span>
@@ -315,6 +319,8 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The region parameter must be a tuple of four&quot;</span>
                                  <span class="s2">&quot; integers describing (x_start, y_start, &quot;</span>
                                  <span class="s2">&quot;width, height)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_autocrop</span> <span class="o">=</span> <span class="n">autocrop</span>
+
         <span class="k">if</span> <span class="n">cbregion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cbcrop</span> <span class="o">=</span> <span class="n">cbregion</span>
@@ -748,6 +754,21 @@
     <span class="c1">#                            CONNECTIVITY</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
+    <span class="k">def</span> <span class="nf">connect_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colorby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">colorby</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">colorby</span> <span class="o">=</span> <span class="n">colorby</span>
+        <span class="k">if</span> <span class="n">dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">dynamic</span> <span class="o">=</span> <span class="n">dynamic</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;cmap&#39;</span><span class="p">,</span> <span class="s1">&#39;clim&#39;</span><span class="p">,</span> <span class="s1">&#39;vmin&#39;</span><span class="p">,</span> <span class="s1">&#39;vmax&#39;</span><span class="p">,</span> <span class="s1">&#39;under&#39;</span><span class="p">,</span> <span class="s1">&#39;over&#39;</span><span class="p">],</span>
+                        <span class="p">[</span><span class="n">cmap</span><span class="p">,</span> <span class="n">clim</span><span class="p">,</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">under</span><span class="p">,</span> <span class="n">over</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">_cb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">show</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
 <div class="viewcode-block" id="userfcn.add_connect"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.add_connect">[docs]</a>    <span class="k">def</span> <span class="nf">add_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a supplementar connectivity object.</span>
 
@@ -939,7 +960,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.9',
+            VERSION:'0.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
