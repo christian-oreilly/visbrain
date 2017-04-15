@@ -8,10 +8,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sleep &mdash; visbrain 0.2.0 documentation</title>
+  <title>Sleep &mdash; visbrain 0.2.1 documentation</title>
   
 
   
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   
 
   
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.2.0 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.2.1 documentation" href="index.html"/>
         <link rel="next" title="Ndviz" href="ndviz.html"/>
         <link rel="prev" title="Exporting your figures" href="vbexport.html"/> 
 
@@ -57,13 +59,16 @@
           
 
           
+            
+            <img src="_static/visbrain_128x128.png" class="logo" />
+          
           </a>
 
           
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -184,6 +189,9 @@
             
   <div class="section" id="sleep">
 <span id="id1"></span><h1>Sleep<a class="headerlink" href="#sleep" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-center">
+<img alt="_images/sleep.png" src="_images/sleep.png" />
+</div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-center" id="id4">
@@ -192,10 +200,10 @@
 </div>
 <p>Sleep is a graphical user interface dedicated to visualization and scoring of sleep data. Sleep runs on Vispy excellent package and benefits thus from the high-performance of this latter (GPU-based computation). Some of the most relevant features of Sleep include:</p>
 <ul class="simple">
-<li>Dynamic display of polysomnographic data, spectrogram and hypnogram, with individual real-time adjustment of channel amplitude and visibility.</li>
+<li>Dynamic display of polysomnographic data, spectrogram, hypnogram and topoplot, with individual real-time adjustment of channel amplitude and visibility.</li>
 <li>Spectrogram display with several controllable parameters (e.g. frequency, channel, colormap)</li>
 <li>Hypnogram editing and saving functions, as well as real-time computation of the main sleep parameters (see Hypnogram section).</li>
-<li>Implementation of several semi-automatic detection method such as sleep spindles, rapid eye movements, slow waves, K-complex or peak detection. These can be performed either on single or multiple channels and report where each one of them on the hypnogram or inside a table. Each detection comes with several parameters that the user can adjust to find the optimal detection.</li>
+<li>Implementation of several semi-automatic detection method such as sleep spindles, K-complexes, slow waves, rapid eye movements, muscle twitches or peak detection. These can be performed either on single or multiple channels and report where each one of them on the hypnogram or inside a table. Each detection comes with several parameters that the user can adjust to find the optimal detection.</li>
 <li>Several others signal processing tools such as de-mean, de-trend and filtering. Those tools are directly applied to each channel and to the spectrogram</li>
 <li>Nice and intuitive interface to help you scroll and explore your data.</li>
 </ul>
@@ -214,8 +222,9 @@
 <h3>Data files<a class="headerlink" href="#data-files" title="Permalink to this headline">¶</a></h3>
 <p>Here’s the list of currently supported extensions for data files:</p>
 <ul class="simple">
-<li>BrainVision (<strong>.eeg</strong>)</li>
+<li>BrainVision (<strong>.eeg</strong>) version 1 and 2</li>
 <li><a class="reference external" href="http://elan.lyon.inserm.fr">ELAN</a> (<strong>.eeg</strong>)</li>
+<li>Micromed (<strong>.trc</strong>) version 4</li>
 <li>European Data Format (<strong>.edf</strong>)</li>
 </ul>
 <div class="admonition note">
@@ -551,7 +560,7 @@
 </div>
 <div class="section" id="detection">
 <span id="detectiontab"></span><h3>Detection<a class="headerlink" href="#detection" title="Permalink to this headline">¶</a></h3>
-<p>The Detection panel offers several semi-automatic algorithms for the detection of sleep features such as sleep spindles, rapid eyes movements, slow waves, K-complexes and peaks. All detection types shared the following parameters :</p>
+<p>The Detection panel offers several semi-automatic algorithms for the detection of sleep features such as sleep spindles, K-complexes, rapid eyes movements, slow waves, muscle twitches and peaks. All detection types shared the following parameters :</p>
 <ul class="simple">
 <li><em>Apply on</em> : choose on which channel to perform the detection<ul>
 <li>Selected : apply detection on selected channel</li>
@@ -629,6 +638,18 @@
 </tr>
 <tr class="row-odd"><td>mouse click</td>
 <td>On a channel canvas, magnify signal under mouse location</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Decrease amplitude</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Increase amplitude</td>
 </tr>
 <tr class="row-even"><td>a</td>
 <td>Insert Artefact in the hypnogram</td>
@@ -734,7 +755,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.2.0',
+            VERSION:'0.2.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

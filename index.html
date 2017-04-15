@@ -8,10 +8,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visbrain documentation &mdash; visbrain 0.2.0 documentation</title>
+  <title>Visbrain documentation &mdash; visbrain 0.2.1 documentation</title>
   
 
   
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   
 
   
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.2.0 documentation" href="#"/>
+    <link rel="top" title="visbrain 0.2.1 documentation" href="#"/>
         <link rel="next" title="Brain" href="brain.html"/> 
 
   
@@ -56,13 +58,16 @@
           
 
           
+            
+            <img src="_static/visbrain_128x128.png" class="logo" />
+          
           </a>
 
           
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -156,31 +161,28 @@
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>New in version v0.2.1<ul>
+<li>Brain<ul>
+<li>New <em>add_mesh</em>, <em>sources_fit</em> and <em>sources_to_convexHull</em> methods</li>
+<li>Improve projection on selected objects</li>
+</ul>
+</li>
+<li>Sleep<ul>
+<li>Load .trc files (Micromed)</li>
+<li>New <em>Muscle twiches</em> detection</li>
+<li>Dections improvements and better GUI integrations</li>
+<li>Import / export all detections for latter use</li>
+<li>Fix detections after bipolarization</li>
+<li>New shortcuts</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>New in version v0.2.0<ul>
 <li>Brain : new <em>ui_autocrop</em> parameter (or using the <em>screenshot</em> function)</li>
 <li>Figure : new <a class="reference external" href="https://github.com/EtienneCmb/visbrain/tree/master/examples/figure">example</a></li>
 <li>Figure : new <em>autocrop</em> parameter for automatic size ajustments and doc update</li>
 <li>Sleep : doc updates and python 2 bug fixing.</li>
-</ul>
-</li>
-<li>New in version v0.1.9<ul>
-<li><strong>New module</strong> <a class="reference internal" href="figure.html#figure"><span class="std std-ref">Figure</span></a></li>
-<li>Brain : fix color control (conflict between clim / (vmin, vmax))</li>
-<li>Brain : improve cortical projection and repartition. This new version use much more RAM but the final result is better</li>
-<li>Brain : user fonctions improved</li>
-<li>Sleep : detections and down-sampling improvements</li>
-<li>Sleep : new magnify to improve signal lisibility</li>
-<li>Sleep : topoplot and re-referencing integration</li>
-</ul>
-</li>
-<li>New in version v0.1.8<ul>
-<li>Brain : New density color and start bundling</li>
-<li>Brain : possibility to add multiple source / connectivity objects</li>
-<li>Brain : screenshot improvements and GUI integration</li>
-<li>Sleep : new slow wave / K-complex detection</li>
-<li>Sleep : REM / spindles detection improvements</li>
-<li>Sleep : everything can now be exported.</li>
-<li>Sleep : GUI re-organization and improvements</li>
 </ul>
 </li>
 </ul>
@@ -309,7 +311,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.2.0',
+            VERSION:'0.2.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

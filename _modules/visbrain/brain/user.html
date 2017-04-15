@@ -8,10 +8,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.user &mdash; visbrain 0.2.0 documentation</title>
+  <title>visbrain.brain.user &mdash; visbrain 0.2.1 documentation</title>
   
 
   
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
   
 
   
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.2.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.2.1 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -56,13 +58,16 @@
           
 
           
+            
+            <img src="../../../_static/visbrain_128x128.png" class="logo" />
+          
           </a>
 
           
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -142,11 +147,13 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">ConvexHull</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
+<span class="kn">from</span> <span class="nn">.base.visuals</span> <span class="k">import</span> <span class="n">BrainMesh</span>
 <span class="kn">from</span> <span class="nn">.base.SourcesBase</span> <span class="k">import</span> <span class="n">SourcesBase</span>
 <span class="kn">from</span> <span class="nn">.base.ConnectBase</span> <span class="k">import</span> <span class="n">ConnectBase</span>
-<span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">color2vb</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">color2vb</span><span class="p">,</span> <span class="n">AddMesh</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;userfcn&#39;</span><span class="p">]</span>
 
@@ -359,7 +366,7 @@
 
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
-    <span class="c1">#                           BRAIN CONTROL</span>
+    <span class="c1">#                                  MESH</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
 <div class="viewcode-block" id="userfcn.brain_control"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.brain_control">[docs]</a>    <span class="k">def</span> <span class="nf">brain_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">hemisphere</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -447,6 +454,31 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;self.q_&#39;</span> <span class="o">+</span> <span class="n">reflect_on</span> <span class="o">+</span> <span class="s1">&#39;.setChecked(True)&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_light_reflection</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">add_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a mesh to the scene.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: string</span>
+<span class="sd">                Name of the object to add.</span>
+
+<span class="sd">            vertices: np.ndarray</span>
+<span class="sd">                Vertices of the mesh.</span>
+
+<span class="sd">            faces: np.ndarray</span>
+<span class="sd">                Faces of the mesh.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            kargs: dict, optional, (def: {})</span>
+<span class="sd">                Supplementar arguments pass to the BrainMesh class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Add mesh to user objects :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">BrainMesh</span><span class="p">(</span><span class="n">vertices</span><span class="o">=</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="o">=</span><span class="n">faces</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">set_camera</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">wc</span><span class="o">.</span><span class="n">camera</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vbNode</span>
+        <span class="c1"># Add mesh for projection :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">AddMesh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_userobj</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
 
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
@@ -669,7 +701,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_tprojectas</span> <span class="o">=</span> <span class="s1">&#39;repartition&#39;</span>
         <span class="c1"># Colormap control :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sources_colormap</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="c1"># Run the corticale reparition :</span>
+        <span class="c1"># Run the corticale repartition :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sourcesProjection</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="userfcn.sources_colormap"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">sources_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -731,6 +763,31 @@
             <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">_cb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span></div>
 
+<div class="viewcode-block" id="userfcn.sources_fit"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_fit">[docs]</a>    <span class="k">def</span> <span class="nf">sources_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Force sources coordinates to fit to a selected object.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            obj: string, optional, (def: &#39;brain&#39;)</span>
+<span class="sd">                The object name to fit. Use &#39;brain&#39; or &#39;roi&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get vertices of the selected object :</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_findVertices</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="c1"># fit sources to the selected vertices :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">_fit</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">progressbar</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="userfcn.sources_to_convexHull"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.sources_to_convexHull">[docs]</a>    <span class="k">def</span> <span class="nf">sources_to_convexHull</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xyz</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a set of sources into a convex hull.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xyz: np.ndarray</span>
+<span class="sd">                Array of sources coordinates of shape (N, 3)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            faces: np.ndarray</span>
+<span class="sd">                A set of faces than can be then passed to the add_mesh method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ConvexHull</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">.</span><span class="n">simplices</span></div>
+
 <div class="viewcode-block" id="userfcn.add_sources"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.add_sources">[docs]</a>    <span class="k">def</span> <span class="nf">add_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a supplementar source&#39;s object.</span>
 
@@ -754,10 +811,37 @@
     <span class="c1">#                            CONNECTIVITY</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
-    <span class="k">def</span> <span class="nf">connect_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colorby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="userfcn.connect_display"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.connect_display">[docs]</a>    <span class="k">def</span> <span class="nf">connect_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colorby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Update connectivity object.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            colorby: string, optional, (def: &#39;strength&#39;)</span>
+<span class="sd">                Define how to color connexions. Use &#39;strength&#39; if the color has</span>
+<span class="sd">                to be modulate by the connectivity strength. Use &#39;count&#39; if the</span>
+<span class="sd">                color depends on the number of connexions per node. Use</span>
+<span class="sd">                &#39;density&#39;to define colors according to the number of line in a</span>
+<span class="sd">                sphere of radius c_dradius.</span>
+
+<span class="sd">            dynamic: tuple, optional, (def: None)</span>
+<span class="sd">                Control the dynamic opacity. For example, if c_dynamic=(0, 1),</span>
+<span class="sd">                strong connections will be more opaque than weak connections.</span>
+
+<span class="sd">            cmap: string, (def: &#39;inferno&#39;)</span>
+<span class="sd">                Matplotlib colormap name.</span>
+
+<span class="sd">            clim: tuple/list, (def: None)</span>
+<span class="sd">                Define the limit of the colorbar. This parameter must be a list</span>
+<span class="sd">                or tuple containing two float (like (3, 5)...).</span>
+
+<span class="sd">            vmin/vmax: int/float, (def: None/None)</span>
+<span class="sd">                Define a threshold to change colors that are under vmin or</span>
+<span class="sd">                over vmax. See under/over to change those colors.</span>
+
+<span class="sd">            under/over: string/tuple, (def: None/None)</span>
+<span class="sd">                The color to use for values under vmin and values over vmax.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">colorby</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">colorby</span> <span class="o">=</span> <span class="n">colorby</span>
         <span class="k">if</span> <span class="n">dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -767,7 +851,7 @@
             <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">_cb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">show</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="userfcn.add_connect"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.add_connect">[docs]</a>    <span class="k">def</span> <span class="nf">add_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a supplementar connectivity object.</span>
@@ -792,7 +876,7 @@
     <span class="c1">#                                 ROI</span>
     <span class="c1"># =========================================================================</span>
     <span class="c1"># =========================================================================</span>
-<div class="viewcode-block" id="userfcn.roi_plot"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.roi_plot">[docs]</a>    <span class="k">def</span> <span class="nf">roi_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">[],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.roi_plot"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.roi_plot">[docs]</a>    <span class="k">def</span> <span class="nf">roi_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">[],</span> <span class="n">subdivision</span><span class="o">=</span><span class="s1">&#39;brod&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;roi&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Select some roi to plot.</span>
 
 <span class="sd">        Kargs:</span>
@@ -807,6 +891,9 @@
 
 <span class="sd">            smoth: int, optional, (def: 3)</span>
 <span class="sd">                Define smooth proportion.</span>
+
+<span class="sd">            name: string, optional, (def: &#39;ro&#39;)</span>
+<span class="sd">                Name of the displayed ROI.</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; # Define a Brain instance :</span>
@@ -836,6 +923,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_roiSmooth</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">smooth</span><span class="p">)</span>
             <span class="c1"># Plot ROI :</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_area_plot</span><span class="p">()</span>
+            <span class="c1"># Add roi to current objects and update list :</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tobj</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fcn_updateProjList</span><span class="p">()</span>
             <span class="c1"># --------------- GUI ---------------</span>
             <span class="c1"># Set check the corresponding subdivision :</span>
             <span class="k">if</span> <span class="n">subdivision</span> <span class="o">==</span> <span class="s1">&#39;brod&#39;</span><span class="p">:</span>
@@ -845,7 +935,6 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">Sub_aal</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
                 <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="c1"># Add selected items to the GUI :</span>
-
             <span class="bp">self</span><span class="o">.</span><span class="n">struct2add</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">_label</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">struct2select</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">struct2select</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">_label</span><span class="p">)</span></div>
@@ -960,7 +1049,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.2.0',
+            VERSION:'0.2.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

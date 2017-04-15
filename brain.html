@@ -8,10 +8,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Brain &mdash; visbrain 0.2.0 documentation</title>
+  <title>Brain &mdash; visbrain 0.2.1 documentation</title>
   
 
   
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   
 
   
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.2.0 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.2.1 documentation" href="index.html"/>
         <link rel="next" title="GUI functions and settings" href="vbfunctions.html"/>
         <link rel="prev" title="Visbrain documentation" href="index.html"/> 
 
@@ -57,13 +59,16 @@
           
 
           
+            
+            <img src="_static/visbrain_128x128.png" class="logo" />
+          
           </a>
 
           
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -297,7 +302,7 @@ otherwise they are going to be ignored.</dd>
 <dd>Linewidth of connectivity lines.</dd>
 <dt>cmap: string, (def: &#8216;inferno&#8217;)</dt>
 <dd>Matplotlib colormap name.</dd>
-<dt>cmap_lim: tuple/list, (def: None)</dt>
+<dt>cmap_clim: tuple/list, (def: None)</dt>
 <dd>Define the limit of the colorbar. This parameter must be a list or
 tuple containing two float (like (3, 5)...). If cmap_lim stay to
 None, the minimum and maximum of projected values are going to be
@@ -403,12 +408,15 @@ the definition of your screen must be multiplied.</dd>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#id1">Opacity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#select-sources">Select sources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#add-source-object">Add source object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#fit-to-an-object">Fit to an object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#convert-into-convex-hull">Convert into convex hull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#cortical-projection">Cortical projection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#cortical-repartition">Cortical repartition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#colormap">Colormap</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vbfunctions.html#connectivity-functions">Connectivity functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#connectivity-settings">Connectivity settings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vbfunctions.html#add-connectivity-object">Add connectivity object</a></li>
 </ul>
 </li>
@@ -541,7 +549,7 @@ the definition of your screen must be multiplied.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.2.0',
+            VERSION:'0.2.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
