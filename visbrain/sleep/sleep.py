@@ -357,3 +357,13 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # This function has to be placed here (and not in the user.py script)
         self.showMaximized()
         visapp.run()
+
+    ###########################################################################
+    # MACHINE-LEARNING
+    ###########################################################################
+    def ml_ComputeFeatures(self):
+        """Compute power features that will be used for Machine-Learning."""
+        from ..utils import welch_power
+        # Spectral properties :
+        # Compute power features :
+        # Save in a numpy array :
