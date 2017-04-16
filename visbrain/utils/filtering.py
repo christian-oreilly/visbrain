@@ -135,7 +135,7 @@ def morlet(x, sf, f, width=7.0):
     return xout
 
 
-def ndmorlet(x, sf, f, axis=0, get=None, width=7.0):
+def ndmorlet(x, sf, fce, axis=0, get='power', width=7.0, win=None):
     """Complex decomposition using Morlet's wlt for a multi-dimentional array.
 
     Args:
@@ -145,7 +145,7 @@ def ndmorlet(x, sf, f, axis=0, get=None, width=7.0):
     sf: float
         Sampling frequency
 
-    f: array, shape (2,)
+    f: array, shape (N,)
         Frequency vector
 
     axis: integer, optional, (def: 0)
@@ -156,26 +156,58 @@ def ndmorlet(x, sf, f, axis=0, get=None, width=7.0):
 
     Returns:
         xout: array, same shape as x
-            Complex decomposition of x.
+            Complex decomposition / amplitude / phase / powe of x with a shape
+            of (N_frequencies, *x.shape)
     """
-    # Get the wavelet :
-    m = _morlet_wlt(sf, f, width)
+    # __________ CHECKING __________
+    # Float32 type :
+    if x.dtype is not np.float32:
+        x = x.astype(np.float32, copy=False)
+    # Force to be an array :
+    fce = np.asarray(fce).ravel()
+    # Get checking :
+    if get not in ['amplitude', 'power', 'phase']:
+        raise ValueError("The get parameter must either be None, 'amplitude',"
+                         " 'phase' or 'power'")
+    if (win is not None) and not isinstance(win, (int, float)):
+        raise ValueError("The win parameter must either be None or a float"
+                         "number")
 
+    # __________ TYPE __________
+    if get == 'amplitude':
+        def fun(x): return np.abs(x)
+    elif get == 'power':
+        def fun(x): return np.square(np.abs(x))
+    elif get == 'phase':
+        def fun(x): return np.angle(x)
+
+    # __________ WINDOWING __________
+    # Get window index :
+    if (win is not None) and isinstance(win, (float, int)):
+        winsample = int(np.round(win * sf))
+        split = np.arange(winsample, x.shape[axis], winsample, dtype=int)
+
+    # __________ MORLET __________
     # Define a morlet function :
     def morletFcn(xt):
-        # Compute morlet :
-        y = np.convolve(xt, m)
-        return y[int(np.ceil(len(m) / 2)) - 1:int(len(y) - np.floor(
-                                                                len(m) / 2))]
+        # Convolve using morlet's wavelet :
+        y = fun(np.convolve(xt, m, mode='same'))
+        # Apply windowing :
+        if win is not None:
+            ysp = np.array([k.mean() for k in np.split(y, split)])
+            return ysp
+        else:
+            return y
 
-    xf = np.apply_along_axis(morletFcn, axis, x)
-    # Get amplitude / power / phase :
-    if get == 'amplitude':
-        return np.abs(xf)
-    elif get == 'power':
-        return np.square(np.abs(xf))
-    elif get == 'phase':
-        return np.angle(xf)
+    # __________ Nd-APPLY __________
+    sig = []
+    for f in fce:
+        # Get the wavelet :
+        m = _morlet_wlt(sf, f, width).astype(np.complex64)
+        # Apply to each dimension :
+        sig.append(np.apply_along_axis(morletFcn, axis, x))
+
+    return np.array(sig)
 
 
 def morlet_power(x, freqs, sf, norm=True):
