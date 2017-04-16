@@ -182,6 +182,10 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # ====================== FUNCTIONS ON LOAD ======================
         self._fcnsOnCreation()
 
+        # ====================== MACHINE LEARNING ======================
+        from ..utils.sleep.mlsleep import ml_BuildTrainingSets
+        ml_BuildTrainingSets(self._data, self._sf, self._hypno, self._channels)
+
     def __len__(self):
         """Return the number of channels."""
         return len(self._channels)
@@ -357,13 +361,3 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # This function has to be placed here (and not in the user.py script)
         self.showMaximized()
         visapp.run()
-
-    ###########################################################################
-    # MACHINE-LEARNING
-    ###########################################################################
-    def ml_ComputeFeatures(self):
-        """Compute power features that will be used for Machine-Learning."""
-        from ..utils import welch_power
-        # Spectral properties :
-        # Compute power features :
-        # Save in a numpy array :
