@@ -139,6 +139,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sleep-inputs">Sleep inputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#collaborator">Collaborator</a></li>
 </ul>
 </li>
@@ -700,6 +701,63 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="sleep-inputs">
+<h2>Sleep inputs<a class="headerlink" href="#sleep-inputs" title="Permalink to this headline">¶</a></h2>
+<p>Here is the list of default Sleep inputs :</p>
+<dl class="class">
+<dt id="visbrain.sleep.sleep.Sleep">
+<em class="property">class </em><code class="descclassname">visbrain.sleep.sleep.</code><code class="descname">Sleep</code><span class="sig-paren">(</span><em>file=None, hypno_file=None, config_file=None, data=None, channels=None, sf=None, hypno=None, downsample=100.0, axis=False, line='gl', hypedit=False, href=['art', 'wake', 'rem', 'n1', 'n2', 'n3']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/sleep/sleep.html#Sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.sleep.sleep.Sleep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize and edit sleep data.</p>
+<dl class="docutils">
+<dt>Use this module to :</dt>
+<dd><ul class="first last simple">
+<li>Load .eeg (Brainvision and ELAN), .edf or directly raw data.</li>
+<li>Visualize polysomnographic data, spectrogram</li>
+<li>Load, edit and save hypnogram from the interface</li>
+<li>Perform several events detection</li>
+<li>Further signal processing tools (de-mean, de-trend and filtering)</li>
+<li>Topographic data visualization</li>
+</ul>
+</dd>
+</dl>
+<p>Sleep has been developped in collaboration with Raphael Vallat.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>file: string, optional, (def: None)</dt>
+<dd>Path to the data file (.eeg, .trc or .edf).</dd>
+<dt>hypno_file: string, optional, (def: None)</dt>
+<dd>Path to the hypnogram file (.hyp, .txt or .csv)</dd>
+<dt>config_file: string, optional, (def: None)</dt>
+<dd>Path to the configuration file (.txt)</dd>
+<dt>data: np.ndarray, optional, (def: None)</dt>
+<dd>Array of data of shape (n_channels, n_pts)</dd>
+<dt>channels: list, optional, (def: None)</dt>
+<dd>List of channel names. The length of this list must be n_channels.</dd>
+<dt>sf: float, optional, (def: None)</dt>
+<dd>The sampling frequency of raw data.</dd>
+<dt>hypno: np.ndarray, optional, (def: None)</dt>
+<dd>Hypnogram data. Should be a raw vector of shape (n_pts,)</dd>
+<dt>downsample: float, optional, (def: 100.)</dt>
+<dd>The downsampling frequency for the data and hypnogram raw data.</dd>
+<dt>axis: bool, optional, (def: Fals)</dt>
+<dd>Specify if each axis have to contains its own axis. Be carefull
+with this option, the rendering can be much slower.</dd>
+<dt>line: string, optional, (def: &#8216;gl&#8217;)</dt>
+<dd>Specify the line rendering. Use &#8216;gl&#8217; for the default line (fast) or
+&#8216;agg&#8217; for smooth lines. This option might not works on some
+plateforms.</dd>
+<dt>hypedit: bool, optional, (def: False)</dt>
+<dd>Enable the drag and drop hypnogram edition.</dd>
+<dt>href: list, optional, (def: [&#8216;art&#8217;, &#8216;wake&#8217;, &#8216;rem&#8217;, &#8216;n1&#8217;, &#8216;n2&#8217;, &#8216;n3&#8217;])</dt>
+<dd>List of sleep stages. This list can be used to changed the display
+order into the GUI.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="collaborator">
 <h2>Collaborator<a class="headerlink" href="#collaborator" title="Permalink to this headline">¶</a></h2>
