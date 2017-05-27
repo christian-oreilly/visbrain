@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>GUI functions and settings &mdash; visbrain 0.2.1 documentation</title>
+  <title>GUI functions and settings &mdash; visbrain 0.2.2 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.2.1 documentation" href="index.html"/>
+    <link rel="top" title="visbrain 0.2.2 documentation" href="index.html"/>
         <link rel="up" title="Brain" href="brain.html"/>
         <link rel="next" title="Exporting your figures" href="vbexport.html"/>
         <link rel="prev" title="Brain" href="brain.html"/> 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                0.2.1
+                0.2.2
               </div>
             
           
@@ -702,7 +702,7 @@ s_data, s_cmap, s_symbol...)</dd>
 <h2>Cortical projection<a class="headerlink" href="#cortical-projection" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="visbrain.brain.user.userfcn.cortical_projection">
-<code class="descclassname">userfcn.</code><code class="descname">cortical_projection</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_projection" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">userfcn.</code><code class="descname">cortical_projection</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em>, <em>contribute=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_projection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project sources activity.</p>
 <p>This method can be used to project the sources activity either onto the
 brain or on deep areas (like gyrus or brodmann areas).</p>
@@ -715,6 +715,8 @@ brain or on deep areas (like gyrus or brodmann areas).</p>
 <dd>Define on which object to project the sources activity. Chose
 either &#8216;brain&#8217; for projecting the sources activity onto the
 brain or &#8216;roi&#8217; to project on region of interest (if defined).</dd>
+<dt>contribute: bool, optional, (def: False)</dt>
+<dd>Specify if sources contribute on both hemisphere.</dd>
 <dt>kwargs: dict</dt>
 <dd>Further arguments are passed to the sources_colormap function.
 Those arguments can be used to control the colormap (clim,
@@ -743,7 +745,7 @@ vmin, under, vmax, over and cmap).</dd>
 <h2>Cortical repartition<a class="headerlink" href="#cortical-repartition" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="visbrain.brain.user.userfcn.cortical_repartition">
-<code class="descclassname">userfcn.</code><code class="descname">cortical_repartition</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_repartition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_repartition" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">userfcn.</code><code class="descname">cortical_repartition</code><span class="sig-paren">(</span><em>radius=10.0</em>, <em>project_on='brain'</em>, <em>contribute=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visbrain/brain/user.html#userfcn.cortical_repartition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#visbrain.brain.user.userfcn.cortical_repartition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the number of contributing sources per vertex.</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
@@ -754,6 +756,8 @@ vmin, under, vmax, over and cmap).</dd>
 <dd>Define on which object to project the sources repartition.
 Chose either &#8216;brain&#8217; for projecting onto the brain or &#8216;roi&#8217;
 to project on region of interest (if defined).</dd>
+<dt>contribute: bool, optional, (def: False)</dt>
+<dd>Specify if sources contribute on both hemisphere.</dd>
 <dt>kwargs: dict</dt>
 <dd>Further arguments are passed to the sources_colormap function.
 Those arguments can be used to control the colormap (clim,
@@ -1086,7 +1090,7 @@ deep voxels inside roi (internal).</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.2.1',
+            VERSION:'0.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

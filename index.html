@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visbrain documentation &mdash; visbrain 0.2.1 documentation</title>
+  <title>Visbrain documentation &mdash; visbrain 0.2.2 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="visbrain 0.2.1 documentation" href="#"/>
+    <link rel="top" title="visbrain 0.2.2 documentation" href="#"/>
         <link rel="next" title="Brain" href="brain.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.2.1
+                0.2.2
               </div>
             
           
@@ -148,19 +148,39 @@
 </ul>
 <div class="section" id="installation">
 <h2>Installation:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>First, visbrain use PyQt4 which means that you need to use a python version under 3.5.2. The same for the matplotlib version (&lt;= 1.5.1). Then you need to install VisPy, which is a Python library for interactive scientific visualization. In order to install this package&#8217;s dependencies (OpenGL), checkout this <a class="reference external" href="http://vispy.org/installation.html">installation guide</a>. You&#8217;ll need to install the developper version of VisPy. Run the following code in a terminal :</p>
-<p>Clone visbrain repository :</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/EtienneCmb/visbrain.git
-</pre></div>
-</div>
-<p>Go to the cloned folder and run :</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install .
+<p>First, visbrain use PyQt4 which means that you need to use a python version under 3.5.2. The same for the matplotlib version (&lt;= 1.5.1). Then you need to install VisPy, which is a Python library for interactive scientific visualization. In order to install this package&#8217;s dependencies (OpenGL), checkout this <a class="reference external" href="http://vispy.org/installation.html">installation guide</a>. You&#8217;ll need to install the developper version of VisPy.</p>
+<p>Environnement configuration and visbrain installation on windows and python 3 :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda create --yes -n visbrain <span class="nv">python</span><span class="o">=</span>3.5 anaconda
+activate visbrain
+git clone https://github.com/EtienneCmb/visbrain.git visbrain
+git clone https://github.com/vispy/vispy vispy
+<span class="nb">cd</span> vispy
+python setup.py install
+<span class="nb">cd</span> ..<span class="se">\v</span>isbrain
+pip install . --no-deps
+conda install --yes <span class="nv">pyqt</span><span class="o">=</span>4
 </pre></div>
 </div>
 </div>
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>New in version v0.2.2<ul>
+<li>Brain<ul>
+<li>Bug fixing</li>
+</ul>
+</li>
+<li>Sleep<ul>
+<li>Bug fixing</li>
+<li>Save and load GUI configuration</li>
+<li>Control the sleep stage order using the href input parameter</li>
+<li>Enable/disable the drag and drop on load</li>
+<li>Better Black and white hypnogram exportation</li>
+<li>New shortcuts</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>New in version v0.2.1<ul>
 <li>Brain<ul>
 <li>New <em>add_mesh</em>, <em>sources_fit</em> and <em>sources_to_convexHull</em> methods</li>
@@ -176,13 +196,6 @@
 <li>New shortcuts</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>New in version v0.2.0<ul>
-<li>Brain : new <em>ui_autocrop</em> parameter (or using the <em>screenshot</em> function)</li>
-<li>Figure : new <a class="reference external" href="https://github.com/EtienneCmb/visbrain/tree/master/examples/figure">example</a></li>
-<li>Figure : new <em>autocrop</em> parameter for automatic size ajustments and doc update</li>
-<li>Sleep : doc updates and python 2 bug fixing.</li>
 </ul>
 </li>
 </ul>
@@ -311,7 +324,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.2.1',
+            VERSION:'0.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>visbrain.brain.user &mdash; visbrain 0.2.1 documentation</title>
+  <title>visbrain.brain.user &mdash; visbrain 0.2.2 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="visbrain 0.2.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="visbrain 0.2.2 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.2.1
+                0.2.2
               </div>
             
           
@@ -626,7 +626,8 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The select parameter must either be &#39;all&#39;, &quot;</span>
                              <span class="s2">&quot;&#39;none&#39;, &#39;left&#39;, &#39;right&#39;, &#39;inside&#39; or &#39;outside&#39;&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="userfcn.cortical_projection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_projection">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.cortical_projection"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_projection">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span>
+                            <span class="n">contribute</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Project sources activity.</span>
 
 <span class="sd">        This method can be used to project the sources activity either onto the</span>
@@ -640,6 +641,9 @@
 <span class="sd">                Define on which object to project the sources activity. Chose</span>
 <span class="sd">                either &#39;brain&#39; for projecting the sources activity onto the</span>
 <span class="sd">                brain or &#39;roi&#39; to project on region of interest (if defined).</span>
+
+<span class="sd">            contribute: bool, optional, (def: False)</span>
+<span class="sd">                Specify if sources contribute on both hemisphere.</span>
 
 <span class="sd">            kwargs: dict</span>
 <span class="sd">                Further arguments are passed to the sources_colormap function.</span>
@@ -662,13 +666,15 @@
         <span class="c1"># Update variables :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tcontribute</span> <span class="o">=</span> <span class="n">contribute</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tprojectas</span> <span class="o">=</span> <span class="s1">&#39;activity&#39;</span>
         <span class="c1"># Colormap control :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sources_colormap</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># Run the corticale projection :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sourcesProjection</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="userfcn.cortical_repartition"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_repartition">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_repartition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="userfcn.cortical_repartition"><a class="viewcode-back" href="../../../vbfunctions.html#visbrain.brain.user.userfcn.cortical_repartition">[docs]</a>    <span class="k">def</span> <span class="nf">cortical_repartition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">project_on</span><span class="o">=</span><span class="s1">&#39;brain&#39;</span><span class="p">,</span>
+                             <span class="n">contribute</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the number of contributing sources per vertex.</span>
 
 <span class="sd">        Kargs:</span>
@@ -679,6 +685,9 @@
 <span class="sd">                Define on which object to project the sources repartition.</span>
 <span class="sd">                Chose either &#39;brain&#39; for projecting onto the brain or &#39;roi&#39;</span>
 <span class="sd">                to project on region of interest (if defined).</span>
+
+<span class="sd">            contribute: bool, optional, (def: False)</span>
+<span class="sd">                Specify if sources contribute on both hemisphere.</span>
 
 <span class="sd">            kwargs: dict</span>
 <span class="sd">                Further arguments are passed to the sources_colormap function.</span>
@@ -698,6 +707,7 @@
         <span class="c1"># Update variables :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tradius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tprojecton</span> <span class="o">=</span> <span class="n">project_on</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tcontribute</span> <span class="o">=</span> <span class="n">contribute</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tprojectas</span> <span class="o">=</span> <span class="s1">&#39;repartition&#39;</span>
         <span class="c1"># Colormap control :</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sources_colormap</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1049,7 +1059,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.2.1',
+            VERSION:'0.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
