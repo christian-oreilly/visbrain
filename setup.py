@@ -19,7 +19,7 @@ setup(
         'pillow',
         'matplotlib<=1.5.1',
         'pyopengl',
-        'vispy>=0.5',
+        'vispy>=0.5.0.dev0',
     ],
     dependency_links=[],
     author='Etienne Combrisson',
