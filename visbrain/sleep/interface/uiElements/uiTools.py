@@ -1,8 +1,8 @@
 """Main class for sleep tools managment."""
 
 import numpy as np
-from PyQt4 import QtGui
-from ....utils import (rereferencing, bipolarization, find_nonEEG,
+from PyQt5 import QtWidgets
+from ....utils import (rereferencing, bipolarization, find_non_eeg,
                        commonaverage, id)
 
 __all__ = ['uiTools']
@@ -14,7 +14,7 @@ class uiTools(object):
     def __init__(self):
         """Init."""
         # Find non-eeg channels :
-        self._noneeg = find_nonEEG(self._channels)
+        self._noneeg = find_non_eeg(self._channels)
         # =====================================================================
         # RE-REFERENCING
         # =====================================================================
@@ -24,13 +24,13 @@ class uiTools(object):
         for i, k in enumerate(self._channels):
             if not self._noneeg[i]:
                 # Add a checkbox to the scrolling panel :
-                box = QtGui.QCheckBox(self._PanScrollChan)
+                box = QtWidgets.QCheckBox(self._PanScrollChan)
                 # Name checkbox with channel name :
                 box.setText(k)
                 # Get it :
                 self._reChecks.append(box)
                 # Add checkbox to the grid :
-                self._ToolsRefIgnGrd.addWidget(self._reChecks[i], i, 0, 1, 1)
+                self._ToolsRefIgnGrd.addWidget(box, i, 0, 1, 1)
         # Connections :
         self._ToolsRefIgn.clicked.connect(self._fcn_refChanIgnore)
         self._ToolsRefLst.addItems(np.array(self._channels)[~self._noneeg])
@@ -107,8 +107,7 @@ class uiTools(object):
 
         # Update and clear detections :
         self._DetectLocations.setRowCount(0)
-        self._DetectChans.clear()
-        self._DetectTypes.clear()
+        self._DetectChanSw.clear()
         self._detect.update_keys(self._channels)
         self._detect.reset()
 

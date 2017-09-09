@@ -1,68 +1,95 @@
+.. image:: https://travis-ci.org/EtienneCmb/visbrain.svg?branch=master
+    :target: https://travis-ci.org/EtienneCmb/visbrain
+
+.. image:: https://codecov.io/gh/EtienneCmb/visbrain/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/EtienneCmb/visbrain
+
+.. image:: https://badge.fury.io/py/visbrain.svg
+  :target: https://badge.fury.io/py/visbrain
+
+.. Levels :
+.. # Main title
+.. * Tile 1
+.. = Title 2
+.. - Title 3
+.. ~ Title 4
+.. ^ Title 5
+.. + Title 6
+
 Visbrain documentation
 ######################
 
-Visbrain is a python package in development and it's dedicated to neuroscience visualization tools. Here is the list of the current modules :
+Visbrain is a python 3 package dedicated to multi-purpose neuroscience visualization tools. Here is the list of the current modules :
 
-* :ref:`brain` : plot your data onto a 3D MNI brain control it via the graphical interface
-* :ref:`Sleep` : display sleep data, perform spindles / REM / peaks / slow waves / K-complex detection and live hypnogram edition
-* :ref:`Ndviz` : inspect data your n-dimentional data.
-* :ref:`Figure` : arange exported pictures in a grid, add colorbar and save a paper ready figure.
+.. figure::  /picture/visbrain_readme.png
+   :align:   center
 
-Installation:
-*************
+* :ref:`Brain` : visualize EEG/MEG/Intracranial data, connectivity in a standard MNI 3D brain (see `Brain examples <http://visbrain.org/auto_examples/index.html#brain-examples>`_).
+* :ref:`Sleep` : visualize polysomnographic data and hypnogram edition (see `Sleep examples <http://visbrain.org/auto_examples/index.html#sleep-examples>`_).
+* :ref:`topo` : display topographical maps (see `Topo examples <http://visbrain.org/auto_examples/index.html#topoplot-examples>`_).
+* :ref:`Ndviz` : visualize multidimensional data and basic plotting forms (see `Ndviz examples <http://visbrain.org/auto_examples/index.html#ndviz-examples>`_).
+* :ref:`Figure` : figure-layout for high-quality publication-like figures (see `Figure examples <http://visbrain.org/auto_examples/index.html#figure-examples>`_).
+* :ref:`colorbar` : colorbar editor (see `Colorbar examples <http://visbrain.org/auto_examples/index.html#colorbar-examples>`_).
 
-First, visbrain use PyQt4 which means that you need to use a python version under 3.5.2. The same for the matplotlib version (<= 1.5.1). Then you need to install VisPy, which is a Python library for interactive scientific visualization. In order to install this package's dependencies (OpenGL), checkout this `installation guide <http://vispy.org/installation.html>`_. You'll need to install the developper version of VisPy.
+See the :ref:`ChangelogFutur`.
 
-Environnement configuration and visbrain installation on windows and python 3 :
+Installation
+************
 
-.. code-block:: bash
+Dependencies
+============
 
-    conda create --yes -n visbrain python=3.5 anaconda
-    activate visbrain
-    git clone https://github.com/EtienneCmb/visbrain.git visbrain
-    git clone https://github.com/vispy/vispy vispy
-    cd vispy
-    python setup.py install
-    cd ..\visbrain
-    pip install . --no-deps
-    conda install --yes pyqt=4
+Here's the list of visbrain's dependencies :
 
-What's new?
-***********
+* Numpy
+* Scipy
+* Vispy : fast graphics rendering
+* Matplotlib : mainly for colors and colormaps integration
+* PyQt5 : Graphical User Interface components
+* Pillow : for screenshots and image file format support.
 
-* New in version v0.2.3
+We also strongly recommend to install *pyopengl* :
 
-  * Sleep
+.. code-block:: shell
 
-    * New re-referencing method (common average)
-    * Detection improvements
-    * Add link to script and datasets to the doc
+    pip install PyOpenGL PyOpenGL_accelerate
 
-* New in version v0.2.2
-  
-  * Brain
+PyQt5 version
+=============
 
-    * Bug fixing
+For the PyQt5 version, Matplotlib's version should be >= 1.5.5. If PyQt is not installed, run either **pip install pyqt5** or **conda install pyqt**. Then, in a terminal run :
 
-  * Sleep
+.. code-block:: shell
 
-    * Bug fixing
-    * Save and load GUI configuration
-    * Control the sleep stage order using the href input parameter
-    * Enable/disable the drag and drop on load
-    * Better Black and white hypnogram exportation
-    * New shortcuts
+    pip install -e git+https://github.com/vispy/vispy#egg=vispy-dev
+
+Finally, install Visbrain :
+
+.. code-block:: shell
+
+    pip install visbain
+
+Develop mode
+============
+
+.. code-block:: shell
+
+    git clone git@github.com:EtienneCmb/visbrain.git visbrain/
+    cd visbrain/
+    pip install -r requirements.txt
+    python setup.py develop 
+
 
 Contents:
 *********
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
-   brain
-   sleep
-   ndviz
-   figure
+   community
+   documentation
+   auto_examples/index.rst
+   changelog_futur
 
 
 Indices and tables

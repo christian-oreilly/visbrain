@@ -5,7 +5,7 @@ The following elements are initialized :
     * Sources : deep points inside / over the brain. They can materialized
     intracranial electrodes, MEG / EEG sensors...
     * Connectivity : straight lines which connect the deep sources.
-    * Areas : deep structures can be added (like brodmann areas or gyrus...).
+    * Roi : deep structures can be added (like brodmann areas or gyrus...).
     This can be for processing (like projecting sources activity on it),
     educational or simply for visualiation purpose.
     * Colorbar : initialize the colorbar elements.
@@ -15,17 +15,19 @@ The following elements are initialized :
     can have access to the previously defined elements.
 """
 
-from vispy.scene import Node
+from vispy import scene
 
 from .AtlasBase import AtlasBase
 from .SourcesBase import SourcesBase
 from .ConnectBase import ConnectBase
-from .CbarBase import CbarBase
-from .AreaBase import AreaBase
+from .TimeSeriesBase import TimeSeriesBase
+from .PicBase import PicBase
+from .VolumeBase import VolumeBase
 from .projection import Projections
+from ...utils import toggle_enable_tab
 
 
-class base(CbarBase, Projections):
+class base(Projections):
     """Initialize Brain objects.
 
     Initialize sources / connectivity / areas / colorbar / projections.
@@ -34,25 +36,20 @@ class base(CbarBase, Projections):
     GUI has to be deactivate).
     """
 
-    def __init__(self, canvas, progressbar, **kwargs):
+    def __init__(self, canvas, parent_sp, progressbar, **kwargs):
         """Init."""
         # ---------- Initialize base ----------
         # Get progress bar :
         self.progressbar = progressbar
 
-        # Initialize brain, sources and connectivity objects and put them in
-        # the relevant attribute :
+        # Initialize visbrain objects :
         self.atlas = AtlasBase(**kwargs)
+        self.volume = VolumeBase(parent_sp=parent_sp)
         self.sources = SourcesBase(**kwargs)
         self.connect = ConnectBase(_xyz=self.sources.xyz,
                                    c_xyz=self.sources.xyz, **kwargs)
-        self.area = AreaBase(scale_factor=self.atlas._scaleMax,
-                             name='NoneArea', select=None, color='#ab4642')
-
-        # Initialize colorbar base  (by default, with sources base):
-        self.cb = CbarBase(self.view.cbwc, cb_fontcolor=self._cbfontcolor,
-                           cb_fontsize=self._cbfontsize,
-                           cb_label=self._cblabel, **self.sources._cb)
+        self.tseries = TimeSeriesBase(ts_xyz=self.sources.xyz, **kwargs)
+        self.pic = PicBase(pic_xyz=self.sources.xyz, **kwargs)
 
         # Add projections :
         Projections.__init__(self, **kwargs)
@@ -63,11 +60,16 @@ class base(CbarBase, Projections):
         # corresponding object.
 
         # Sources panel:
-        if self.sources.mesh.name is 'NoneSources':
-            self.QuickSettings.setTabEnabled(2, False)
-            self.QuickSettings.setTabEnabled(3, False)
-            self.QuickSettings.setTabEnabled(5, False)
+        if self.sources.name is 'NoneSources':
+            # Disable menu :
+            self.menuDispSources.setChecked(False)
+            self.menuDispSources.setEnabled(False)
             self.menuTransform.setEnabled(False)
+            # Disable source/connect/cbar tabs :
+            toggle_enable_tab(self.QuickSettings, 'Sources', False)
+            toggle_enable_tab(self.QuickSettings, 'Connect', False)
+            toggle_enable_tab(self.QuickSettings, 'Cbar', False)
+            # Disable transparency on sources :
             self.o_Sources.setEnabled(False)
             self.o_Sources.setChecked(False)
 
@@ -77,10 +79,21 @@ class base(CbarBase, Projections):
             self.o_Text.setChecked(False)
             self.grpText.setEnabled(False)
 
+        # Time-series panel :
+        if self.tseries.mesh.name == 'NoneTimeSeries':
+            self.grpTs.setEnabled(False)
+
+        # Pictures panel :
+        if self.pic.mesh.name == 'NonePic':
+            self.grpPic.setEnabled(False)
+
         # Connectivity panel:
-        if self.connect.mesh.name == 'NoneConnect':
-            self.QuickSettings.setTabEnabled(3, False)
-            self.cmapConnect.setEnabled(False)
+        if self.connect.name == 'NoneConnect':
+            # Disable menu :
+            self.menuDispConnect.setEnabled(False)
+            self.menuDispConnect.setChecked(False)
+            # Disable Connect tab :
+            toggle_enable_tab(self.QuickSettings, 'Connect', False)
             self.o_Connect.setEnabled(False)
             self.o_Connect.setChecked(False)
         elif self.connect.colval is not None:
@@ -93,13 +106,19 @@ class base(CbarBase, Projections):
         # can be applied to all elements.
 
         # Create a root node :
-        self._vbNode = Node(name='visbrain')
+        self._vbNode = scene.Node(name='visbrain')
 
         # Make this root node the parent of others Brain objects :
-        self.atlas.mesh.parent = self._vbNode
+        self.volume.parent = self._vbNode
         self.sources.mesh.parent = self._vbNode
         self.connect.mesh.parent = self._vbNode
         self.sources.stextmesh.parent = self._vbNode
+        self.tseries.mesh.parent = self._vbNode
+        self.pic.mesh.parent = self._vbNode
+        self.atlas.mesh.parent = self._vbNode
+
+        # Add XYZ axis (debugging : x=red, y=green, z=blue)
+        # scene.visuals.XYZAxis(parent=self._vbNode)
 
         # Add a rescale / translate transformation to the Node :
-        self._vbNode.transform = self.atlas.transform
+        self._vbNode.transform = self.atlas.mesh._btransform

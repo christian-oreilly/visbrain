@@ -2,7 +2,7 @@
 import numpy as np
 import sip
 
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
 import sys
 import os
 from warnings import warn
@@ -13,81 +13,77 @@ import vispy.scene.cameras as viscam
 from .interface import uiInit, uiElements
 from .visuals import visuals
 from .tools import Tools
-from ..utils import (FixedCam, load_sleepdataset, load_hypno, color2vb,
-                     ShortcutPopup, check_downsampling)
+from ..utils import (FixedCam, load_sleepdataset, color2vb, check_downsampling,
+                     MouseEventControl, set_widget_size)
+from ..io import dialogLoad, read_hypno
 
 sip.setdestroyonexit(False)
 
 
-class Sleep(uiInit, visuals, uiElements, Tools):
+class Sleep(uiInit, visuals, uiElements, Tools, MouseEventControl):
     """Visualize and edit sleep data.
 
     Use this module to :
-        - Load .eeg (Brainvision and ELAN), .edf or directly raw data.
-        - Visualize polysomnographic data, spectrogram
-        - Load, edit and save hypnogram from the interface
-        - Perform several events detection
-        - Further signal processing tools (de-mean, de-trend and filtering)
-        - Topographic data visualization
+
+        * Load .eeg (Brainvision and ELAN), .edf or directly raw data.
+        * Visualize polysomnographic data, spectrogram
+        * Load, edit and save hypnogram from the interface
+        * Perform several events detection
+        * Further signal processing tools (de-mean, de-trend and filtering)
+        * Topographic data visualization
+
     Sleep has been developped in collaboration with Raphael Vallat.
 
-    Kargs:
-        file: string, optional, (def: None)
-            Path to the data file (.eeg, .trc or .edf).
-
-        hypno_file: string, optional, (def: None)
-            Path to the hypnogram file (.hyp, .txt or .csv)
-
-        config_file: string, optional, (def: None)
-            Path to the configuration file (.txt)
-
-        data: np.ndarray, optional, (def: None)
-            Array of data of shape (n_channels, n_pts)
-
-        channels: list, optional, (def: None)
-            List of channel names. The length of this list must be n_channels.
-
-        sf: float, optional, (def: None)
-            The sampling frequency of raw data.
-
-        hypno: np.ndarray, optional, (def: None)
-            Hypnogram data. Should be a raw vector of shape (n_pts,)
-
-        downsample: float, optional, (def: 100.)
-            The downsampling frequency for the data and hypnogram raw data.
-
-        axis: bool, optional, (def: Fals)
-            Specify if each axis have to contains its own axis. Be carefull
-            with this option, the rendering can be much slower.
-
-        line: string, optional, (def: 'gl')
-            Specify the line rendering. Use 'gl' for the default line (fast) or
-            'agg' for smooth lines. This option might not works on some
-            plateforms.
-
-        hypedit: bool, optional, (def: False)
-            Enable the drag and drop hypnogram edition.
-
-        href: list, optional, (def: ['art', 'wake', 'rem', 'n1', 'n2', 'n3'])
-            List of sleep stages. This list can be used to changed the display
-            order into the GUI.
+    Parameters
+    ----------
+    file : string | None
+        Path to the data file (.eeg, .trc or .edf).
+    hypno_file : string | None
+        Path to the hypnogram file (.hyp, .txt or .csv)
+    config_file : string | None
+        Path to the configuration file (.txt)
+    annotation_file : string | None
+        Path to the annotation file (.txt, .csv). Alternatively, you can pass
+        an annotation instance of MNE.
+    data : array_like | None
+        Array of data of shape (n_channels, n_pts)
+    channels : list | None
+        List of channel names. The length of this list must be n_channels.
+    sf : float | None
+        The sampling frequency of raw data.
+    hypno : array_like | None
+        Hypnogram data. Should be a raw vector of shape (n_pts,)
+    downsample : float | 100.
+        The downsampling frequency for the data and hypnogram raw data.
+    axis : bool | Fals
+        Specify if each axis have to contains its own axis. Be carefull
+        with this option, the rendering can be much slower.
+    line : string | 'gl'
+        Specify the line rendering. Use 'gl' for the default line (fast) or
+        'agg' for smooth lines. This option might not works on some
+        plateforms.
+    hedit : bool | False
+        Enable the drag and drop hypnogram edition.
+    href : list | ['art', 'wake', 'rem', 'n1', 'n2', 'n3']
+        List of sleep stages. This list can be used to changed the display
+        order into the GUI.
     """
 
     def __init__(self, file=None, hypno_file=None, config_file=None,
-                 data=None, channels=None, sf=None, hypno=None,
-                 downsample=100., axis=False, line='gl', hypedit=False,
-                 href=['art', 'wake', 'rem', 'n1', 'n2', 'n3']):
+                 annotation_file=None, data=None, channels=None, sf=None,
+                 hypno=None, downsample=100., axis=False, line='gl',
+                 hedit=False, href=['art', 'wake', 'rem', 'n1', 'n2', 'n3']):
         """Init."""
         # ====================== APP CREATION ======================
         # Create the app and initialize all graphical elements :
-        self._app = QtGui.QApplication(sys.argv)
+        self._app = QtWidgets.QApplication(sys.argv)
         uiInit.__init__(self)
-
-        # Shortcuts popup window :
-        self._shpopup = ShortcutPopup()
 
         # Set default GUI state :
         self.setDefaultState()
+
+        # Mouse control :
+        MouseEventControl.__init__(self)
 
         # ====================== LOAD FILE ======================
         # Load file and convert if needed :
@@ -95,18 +91,15 @@ class Sleep(uiInit, visuals, uiElements, Tools):
             # --------------- Qt Dialog ---------------
             if (file is None) or not isinstance(file, str):
                 # Dialog window for the main dataset :
-                file = QtGui.QFileDialog.getOpenFileName(
-                    self, "Open dataset", "", "BrainVision /Elan (*.eeg);;"
-                    "Edf (*.edf);;Micromed (*.trc)")
-                file = str(file)  # py2
+                file = dialogLoad(self, "Open dataset", '',
+                                  "BrainVision/Elan (*.eeg);;Edf (*.edf);;"
+                                  "Micromed (*.trc);;All files (*.*)")
                 # Get the user path :
                 upath = os.path.split(file)[0]
                 # Dialog window for hypnogram :
-                hypno_file = QtGui.QFileDialog.getOpenFileName(
-                    self, "Open hypnogram", upath, "Elan (*.hyp);;"
-                    "Text file (*.txt);;""CSV file (*.csv);;All files "
-                    "(*.*)")
-                hypno_file = str(hypno_file)  # py2
+                hypno_file = dialogLoad(self, "Open hypnogram", upath,
+                                        "Elan (*.hyp);;Text file (*.txt);;"
+                                        "CSV file (*.csv);;All files (*.*)")
 
             # Load dataset :
             sf, downsample, data, channels, N, start_time = load_sleepdataset(
@@ -122,11 +115,11 @@ class Sleep(uiInit, visuals, uiElements, Tools):
             # Load hypnogram :
             if hypno_file:
                 # Load the hypnogram :
-                hypno = load_hypno(hypno_file, npts)
+                hypno = read_hypno(hypno_file, npts)
 
             # Change the sampling frequency if down-sample :
             if downsample is not None:
-                time = time[::int(np.round(sf/downsample))]
+                time = time[::int(np.round(sf / downsample))]
                 sf = downsample
                 downsample = None
 
@@ -142,14 +135,15 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # ====================== VARIABLES ======================
         # Check all data :
         self._file = file
-        (self._sf, self._data, self._hypno, self._time,
+        self._config_file = config_file
+        self._annot_file = annotation_file
+        self._annot_mark = np.array([])
+        (self._sf, self._data, self._channels, self._hypno, self._time,
          self._href, self._hconv) = self._check_data(sf, data, channels, hypno,
                                                      downsample, time, href)
         self._hconvinv = {v: k for k, v in self._hconv.items()}
-        self._channels = [k.strip().replace(' ', '').split('.')[
-            0] for k in channels]
         self._ax = axis
-        self._enabhypedit = hypedit
+        self._enabhypedit = hedit
         # ---------- Default line width ----------
         self._linemeth = line
         self._lw = 1.
@@ -203,11 +197,6 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # ====================== FUNCTIONS ON LOAD ======================
         self._fcnsOnCreation()
 
-        # Load config file
-        if config_file:
-            self._config_file = config_file
-            self.loadConfig()
-
     def __len__(self):
         """Return the number of channels."""
         return len(self._channels)
@@ -223,46 +212,40 @@ class Sleep(uiInit, visuals, uiElements, Tools):
                     time=None, href=None):
         """Check data, hypnogram, channels and sample frequency after loading.
 
-        Args:
-            sf: float
-                The sampling frequency.
+        Parameters
+        ----------
+        sf: float
+            The sampling frequency.
+        data: array_like
+            The data to use. Must be a (n_channels, n_pts) array.
+        channel : list
+            List of string where each element refer to a channel names.
+            The length of this list must be n_channels.
+        hypno : array_like | None
+            A row vector of shape (npts,) containing hypnogram values.
+            If the hypnogram is None, this functions returns a row vector
+            fill with zeros.
+        time : array_like | None
+            The time vector to use. If the time vector is None, it will be
+            inferred from data length (be carefull to time consistency).
+        href : list | None
+            List of sleep stages. This list can be used to changed the
+            display order into the GUI.
 
-            data: np.ndarray
-                The data to use. Must be a (n_channels, n_pts) array.
-
-            channel: list
-                List of string where each element refer to a channel names.
-                The length of this list must be n_channels.
-
-        Kargs:
-            hypno: np.ndarray, optional, (def: None)
-                A row vector of shape (npts,) containing hypnogram values.
-                If the hypnogram is None, this functions returns a row vector
-                fill with zeros.
-
-            time: np.ndarray, optional, (def: None)
-                The time vector to use. If the time vector is None, it will be
-                inferred from data length (be carefull to time consistency).
-
-            href: list, optional, (def: None)
-                List of sleep stages. This list can be used to changed the
-                display order into the GUI.
-
-        Returns:
-            sf: float
-                The sampling frequency
-
-            data: np.ndarray
-                The float 32 data with a shape of (n_channels, n_pts).
-
-            hypno: np.ndarray
-                The float 32 hypnogram with a shape of (npts,).
-
-            time: np.ndarray
-                The time vector with a shape of (npts,).
-
-            href: list, optional, (def: default)
-                List of checked hypno reference.
+        Returns
+        -------
+        sf: float
+            The sampling frequency
+        data : array_like
+            The float 32 data with a shape of (n_channels, n_pts).
+        channels : list
+            List of cleaned channel names.
+        hypno : array_like
+            The float 32 hypnogram with a shape of (npts,).
+        time : array_like
+            The time vector with a shape of (npts,).
+        href : list | default
+            List of checked hypno reference.
         """
         # ========================== CHECKING ==========================
         nchan = len(channels)
@@ -284,7 +267,7 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # Channels checking :
         if nchan not in data.shape:
             raise ValueError("Incorrect data shape. The number of channels "
-                             "("+str(nchan)+') can not be found.')
+                             "(" + str(nchan) + ') can not be found.')
         # href checking :
         absref = ['art', 'wake', 'n1', 'n2', 'n3', 'rem']
         absint = [-1, 0, 1, 2, 3, 4]
@@ -296,7 +279,7 @@ class Sleep(uiInit, visuals, uiElements, Tools):
             # Check that all stage are present :
             for k in absref:
                 if k not in href:
-                    raise ValueError(k+" not found in href.")
+                    raise ValueError(k + " not found in href.")
             # Force capitalize :
             href = [k.capitalize() for k in href]
             href[href.index('Rem')] = 'REM'
@@ -322,6 +305,19 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # Define time vector if needed :
         if time is None:
             time = np.arange(npts, dtype=np.float32) / sf
+        # Clean channel names :
+        patterns = ['eeg', 'EEG']
+        chanc = []
+        for k in channels:
+            # Remove informations after . :
+            k = k.split('.')[0]
+            # Exclude patterns :
+            for i in patterns:
+                k = k.replace(i, '')
+            # Remove space :
+            k = k.replace(' ', '')
+            k = k.strip()
+            chanc.append(k)
 
         # ========================== DOWN-SAMPLING ==========================
         if isinstance(downsample, (int, float)):
@@ -334,7 +330,12 @@ class Sleep(uiInit, visuals, uiElements, Tools):
             # Replace sampling frequency :
             sf = float(downsample)
 
-        # ========================== CONVERSION ==========================
+        # =========================== SCALING =============================
+        # Check amplitude of the data and if necessary apply re-scaling
+        if np.abs(np.ptp(data, 0).mean()) < 0.1:
+            data *= 1e6
+
+        # ========================== CONVERSION ===========================
         # Convert data and hypno to be contiguous and float 32 (for vispy):
         if not data.flags['C_CONTIGUOUS']:
             data = np.ascontiguousarray(data, dtype=np.float32)
@@ -345,7 +346,7 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         if hypno.dtype != np.float32:
             hypno = hypno.astype(np.float32, copy=False)
 
-        return sf, data, hypno, time, href, conv
+        return sf, data, chanc, hypno, time, href, conv
 
     ###########################################################################
     # SUB-FONCTIONS
@@ -359,6 +360,7 @@ class Sleep(uiInit, visuals, uiElements, Tools):
     def setDefaultState(self):
         """Set the default window state."""
         # ================= TAB =================
+        set_widget_size(self._app, self.q_widget, 23)
         self.QuickSettings.setCurrentIndex(0)
         self.toolBox.setCurrentIndex(1)
         self.toolBox_2.setCurrentIndex(0)
@@ -367,7 +369,7 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         # ================= ICON =================
         pathfile = sys.modules[__name__].__file__.split('sleep.py')[0]
         app_icon = QtGui.QIcon()
-        app_icon.addFile(os.path.join(pathfile, 'ico/sleep.svg'))
+        app_icon.addFile(os.path.join(pathfile, 'sleep_icon.svg'))
         self.setWindowIcon(app_icon)
 
     def _camCreation(self):
@@ -394,10 +396,10 @@ class Sleep(uiInit, visuals, uiElements, Tools):
                          self._topocam, self._timecam)
 
     def _fcnsOnCreation(self):
-        """Functions that need to be applied on creation."""
+        """Applied on creation."""
         self._fcn_sliderMove()
         self._chanChecks[0].setChecked(True)
-        self._hypLabel.setVisible(self._PanHypViz.isChecked())
+        self._hypLabel.setVisible(self.menuDispHypno.isChecked())
         self._fcn_chanViz()
         self._fcn_chanSymAmp()
         self._fcn_infoUpdate()
@@ -406,6 +408,11 @@ class Sleep(uiInit, visuals, uiElements, Tools):
         self._SpecW.setVisible(True)
         self._HypW.setVisible(True)
         self._TimeAxisW.setVisible(True)
+        # File to load :
+        if self._config_file is not None:  # Config file
+            self.loadConfig(filename=self._config_file)
+        if self._annot_file is not None:   # Annotation file
+            self.loadAnnotationTable(filename=self._annot_file)
 
     def show(self):
         """Display the graphical user interface."""

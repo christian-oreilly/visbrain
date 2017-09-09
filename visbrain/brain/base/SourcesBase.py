@@ -14,27 +14,28 @@ from scipy.spatial.distance import cdist
 import vispy.scene.visuals as visu
 import vispy.visuals.transforms as vist
 
-from ...utils import color2vb, normalize, _colormap
+from ...utils import color2vb, normalize, tal2mni
+from ...visuals import CbarArgs
 
-__all__ = ['SourcesBase']
+__all__ = ('SourcesBase')
 
 
-class SourcesBase(_colormap):
+class SourcesBase(CbarArgs):
     """Initialize the source object and to add some necessary functions.
 
     This class can be used for like plotting, loading... Each source's input
     start with 's_'. Other arguments (**kwargs) are ignored. This class is also
-    responsible for associated text of each source.
+    responsible for associated text to each source.
     """
 
     def __init__(self, s_xyz=None, s_data=None, s_color='#ab4652',
                  s_opacity=1.0, s_radiusmin=5.0, s_radiusmax=10.0,
                  s_edgecolor=None, s_edgewidth=0.6, s_scaling=False,
-                 s_text=None, s_symbol='disc', s_textcolor='black',
+                 s_text=None, s_symbol='disc', s_textcolor='white',
                  s_textsize=3, s_textshift=(0, 2, 0), s_mask=None,
-                 s_maskcolor='gray', s_cmap='inferno', s_cmap_clim=None,
-                 s_cmap_vmin=None, s_cmap_vmax=None, s_cmap_under=None,
-                 s_cmap_over=None, s_projecton='surface', **kwargs):
+                 s_maskcolor='gray', s_cmap='inferno', s_clim=(0., 1.),
+                 s_vmin=None, s_vmax=None, s_under=None, s_over=None,
+                 s_projecton='surface', s_system='mni', **kwargs):
         """Init."""
         # Initialize elements :
         self.xyz = s_xyz
@@ -54,12 +55,9 @@ class SourcesBase(_colormap):
         self.smask = s_mask
         self.smaskcolor = color2vb(s_maskcolor)
         self.projecton = s_projecton
+        self.system = s_system
         self._defcolor = 'slateblue'
         self._rescale = 3.0
-
-        # Initialize colorbar elements :
-        _colormap.__init__(self, s_cmap, s_cmap_clim, s_cmap_vmin, s_cmap_vmax,
-                           s_cmap_under, s_cmap_over, self.data)
 
         # Plot :
         if self.xyz is not None:
@@ -70,12 +68,21 @@ class SourcesBase(_colormap):
             self.mesh = visu.Markers(name='NoneSources')
             self.stextmesh = visu.Text(name='NoneText')
 
+        # Vmin/Vmax only active if not None and in [clim[0], clim[1]] :
+        isvmin = (s_vmin is not None) and (
+            s_clim[0] < s_vmin < s_clim[1])
+        isvmax = (s_vmax is not None) and (
+            s_clim[0] < s_vmax < s_clim[1])
+        # Initialize colorbar elements :
+        CbarArgs.__init__(self, s_cmap, s_clim, isvmin, s_vmin,
+                          isvmax, s_vmax, s_under, s_over)
+
     def __len__(self):
         """Get the length of non-masked sources."""
         return len(np.where(np.logical_not(self.data.mask))[0])
 
     def __iter__(self):
-        """Iterations over sources coordinates."""
+        """Iterate over sources coordinates."""
         for k in range(len(self)):
             yield np.ravel(self.xyz[k, :])
 
@@ -107,6 +114,11 @@ class SourcesBase(_colormap):
             self.xyz = self.xyz.T
         self.xyz = self.xyz
         self.nSources = self.xyz.shape[0]
+        # Check coordinate system :
+        if self.system not in ['mni', 'tal']:
+            raise ValueError("The s_system must either be 'mni' or 'tal'.")
+        elif self.system is 'tal':
+            self.xyz = tal2mni(self.xyz)
 
         # ======================== Check color ========================
         # Simple string :
@@ -125,19 +137,21 @@ class SourcesBase(_colormap):
                     self.sColor = self.sColor.T
         # Array of colors :
         elif isinstance(self.color, np.ndarray):
-            if self.nSource not in self.color.shape:
-                raise ValueError("color for sources must be a (N, 3) array "
-                                 "(for rgb) or (N, 4) for rgba.")
-            else:
+            if self.color.shape == (1, 3) or self.color.shape == (1, 4):
+                self.sColor = np.tile(self.color, (self.nSources, 1))
+            elif self.nSources in self.color.shape:
                 if (self.color.shape[1] is not 4):
                     self.color = self.color.T
                 self.sColor = self.color
+            else:
+                raise ValueError("color for sources must be a (N, 3) array "
+                                 "(for rgb) or (N, 4) for rgba.")
 
         # ======================== Check mask ========================
         # Check mask :
         if self.smask is not None:
             if (len(self.smask) != self.nSources) or not isinstance(
-                                                    self.smask, np.ndarray):
+                    self.smask, np.ndarray):
                 raise ValueError("The mask must be an array of bool with the "
                                  "same length as the number of electrodes")
             else:
@@ -562,7 +576,7 @@ class SourcesBase(_colormap):
 
             # Apply a transformation to text elements to not cover sources :
             self.stextmesh.transform = vist.STTransform(
-                                                    translate=self.stextshift)
+                translate=self.stextshift)
         else:
             self.stextmesh = visu.Text(name='NoneText')
 
@@ -587,3 +601,9 @@ class SourcesBase(_colormap):
             self.stextmesh.color = self.stextcolor
             self.stextmesh.font_size = self.stextsize
             self.stextmesh.update()
+
+    # ----------- NAME -----------
+    @property
+    def name(self):
+        """Get the name value."""
+        return self.mesh.name

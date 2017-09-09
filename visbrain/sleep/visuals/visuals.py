@@ -11,10 +11,11 @@ from vispy import scene
 import vispy.visuals.transforms as vist
 
 from .marker import Markers
-from ...utils import (array2colormap, color2vb, TopoPlot, PrepareData)
+from ...utils import (array2colormap, color2vb, PrepareData)
+from ...utils.sleep.event import _index_to_events
+from ...visuals import TopoMesh
 
-
-__all__ = ["visuals"]
+__all__ = ("visuals")
 
 
 """
@@ -70,7 +71,7 @@ class Detection(object):
             yield k
 
     def __bool__(self):
-        pass
+        return any([bool(self[k]['index'].size) for k in self])
 
     def __setitem__(self, key, value):
         self.dict[key] = value
@@ -83,24 +84,29 @@ class Detection(object):
 
         Args:
             data: np.ndarray
-                Data vector for a spcific channel.
+                Data vector for a spcefic channel.
         """
         for num, k in enumerate(self):
             if self[k]['index'].size:
-                # Get index and channel number :
-                index = self[k]['index']
+                # Get the channel number :
                 nb = self.chans.index(k[0])
-                # Build position vector :
-                z = np.full(index.shape, 2., dtype=np.float32)
-                pos = np.vstack((self.time[index], data[nb, index], z)).T
-                # Build connections :
-                connect = np.gradient(index) == 1.
-                connect[0], connect[-1] = True, False
                 # Send data :
                 if k[1] is 'Peaks':
+                    # Get index and channel number :
+                    index = self[k]['index'][:, 0]
+                    z = np.full(len(index), 2., dtype=np.float32)
+                    pos = np.vstack((self.time[index], data[nb, index], z)).T
                     self.peaks[k].set_data(pos=pos, edge_width=0.,
                                            face_color=self[k]['color'])
                 else:
+                    # Get index and channel number :
+                    index = _index_to_events(self[k]['index'])
+                    z = np.full(index.shape, 2., dtype=np.float32)
+                    # Build position vector :
+                    pos = np.vstack((self.time[index], data[nb, index], z)).T
+                    # Build connections :
+                    connect = np.gradient(index) == 1.
+                    connect[0], connect[-1] = True, False
                     self.line[k].set_data(pos=pos, width=4., connect=connect)
 
     def build_hyp(self, chan, types):
@@ -116,11 +122,7 @@ class Detection(object):
         # Get index :
         index = self[(chan, types)]['index']
         # Get only starting points :
-        if types == 'Peaks':
-            start = index
-        else:
-            start = index[np.hstack((np.gradient(index[0:-1]) != 1,
-                                     [True]))][::2]
+        start = index[:, 0]
         y = np.full_like(start, 1.5, dtype=float)
         z = np.full_like(start, -2., dtype=float)
         pos = np.vstack((self.time[start], y, z)).T
@@ -144,7 +146,7 @@ class Detection(object):
                 Detection type name.
         """
         self.hyp.visible = viz
-        if types is 'Peaks':
+        if types == 'Peaks':
             self.peaks[(chan, types)].visible = viz
         else:
             self.line[(chan, types)].visible = viz
@@ -155,11 +157,13 @@ class Detection(object):
         self[(chan, types)]['index'] = np.array([])
         # Remove data from plot :
         pos = np.full((1, 3), -10., dtype=np.float32)
-        if types is 'Peaks':
+        if types == 'Peaks':
             self.peaks[(chan, types)].set_data(pos=pos)
         else:
             self.line[(chan, types)].set_data(pos=pos,
                                               connect=np.array([False]))
+        # Remove data from hypnogram :
+        self.hyp.set_data(pos=pos)
 
     def nonzero(self):
         """Return the list of channels with non-empty detections."""
@@ -539,9 +543,9 @@ class Hypnogram(object):
         # Create a default marker (for edition):
         self.edit = Markers(parent=parent)
         # self.mesh.set_gl_state('translucent', depth_test=True)
-        self.mesh.set_gl_state('translucent')
+        self.edit.set_gl_state('translucent')
         # Add grid :
-        self.grid = scene.visuals.GridLines(color=(.1, .1, .1, 1.),
+        self.grid = scene.visuals.GridLines(color=(.7, .7, .7, 1.),
                                             scale=(30.*time[-1]/len(time), 1.),
                                             parent=parent)
         self.grid.set_gl_state('translucent')
@@ -576,11 +580,37 @@ class Hypnogram(object):
         # Build color array :
         color = np.zeros((len(data), 4), dtype=np.float32)
         for k, v in zip(self.color.keys(), self.color.values()):
+            # Set the stage color :
             color[data == k, :] = v
+        # Avoid gradient color :
+        color[1::, :] = color[0:-1, :]
         # Set data to the mesh :
         self.mesh.set_data(pos=np.vstack((time, -data)).T, width=self.width,
                            color=color)
         self.mesh.update()
+
+    def set_stage(self, stfrom, stend, stage):
+        """Add a stage in a specific interval.
+
+        This method only set the stage without updating the entire
+        hypnogram.
+
+        Args:
+            stfrom: int
+                The index where the stage start.
+
+            stend: int
+                The index where the stage end.
+
+            stage: int
+                Stage value.
+        """
+        # Convert the stage :
+        stagec = self._hconv[stage]
+        # Update color :
+        self.mesh.color[stfrom+1:stend+1, :] = self.color[stagec]
+        # Only update the needed part :
+        self.mesh.pos[stfrom:stend, 1] = -float(stagec)
 
     def set_grid(self, time, length=30., y=1.):
         """Set grid lentgh."""
@@ -671,24 +701,14 @@ class Hypnogram(object):
         elif isinstance(pos, (int, float)):
             return -self._hconvinv[-int(pos)]
 
-    def clean(self):
+    def clean(self, sf, time):
         """Clean indicators."""
-        pos = np.zeros((1, 3), dtype=np.float32)
         # Mesh :
-        self.mesh.set_data(pos=pos, color='gray')
-        self.mesh.parent = None
-        self.mesh = None
+        posmesh = np.zeros((len(self),), dtype=np.float32)
+        self.set_data(sf, posmesh, time)
         # Edit :
-        self.edit.set_data(pos=pos, face_color='gray')
-        self.edit.parent = None
-        self.edit = None
-        # Report :
-        self.report.set_data(pos=pos, face_color='gray')
-        self.report.parent = None
-        self.report = None
-        # Grid :
-        self.grid.parent = None
-        self.grid = None
+        posedit = np.full((1, 3), -10., dtype=np.float32)
+        self.edit.set_data(pos=posedit, face_color='gray')
 
     # ----------- RECT -----------
     @property
@@ -701,6 +721,51 @@ class Hypnogram(object):
         """Set rect value."""
         self._rect = value
         self._camera.rect = value
+
+
+"""
+###############################################################################
+# TOPOPLOT
+###############################################################################
+Topoplot class that inherit from the visual TopoMesh and PrepareData for
+filetring, de-meaning...
+"""
+
+
+class TopoSleep(TopoMesh, PrepareData):
+    """Topoplot for sleep data."""
+
+    def __init__(self, **kwargs):
+        # Initialize TopoMesh and PrepareData :
+        TopoMesh.__init__(self, **kwargs)
+        PrepareData.__init__(self, axis=1)
+        # Initialize data, clim, cmap and cblabel :
+        self._data = None
+        self._clim = None
+        self._cmap = None
+        self._cblabel = None
+
+    def set_sleep_topo(self, data=None, clim=None, cmap=None, cblabel=None):
+        """Send data to TopoGraphic plot."""
+        # Data :
+        if data is None:
+            data = self._data
+        self._data = data
+        # Clim :
+        if clim is None:
+            clim = self._clim
+        self._clim = clim
+        # Cmap :
+        if cmap is None:
+            cmap = self._cmap
+        self._cmap = cmap
+        # Cblabel :
+        if cblabel is None:
+            cblabel = self._cblabel
+        self._cblabel = cblabel
+
+        if data is not None:
+            self.set_data(data, cmap=cmap, cblabel=cblabel, clim=clim)
 
 
 """
@@ -734,7 +799,7 @@ class Indicator(object):
                 A tuple of two floats indicating where ylim start and ylim end.
         """
         tox = (xlim[0], ylim[0], -1.)
-        sc = (xlim[1]-xlim[0], ylim[1]-ylim[0], 1.)
+        sc = (xlim[1] - xlim[0], ylim[1] - ylim[0], 1.)
         # Move the square
         self.mesh.transform = vist.STTransform(translate=tox, scale=sc)
 
@@ -771,14 +836,20 @@ class vbShortcuts(object):
                    ('s', 'Display / hide spectrogram'),
                    ('t', 'Display / hide topoplot'),
                    ('h', 'Display / hide hypnogram'),
-                   ('p', 'Display / disable time bar'),
+                   ('p', 'Display / hide navigation bar'),
+                   ('x', 'Display / hide time axis'),
+                   ('g', 'Display / hide time grid'),
                    ('z', 'Enable / disable zooming'),
+                   ('i', 'Enable / disable indicators'),
                    ('a', 'Scoring: set current window to Art (-1)'),
                    ('w', 'Scoring: set current window to Wake (0)'),
                    ('1', 'Scoring: set current window to N1 (1)'),
                    ('2', 'Scoring: set current window to N2 (2)'),
                    ('3', 'Scoring: set current window to N3 (3)'),
                    ('r', 'Scoring: set current window to REM (4)'),
+                   ('Double clik', 'Insert annotation'),
+                   ('CTRL + left click', 'Magnify signal under the cursor'),
+                   ('CTRL + Num', 'Display the channel Num'),
                    ('CTRL + s', 'Save hypnogram'),
                    ('CTRL + t', 'Display shortcuts'),
                    ('CTRL + e', 'Display documentation'),
@@ -796,6 +867,7 @@ class vbShortcuts(object):
             """
             if event.text == ' ':
                 pass
+
             # ------------ SLIDER ------------
             elif event.text.lower() == 'n':  # Next (slider)
                 self._SlGoto.setValue(
@@ -813,34 +885,16 @@ class vbShortcuts(object):
                 self._PanAmpSym.setChecked(True)
                 self._PanAllAmpMax.setValue(self._PanAllAmpMax.value() - 5.)
 
-            # ------------  VISIBILITY ------------
-            elif event.text.lower() == 's':  # Toggle visibility on spec
-                self._PanSpecViz.setChecked(not self._PanSpecViz.isChecked())
-                self._fcn_specViz()
-
-            elif event.text.lower() == 'h':  # Toggle visibility on hypno
-                self._PanHypViz.setChecked(not self._PanHypViz.isChecked())
-                self._fcn_hypViz()
-
-            elif event.text.lower() == 'p':  # Toggle visibility time bar
-                self._slFrame.hide() if self._slFrame.isVisible(
-                                                    ) else self._slFrame.show()
-
-            elif event.text.lower() == 't':   # Toggle visibility on topo
-                self._PanTopoViz.setChecked(not self._PanTopoViz.isChecked())
-                self._fcn_topoViz()
-
-            elif event.text.lower() == 'z':  # Enable zoom
-                viz = self._PanTimeZoom.isChecked()
-                self._PanTimeZoom.setChecked(not viz)
-                self._PanHypZoom.setChecked(not viz)
-                self._PanSpecZoom.setChecked(not viz)
-                self._fcn_Zooming()
-
-            elif event.text.lower() == 'm':
+            # ------------  GRID/MAGNIFY ------------
+            elif event.text.lower() == 'm':  # Magnify
                 viz = self._slMagnify.isChecked()
                 self._slMagnify.setChecked(not viz)
                 self._fcn_sliderMagnify()
+
+            elif event.text.lower() == 'g':  # Grid
+                viz = self._slGrid.isChecked()
+                self._slGrid.setChecked(not viz)
+                self._fcn_gridToggle()
 
             # ------------ SCORING ------------
             elif event.text.lower() == 'a':
@@ -891,7 +945,22 @@ class vbShortcuts(object):
 
             :event: the trigger event
             """
-            pass
+            # Get canvas title :
+            is_sp_hyp = canvas.title in ['Hypnogram', 'Spectrogram']
+            title = canvas.title if is_sp_hyp else canvas.title.split('_')[1]
+            # Annotate the timing :
+            if is_sp_hyp:
+                cursor = self._time[-1] * event.pos[0] / canvas.size[0]
+            else:
+                val = self._SlVal.value()
+                step = self._SigSlStep.value()
+                win = self._SigWin.value()
+                tm, tM = (val * step, val * step + win)
+                cursor = tm + ((tM - tm) * event.pos[0] / canvas.size[0])
+            # Set the current tab to the annotation tab :
+            self.QuickSettings.setCurrentIndex(5)
+            # Run annotation :
+            self._fcn_annotateAdd('', (cursor, cursor), title)
 
         @canvas.events.mouse_move.connect
         def on_mouse_move(event):
@@ -899,17 +968,27 @@ class vbShortcuts(object):
 
             Magnify for all channels under cursor locations.
             """
-            if self._slMagnify.isChecked():
+            # Get mouse cursor position for the specified canvas :
+            zoom = self.menuDispZoom.isChecked()
+            if canvas.title in ['Hypnogram', 'Spectrogram'] and not zoom:
+                cursor = self._time[-1] * event.pos[0] / canvas.size[0]
+            else:
+                # Get time parameters (window, step, slider value) :
                 val = self._SlVal.value()
                 step = self._SigSlStep.value()
                 win = self._SigWin.value()
-                tm, tM = (val*step, val*step+win)
-                # tm, tM = self._time.min(), self._time.max()
+                tm, tM = (val * step, val * step + win)
+                # Convert cursor in time position :
                 cursor = tm + ((tM - tm) * event.pos[0] / canvas.size[0])
-                for i, k in self._chan:
-                    self._chan.node[i].transform.center = (cursor, 0.)
-                    k.update()
-                tm, tM = self._time.min(), self._time.max()
+                # Enable/Disable magnify :
+                if self._slMagnify.isChecked():
+                    for i, k in self._chan:
+                        self._chan.node[i].transform.center = (cursor, 0.)
+                        k.update()
+                    tm, tM = self._time.min(), self._time.max()
+            # Set time position to the cursor text :
+            cursor = np.round(cursor * 1000.) / 1000.
+            self._txtCursor.setText('Cursor : ' + str(cursor) + ' sec')
 
         @canvas.events.mouse_press.connect
         def on_mouse_press(event):
@@ -917,9 +996,11 @@ class vbShortcuts(object):
 
             Magnigy the signal under the mouse cursor only.
             """
-            # Get canvas name :
+            # ------------- MAGNIFY : CTRL + left click -------------
             name = canvas.title
-            condition = bool(name.find('Canvas') + 1)
+            isleft = self._is_left_click(event)
+            isCtrl = self._is_modifier(event, 'Control')
+            condition = bool(name.find('Canvas') + 1) and isleft and isCtrl
             if condition and not self._slMagnify.isChecked():
                 # Get channel name :
                 chan = name.split('Canvas_')[1]
@@ -929,7 +1010,7 @@ class vbShortcuts(object):
                 val = self._SlVal.value()
                 step = self._SigSlStep.value()
                 win = self._SigWin.value()
-                tm, tM = (val*step, val*step+win)
+                tm, tM = (val * step, val * step + win)
                 cursor = tm + ((tM - tm) * event.pos[0] / canvas.size[0])
                 # Build transformation :
                 kwargs = {'center': (cursor, 0.), 'radii': (3, 15), 'mag': 10}
@@ -984,10 +1065,12 @@ class visuals(vbShortcuts):
                                  self._chan.node, self._hypCanvas.wc.scene)
 
         # =================== TOPOPLOT ===================
-        self._topo = TopoPlot(chans=self._channels, camera=cameras[3],
-                              parent=self._topoCanvas.wc.scene)
-        self._topo.set_cmap(clim=(-1., 1.))
-        if not any(self._topo.keeponly):
+        self._topo = TopoSleep(channels=self._channels, margin=.2,
+                               parent=self._topoCanvas.wc.scene)
+        # Set camera properties :
+        cameras[3].rect = self._topo.rect
+        cameras[3].aspect = 1.
+        if not any(self._topo._keeponly):
             self.toolBox_2.setItemEnabled(2, False)
 
         # =================== SHORTCUTS ===================

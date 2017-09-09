@@ -3,13 +3,19 @@
 Ndviz
 #####
 
+.. warning::
+   The *Ndviz* module could be divided into two separate modules : *NdSignals* et *NdImages*. 
+
+.. figure::  picture/ico/ndviz_ico.png
+   :align:   center
+
 Description
 -----------
 
 The Ndviz module groups a bundle of functionalities for the visualization of mutli-dimentional data. It can be used to represent all of your signals in a single canvas (see this `example <https://github.com/vispy/vispy/blob/master/examples/demo/gloo/realtime_signals.py>`_ by `Cyrille Rossant <https://github.com/rossant>`_ for the original script). Each single signal can then be ploted as a traditional continious line, a cloud of points, a histogram, a spectrogram or as an image.
 
 
-.. figure::  picture/ndviz_example.png
+.. figure::  picture/picndviz/ndviz_example.png
    :align:   center
 
 Use the following command to import Ndviz :
@@ -20,7 +26,7 @@ Use the following command to import Ndviz :
 
 Visit this page for a set of `examples <https://github.com/EtienneCmb/visbrain/tree/master/examples/ndviz>`_.
 
-Inputs
+API
 ------
 
 .. autoclass:: visbrain.ndviz.ndviz.Ndviz

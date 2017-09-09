@@ -3,24 +3,24 @@ import numpy as np
 from scipy.misc import imresize
 
 
-__all__ = ['piccrop', 'picresize']
+__all__ = ('piccrop', 'picresize')
 
 
 def piccrop(im, margin=10):
     """Automatic picture cropping.
 
-    Args:
-        im: np.ndarray
-            The array of image data. Could be a (N, M) or (N, M, 3/4).
+    Parameters
+    ----------
+    im : array_like
+        The array of image data. Could be a (N, M) or (N, M, 3/4).
+    margin : int | 10
+        Number of pixels before and after to condider for cropping
+        security.
 
-    Kargs:
-        margin: int, optional, (def: 10)
-            Number of pixels before and after to condider for cropping
-            security.
-
-    Returns:
-        imas: np.ndarray
-            The cropped figure.
+    Returns
+    -------
+    imas : array_like
+        The cropped figure.
     """
     # ================= Size checking =================
     if im.ndim < 2:
@@ -38,17 +38,19 @@ def piccrop(im, margin=10):
     # x-axis :
     idx_x = np.where(imdiff_x != 0)[1]
     if idx_x.size:
-        xm = max(0, idx_x.min()-margin)
-        xM = min(imas.shape[1], idx_x.max()+margin)
-        sl_x = slice(xm, xM)
+        ncols = imas.shape[1]
+        x_min = max(0, idx_x.min() - margin + 1)
+        x_max = min(min(ncols, idx_x.max() + margin + 1), ncols)
+        sl_x = slice(x_min, x_max)
     else:
         sl_x = slice(None)
     # y-axis :
     idx_y = np.where(imdiff_y)[0]
     if idx_y.size:
-        ym = max(0, idx_y.min()-margin)
-        yM = min(imas.shape[0], idx_y.max()+margin)
-        sl_y = slice(ym, yM)
+        y_min = max(0, idx_y.min() - margin + 1)
+        nrows = imas.shape[0]
+        y_max = min(min(imas.shape[0], idx_y.max() + margin + 1), nrows)
+        sl_y = slice(y_min, y_max)
     else:
         sl_y = slice(None)
 
@@ -61,23 +63,22 @@ def picresize(im, axis=0, extend=False):
     Inspect each picture in the list, get all shapes and use the smallest or
     the largest picture as the reference for resizing all other pictures.
 
-    Args:
-        im: list
-            List of np.ndarray of shapes (N, M) or (N, M, 3/4)
+    Parameters
+    ----------
+    im : list
+        List of np.ndarray of shapes (N, M) or (N, M, 3/4)
+    axis : int | 0
+        Specify which axis is considered as the reference. Use 0 and all
+        figures will have the same height otherwise use 1 for width.
+    extend : bool | False
+        Specify if the reference picture have to be the smallest
+        (False - downsize all pictures) or the largest
+        (True - extend all others).
 
-    Kargs:
-        axis: int, optional, (def: 0)
-            Specify which axis is considered as the reference. Use 0 and all
-            figures will have the same height otherwise use 1 for width.
-
-        extend: bool, optional, (def: False)
-            Specify if the reference picture have to be the smallest
-            (False - downsize all pictures) or the largest
-            (True - extend all others).
-
-    Returns:
-        imr: list
-            List of resized pictures.
+    Returns
+    -------
+    imr : list
+        List of resized pictures.
     """
     # ================= Checking =================
     if not isinstance(im, list):
